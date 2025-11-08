@@ -2,7 +2,7 @@
 
 **The Ultimate Large Language Model Comparison Tool**
 
-LLM DB is a comprehensive, user-friendly web application that helps developers, researchers, and AI enthusiasts compare and choose the right Large Language Model (LLM) for their needs. With over 300+ models from 40+ providers, you'll never struggle to find pricing, context windows, or API integration details again.
+LLM DB is a comprehensive, user-friendly web application that helps developers, researchers, and AI enthusiasts compare and choose the right Large Language Model (LLM) for their needs. With 150 carefully curated production models from 39+ providers, you'll never struggle to find pricing, context windows, or API integration details again.
 
 [![Made with ❤️](https://img.shields.io/badge/Made%20with-%E2%9D%A4%EF%B8%8F-red)](https://github.com)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
@@ -16,42 +16,56 @@ LLM DB is a comprehensive, user-friendly web application that helps developers, 
 Choosing the right LLM can be overwhelming. Different providers, different pricing models, varying context windows, and scattered documentation make it hard to make informed decisions. **LLM DB solves this by putting all the information you need in one place.**
 
 ### The Problem
-- 🤯 **Too many models**: OpenAI, Anthropic, Google, Meta, Mistral, and 40+ other providers
+- 🤯 **Too many models**: OpenAI, Anthropic, Google, Meta, Mistral, and 39+ other providers
 - 💰 **Complex pricing**: Per-token costs, input vs output pricing, varying by provider
 - 📊 **Hard to compare**: Context windows range from 4K to 2M tokens
 - 🔍 **Scattered info**: Official docs across dozens of websites
 - 💻 **Integration confusion**: Different SDKs, APIs, and authentication methods
+- 🔄 **Outdated information**: Models and pricing change frequently
 
 ### The Solution
 LLM DB gives you:
-- ✅ **Instant comparison** of 300+ models in a sortable table
+- ✅ **Instant comparison** of 150 production models in a sortable table
 - ✅ **Real-time cost calculator** to estimate your expenses
 - ✅ **Quality scores** based on benchmark performance
 - ✅ **Python code samples** ready to copy-paste for every model
-- ✅ **Smart filtering** by price, context size, or provider
-- ✅ **Side-by-side comparison** of multiple models
+- ✅ **Advanced filtering** by price, context size, provider, status, and more
+- ✅ **Side-by-side comparison** of up to 4 models
+- ✅ **API availability info** with endpoints, authentication, and rate limits
+- ✅ **Status indicators** showing NEW, UPDATED, and DEPRECATED models
 
 ---
 
 ## ✨ Key Features
 
 ### 📊 Comprehensive Model Database
-- **300+ models** from all major providers
-- **40+ providers** including OpenAI, Anthropic, Google, Meta, xAI, DeepSeek, and more
+- **150 production models** - carefully curated, no fake/placeholder models
+- **39+ providers** including OpenAI, Anthropic, Google, Meta, xAI, DeepSeek, and more
+- **100% API coverage** - every model includes complete API information
+- **Status indicators** - NEW (2024-2025 releases), UPDATED (recent pricing changes), DEPRECATED
 - Regular updates with latest models and pricing
+
+### 🔍 Advanced Search & Filtering
+- **Multi-criteria search** - filter by provider, model type, capabilities, and features
+- **Status filters** - find new models, recently updated pricing, or deprecated models
+- **Quick filters** - cheapest, largest context, best value, your favorites
+- **Real-time search** - instant results as you type
+- **Smart sorting** - by price, context window, quality score, or release date
 
 ### 💰 Cost Analysis Tools
 - **Pricing per million tokens** for both input and output
 - **Real-world cost examples** (1K tokens, 10K tokens, 100K tokens)
 - **Cost calculator** to estimate your monthly expenses
 - **Sort by price** to find the most economical option
+- **Books capacity calculator** - understand context in terms of books (100K tokens each)
 
 ### 🧠 Smart Model Comparison
+- **Side-by-side comparison** of up to 4 models simultaneously
 - **Quality scores** calculated from MMLU and HumanEval benchmarks
 - **Context window size** - see which models can handle long documents
-- **Books capacity** - understand size in terms of books (100K tokens each)
 - **Performance benchmarks** (MMLU, HumanEval, inference speed)
 - **Best use cases** - recommended applications for each model
+- **Visual comparison** - easily spot differences across models
 
 ### 💻 Developer-Friendly Integration
 - **Python code samples** for EVERY model - no more searching docs!
@@ -59,6 +73,14 @@ LLM DB gives you:
 - **API integration examples** with proper authentication
 - **Working code** for OpenAI, Anthropic, Google, Cohere, AWS, and 35+ other providers
 - **Copy-to-clipboard** functionality
+
+### 🌐 API Availability Information
+- **Complete endpoint URLs** - ready to use in your code
+- **Authentication methods** - API keys, tokens, OAuth details
+- **Rate limits** - understand tier-based quotas and throttling
+- **Regional availability** - know where each model is accessible
+- **Official documentation links** - quick access to provider docs
+- **100% coverage** - every model includes complete API information
 
 ### 🎨 Beautiful User Interface
 - **Collapsible sections** - only see what you need
@@ -68,12 +90,14 @@ LLM DB gives you:
 - **Favorites** - star your most-used models
 - **Search & filter** - find models instantly
 
-### 📱 Model Detail View
+### 📱 Enhanced Model Detail View
 Click any model to see:
+- **Status Badges** - NEW, UPDATED, or DEPRECATED indicators in header
 - **Overview** - primary purpose, best use cases, key features
 - **Pricing & Economics** - detailed cost breakdown with examples
 - **Technical Specs** - context window, capacity, last updated
 - **Performance Benchmarks** - MMLU, HumanEval, speed ratings
+- **API Availability** - endpoints, authentication, rate limits, regional availability
 - **Python Integration** - working code examples with installation
 - **Tags** - quick identification of model capabilities
 
@@ -121,24 +145,33 @@ npm start
 - View the comprehensive table of all LLM models
 - Sort by **name**, **provider**, **context window**, **price**, or **quality score**
 - Use the search bar to find specific models
+- **Status badges** show NEW, UPDATED, or DEPRECATED models directly in the table
 
-### 2️⃣ Filter & Compare
-- Click **filter tabs** to view:
+### 2️⃣ Advanced Search & Filter
+- Click **"Advanced Search"** button for multi-criteria filtering:
+  - **Providers** - filter by specific providers (OpenAI, Anthropic, Google, etc.)
+  - **Model Types** - chat, completion, embedding, multimodal
+  - **Capabilities** - vision, function calling, streaming, etc.
+  - **Status** - find new models, recently updated pricing, or deprecated ones
+  - **Features** - long context, reasoning, coding specialist, etc.
+- Click **quick filter tabs** to view:
   - All models
   - Cheapest options
   - Large context models
   - Best value models
   - Your favorites
 - **Star models** to add them to favorites
-- **Select multiple models** to compare side-by-side
+- **Select up to 4 models** to compare side-by-side
 
 ### 3️⃣ View Details
 - Click the **ℹ️ info icon** on any model
+- See **status badges** (NEW/UPDATED/DEPRECATED) in the model header
 - Explore organized sections:
   - **Overview** - what the model is good for
   - **Pricing** - detailed cost breakdown
   - **Specs** - technical specifications
   - **Benchmarks** - performance scores
+  - **API Availability** - endpoints, authentication, rate limits, regional availability, docs
   - **Python Code** - ready-to-use integration examples
 - **Copy code** with one click
 
@@ -210,23 +243,34 @@ Edit `app/data/llm-data.ts`:
   contextWindow: 128000,
   inputCostPer1M: 10.00,
   outputCostPer1M: 30.00,
+  releaseDate: "2024-11-08",
   description: "Model description",
-  released: "2024",
-  tags: ["Latest", "Long Context"],
-  bestFor: ["Complex tasks", "Long documents"],
-  purpose: "Advanced AI applications",
-  keyFeatures: ["128K context", "High performance"],
-  benchmarks: {
-    mmlu: 90.0,
-    humanEval: 92.5,
-    speed: "fast"
+  strengths: ["Complex tasks", "Long documents", "High performance"],
+  apiInfo: {
+    endpoint: "https://api.provider.com/v1/chat/completions",
+    authentication: "API Key (Bearer token)",
+    rateLimits: "10,000 TPM on tier 1",
+    regionalAvailability: "Global",
+    documentation: "https://docs.provider.com/api"
+  },
+  status: {
+    isNew: true,
+    pricingUpdated: true,
+    pricingUpdateDate: "2024-11-08"
   }
 }
 ```
 
 ### Updating Pricing
 
-Pricing is in `app/data/llm-data.ts`. Update `inputCostPer1M` and `outputCostPer1M` fields.
+Pricing is in `app/data/llm-data.ts`. Update `inputCostPer1M` and `outputCostPer1M` fields. When updating pricing, also update the status badge:
+
+```typescript
+status: {
+  pricingUpdated: true,
+  pricingUpdateDate: "2025-11-08"  // Today's date
+}
+```
 
 ### Styling
 
@@ -242,21 +286,23 @@ Customize in:
 LLMDB/
 ├── app/
 │   ├── [modelId]/
-│   │   └── page.tsx              # Model detail page
+│   │   └── page.tsx                        # Model detail page
 │   ├── components/
-│   │   └── ModelDetailsCard.tsx  # Redesigned model card
+│   │   ├── ModelDetailsCard.tsx            # Enhanced model card with API info & status
+│   │   ├── AdvancedSearch.tsx              # Multi-criteria search & filtering
+│   │   └── EnhancedModelComparison.tsx     # Side-by-side model comparison (up to 4)
 │   ├── data/
-│   │   └── llm-data.ts           # All model data
+│   │   └── llm-data.ts                     # All model data (150 models)
 │   ├── types/
-│   │   └── features.ts           # TypeScript types
-│   ├── globals.css               # Global styles
-│   ├── layout.tsx                # Root layout
-│   └── page.tsx                  # Main table view
-├── components/                    # Additional components
-├── public/                        # Static assets
-├── next.config.mjs               # Next.js config
-├── tailwind.config.ts            # Tailwind config
-└── package.json                  # Dependencies
+│   │   └── features.ts                     # TypeScript types
+│   ├── globals.css                         # Global styles
+│   ├── layout.tsx                          # Root layout
+│   └── page.tsx                            # Main table view with status badges
+├── components/                              # Additional components
+├── public/                                  # Static assets
+├── next.config.mjs                         # Next.js config
+├── tailwind.config.ts                      # Tailwind config
+└── package.json                            # Dependencies
 ```
 
 ---
@@ -315,14 +361,25 @@ vercel
 
 ## 🎯 Roadmap
 
+### ✅ Recently Completed
+- [x] API Availability Information (endpoints, auth, rate limits)
+- [x] Model Status Indicators (NEW, UPDATED, DEPRECATED badges)
+- [x] Advanced Search & Filtering (multi-criteria)
+- [x] Enhanced Model Comparison (up to 4 models)
+- [x] Database cleanup (150 curated production models)
+
+### 🚧 In Progress
 - [ ] Add JavaScript/TypeScript code samples
-- [ ] API cost comparison charts
 - [ ] Model performance visualizations
-- [ ] Export comparison tables
-- [ ] Save custom comparisons
-- [ ] Email price alerts for models
-- [ ] Advanced filtering (by benchmark scores, release date)
-- [ ] Model availability by region
+- [ ] Export comparison tables to CSV/JSON
+
+### 📋 Planned Features
+- [ ] API cost comparison charts
+- [ ] Save custom comparisons to browser storage
+- [ ] Email/webhook alerts for price changes
+- [ ] Model changelog tracking
+- [ ] Usage calculator with custom workloads
+- [ ] Provider status monitoring
 
 ---
 
@@ -343,6 +400,10 @@ Please ensure new models include:
 - Benchmark scores (if available)
 - Proper provider attribution
 - Release date
+- **API information** (endpoint, authentication, rate limits, regional availability, documentation)
+- **Status badges** (isNew for 2024-2025 releases, pricingUpdated with date)
+- Model strengths and description
+- Only **real production models** - no fake or placeholder entries
 
 ---
 
@@ -378,4 +439,14 @@ Pricing and model information is updated regularly but may not always reflect th
 
 Made with ❤️ by Sriram Srinivasan
 
-**Last Updated**: November 2025
+**Last Updated**: November 8, 2025
+
+---
+
+## 📊 Database Statistics
+
+- **150 production models** across 39 providers
+- **100% API coverage** - every model has complete API information
+- **122 NEW models** - released in 2024-2025
+- **81 models** with recent pricing updates
+- **Latest additions**: o1, o3-mini, Codestral, Gemini 2.0 Flash, DeepSeek V3, Gemma 2 9B/27B

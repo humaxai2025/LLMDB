@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { LLMModel } from '../data/llm-data';
 import { Search, Sparkles, DollarSign, TrendingUp, RefreshCw } from 'lucide-react';
 import { findSimilarModels, findCheaperAlternatives, findBetterPerformance } from '../utils/modelRecommendations';
@@ -28,6 +28,7 @@ export default function AdvancedSearch({
   const [selectedYears, setSelectedYears] = useState<string[]>([]);
   const [selectedContextRanges, setSelectedContextRanges] = useState<string[]>([]);
   const [selectedCapabilities, setSelectedCapabilities] = useState<string[]>([]);
+  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
   const [mmluMin, setMmluMin] = useState(0);
   const [humanEvalMin, setHumanEvalMin] = useState(0);
   const [priceMin, setPriceMin] = useState(0);
@@ -59,6 +60,12 @@ export default function AdvancedSearch({
   ];
 
   const years = ['2023', '2024', '2025'];
+
+  const statuses = [
+    { id: 'new', label: 'New Models', description: 'Released within last 3 months' },
+    { id: 'updated', label: 'Recently Updated Pricing', description: 'Pricing updated recently' },
+    { id: 'deprecated', label: 'Deprecated', description: 'Models being sunset' }
+  ];
 
   // Handle apply filters button click
   const handleSearch = () => {
@@ -131,6 +138,18 @@ export default function AdvancedSearch({
       );
     }
 
+    // Status filter
+    if (selectedStatuses.length > 0) {
+      filtered = filtered.filter(model => {
+        return selectedStatuses.some(status => {
+          if (status === 'new') return model.status?.isNew;
+          if (status === 'updated') return model.status?.pricingUpdated;
+          if (status === 'deprecated') return model.status?.isDeprecated;
+          return false;
+        });
+      });
+    }
+
     onSearchResults(filtered);
   };
 
@@ -140,6 +159,7 @@ export default function AdvancedSearch({
     setSelectedYears([]);
     setSelectedContextRanges([]);
     setSelectedCapabilities([]);
+    setSelectedStatuses([]);
     setMmluMin(0);
     setHumanEvalMin(0);
     setPriceMin(0);
@@ -152,6 +172,7 @@ export default function AdvancedSearch({
     selectedYears.length > 0 ||
     selectedContextRanges.length > 0 ||
     selectedCapabilities.length > 0 ||
+    selectedStatuses.length > 0 ||
     mmluMin > 0 ||
     humanEvalMin > 0 ||
     priceMin > 0 ||
@@ -162,7 +183,7 @@ export default function AdvancedSearch({
       {/* Info Banner */}
       <div className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 border border-indigo-200 dark:border-indigo-800 rounded-lg p-4">
         <p className="text-sm text-indigo-900 dark:text-indigo-100 font-medium">
-          💡 Select multiple filters from different categories, then click "Apply Filters" to search
+          💡 Select multiple filters from different categories, then click &quot;Apply Filters&quot; to search
         </p>
       </div>
 
@@ -204,7 +225,7 @@ export default function AdvancedSearch({
               <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shadow-md">
                 {selectedProviders.length + selectedYears.length + selectedContextRanges.length + selectedCapabilities.length + (mmluMin > 0 ? 1 : 0) + (humanEvalMin > 0 ? 1 : 0) + ((priceMin > 0 || priceMax < 100) ? 1 : 0)}
               </span>
-              Selected Filters (Click "Apply Filters" below to search)
+              Selected Filters (Click &quot;Apply Filters&quot; below to search)
             </h4>
           </div>
           <div className="flex flex-wrap gap-2 text-sm">
@@ -378,6 +399,48 @@ export default function AdvancedSearch({
               >
                 {selectedYears.includes(year) && '✓ '}
                 {year}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Model Status */}
+        <div className="space-y-3">
+          <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+            <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+            Model Status
+            {selectedStatuses.length > 0 && (
+              <span className="bg-amber-500 text-white text-xs rounded-full px-2 py-0.5">
+                {selectedStatuses.length}
+              </span>
+            )}
+          </h3>
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Filter by model status (new, recently updated, or deprecated)
+          </p>
+          <div className="space-y-2">
+            {statuses.map(status => (
+              <button
+                key={status.id}
+                onClick={() => setSelectedStatuses(prev =>
+                  prev.includes(status.id)
+                    ? prev.filter(s => s !== status.id)
+                    : [...prev, status.id]
+                )}
+                className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                  selectedStatuses.includes(status.id)
+                    ? 'bg-amber-500 text-white shadow-md ring-2 ring-amber-300'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="font-semibold">{selectedStatuses.includes(status.id) && '✓ '}{status.label}</div>
+                    <div className={`text-xs mt-0.5 ${selectedStatuses.includes(status.id) ? 'text-amber-100' : 'text-gray-500 dark:text-gray-400'}`}>
+                      {status.description}
+                    </div>
+                  </div>
+                </div>
               </button>
             ))}
           </div>

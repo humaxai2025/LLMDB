@@ -2,10 +2,11 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { llmModels, calculateBooksInContext, type LLMModel } from './data/llm-data';
-import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Share2, Keyboard, TrendingUp, Clock, Filter, Sparkles } from 'lucide-react';
+import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Keyboard, TrendingUp, Clock, Filter, Sparkles, AlertCircle } from 'lucide-react';
 import { APIIntegrationHelper } from '../components/APIIntegrationHelper';
 import { ModelDetailsCard } from './components/ModelDetailsCard';
 import AdvancedSearch from './components/AdvancedSearch';
+import EnhancedModelComparison from './components/EnhancedModelComparison';
 import { findSimilarModels, findCheaperAlternatives, findBetterPerformance } from './utils/modelRecommendations';
 
 type SortField = 'name' | 'provider' | 'contextWindow' | 'books' | 'inputCost' | 'outputCost' | 'quality';
@@ -38,6 +39,24 @@ export default function Home() {
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [advancedSearchResults, setAdvancedSearchResults] = useState<LLMModel[]>([]);
   const [isAdvancedSearchActive, setIsAdvancedSearchActive] = useState(false);
+  const [showEnhancedComparison, setShowEnhancedComparison] = useState(false);
+  const [selectedForCalculator, setSelectedForCalculator] = useState<string[]>([]);
+
+  // Load comparison from URL on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const compareParam = params.get('compare');
+      if (compareParam) {
+        const modelIds = compareParam.split(',').filter(id => llmModels.some(m => m.id === id));
+        if (modelIds.length >= 2) {
+          setSelectedForCompare(modelIds);
+          setCompareMode(true);
+          setShowEnhancedComparison(true);
+        }
+      }
+    }
+  }, []);
 
   // Function to handle advanced search results
   const handleAdvancedSearchResults = (results: LLMModel[]) => {
@@ -92,7 +111,7 @@ export default function Home() {
   const toggleCompare = (modelId: string) => {
     if (selectedForCompare.includes(modelId)) {
       setSelectedForCompare(selectedForCompare.filter(id => id !== modelId));
-    } else if (selectedForCompare.length < 3) {
+    } else if (selectedForCompare.length < 4) {
       setSelectedForCompare([...selectedForCompare, modelId]);
     }
   };
@@ -265,13 +284,6 @@ export default function Home() {
     return calculateCustomCost(totalTokens, inputCostPer1M, outputCostPer1M);
   };
 
-  const shareComparison = () => {
-    const models = selectedForCompare.join(',');
-    const url = `${window.location.origin}?compare=${models}`;
-    navigator.clipboard.writeText(url);
-    alert('Comparison link copied to clipboard!');
-  };
-
   const comparedModels = llmModels.filter(m => selectedForCompare.includes(m.id));
   const tokensForCalc = parseInt(calculatorTokens) || 0;
   const monthlyConvs = parseInt(monthlyConversations) || 0;
@@ -439,17 +451,27 @@ export default function Home() {
               </button>
               <button
                 onClick={() => {
-                  setCompareMode(!compareMode);
-                  if (compareMode) setSelectedForCompare([]);
+                  if (compareMode && selectedForCompare.length >= 2) {
+                    // If already in compare mode with selections, open comparison
+                    setShowEnhancedComparison(true);
+                  } else {
+                    // Toggle compare mode
+                    setCompareMode(!compareMode);
+                    if (compareMode) setSelectedForCompare([]);
+                  }
                 }}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg ${
                   compareMode
-                    ? 'bg-purple-600 text-white'
+                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                 }`}
               >
                 <GitCompare className="w-5 h-5" />
-                Compare {selectedForCompare.length > 0 && `(${selectedForCompare.length})`}
+                {compareMode && selectedForCompare.length >= 2
+                  ? `View Comparison (${selectedForCompare.length})`
+                  : compareMode
+                  ? `Select Models ${selectedForCompare.length > 0 ? `(${selectedForCompare.length})` : ''}`
+                  : 'Compare Models'}
               </button>
               <button
                 onClick={() => setShowKeyboardHelp(true)}
@@ -485,144 +507,274 @@ export default function Home() {
               </div>
             </div>
 
-            {!showAdvancedCalc ? (
-              <div>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Enter number of tokens:
-                  </label>
-                  <input
-                    type="number"
-                    value={calculatorTokens}
-                    onChange={(e) => setCalculatorTokens(e.target.value)}
-                    placeholder="100000"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
-                  />
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    That&apos;s approximately {(tokensForCalc / 100000).toFixed(2)} books
-                  </p>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead className="bg-gray-50 dark:bg-gray-800">
-                      <tr>
-                        <th className="px-3 py-2 text-left font-semibold">Model</th>
-                        <th className="px-3 py-2 text-right font-semibold">Input Cost</th>
-                        <th className="px-3 py-2 text-right font-semibold">Output Cost</th>
-                        <th className="px-3 py-2 text-right font-semibold">Total Cost</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                      {filteredModels.slice(0, 10).map(model => {
-                        const cost = calculateCustomCost(tokensForCalc, model.inputCostPer1M, model.outputCostPer1M);
-                        return (
-                          <tr key={model.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                            <td className="px-3 py-2 font-medium">{model.name}</td>
-                            <td className="px-3 py-2 text-right font-mono">${cost.input.toFixed(4)}</td>
-                            <td className="px-3 py-2 text-right font-mono">${cost.output.toFixed(4)}</td>
-                            <td className="px-3 py-2 text-right font-mono font-bold text-green-600 dark:text-green-400">
-                              ${cost.total.toFixed(4)}
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            ) : (
-              <div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Monthly conversations:
-                    </label>
-                    <input
-                      type="number"
-                      value={monthlyConversations}
-                      onChange={(e) => setMonthlyConversations(e.target.value)}
-                      placeholder="1000"
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Tokens per conversation:
-                    </label>
-                    <input
-                      type="number"
-                      value={tokensPerConversation}
-                      onChange={(e) => setTokensPerConversation(e.target.value)}
-                      placeholder="500"
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  Monthly usage: {formatNumber(monthlyConvs * tokensPerConv)} tokens
-                </p>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead className="bg-gray-50 dark:bg-gray-800">
-                      <tr>
-                        <th className="px-3 py-2 text-left font-semibold">Model</th>
-                        <th className="px-3 py-2 text-right font-semibold">Monthly Cost</th>
-                        <th className="px-3 py-2 text-right font-semibold">Per Conversation</th>
-                        <th className="px-3 py-2 text-right font-semibold">Annual Cost</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                      {filteredModels.slice(0, 10).map(model => {
-                        const monthlyCost = calculateMonthlyCost(monthlyConvs, tokensPerConv, model.inputCostPer1M, model.outputCostPer1M);
-                        const perConv = monthlyCost.total / monthlyConvs;
-                        return (
-                          <tr key={model.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                            <td className="px-3 py-2 font-medium">{model.name}</td>
-                            <td className="px-3 py-2 text-right font-mono font-bold text-green-600 dark:text-green-400">
-                              ${monthlyCost.total.toFixed(2)}
-                            </td>
-                            <td className="px-3 py-2 text-right font-mono">${perConv.toFixed(4)}</td>
-                            <td className="px-3 py-2 text-right font-mono">${(monthlyCost.total * 12).toFixed(2)}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+            {/* Model Selection */}
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Select Models for Cost Calculation
+              </label>
+              <select
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+                onChange={(e) => {
+                  const modelId = e.target.value;
+                  if (modelId && !selectedForCalculator.includes(modelId)) {
+                    setSelectedForCalculator([...selectedForCalculator, modelId]);
+                  }
+                }}
+                value=""
+              >
+                <option value="">Select a model...</option>
+                {filteredModels.map(model => (
+                  <option key={model.id} value={model.id} disabled={selectedForCalculator.includes(model.id)}>
+                    {model.name} ({model.provider})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Selected Models Pills */}
+            {selectedForCalculator.length > 0 && (
+              <div className="mb-4 flex flex-wrap gap-2">
+                {selectedForCalculator.map(modelId => {
+                  const model = llmModels.find(m => m.id === modelId);
+                  return model ? (
+                    <div
+                      key={modelId}
+                      className="flex items-center gap-2 px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
+                    >
+                      <span>{model.name}</span>
+                      <button
+                        onClick={() => setSelectedForCalculator(selectedForCalculator.filter(id => id !== modelId))}
+                        className="hover:text-red-600 dark:hover:text-red-400"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ) : null;
+                })}
               </div>
             )}
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-3">
-              Showing top 10 models from current filter. Adjust filters to see different models.
-            </p>
+
+            {/* Calculator Results */}
+            {selectedForCalculator.length > 0 && (
+                  <>
+                    {/* Simple Calculator Mode */}
+                    {!showAdvancedCalc ? (
+                      <div>
+                        <div className="mb-4">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Enter number of tokens:
+                          </label>
+                          <input
+                            type="number"
+                            value={calculatorTokens}
+                            onChange={(e) => setCalculatorTokens(e.target.value)}
+                            placeholder="100000"
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+                          />
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                            That&apos;s approximately {(tokensForCalc / 100000).toFixed(2)} books
+                          </p>
+                        </div>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead className="bg-gray-50 dark:bg-gray-800">
+                              <tr>
+                                <th className="px-3 py-2 text-left font-semibold">Model</th>
+                                <th className="px-3 py-2 text-right font-semibold">Input Cost</th>
+                                <th className="px-3 py-2 text-right font-semibold">Output Cost</th>
+                                <th className="px-3 py-2 text-right font-semibold">Total Cost</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                              {llmModels
+                                .filter(m => selectedForCalculator.includes(m.id))
+                                .map(model => {
+                                  const cost = calculateCustomCost(tokensForCalc, model.inputCostPer1M, model.outputCostPer1M);
+                                  return (
+                                    <tr key={model.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                      <td className="px-3 py-2 font-medium">{model.name}</td>
+                                      <td className="px-3 py-2 text-right font-mono">${cost.input.toFixed(4)}</td>
+                                      <td className="px-3 py-2 text-right font-mono">${cost.output.toFixed(4)}</td>
+                                      <td className="px-3 py-2 text-right font-mono font-bold text-green-600 dark:text-green-400">
+                                        ${cost.total.toFixed(4)}
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className="mb-4">
+                          <button
+                            onClick={() => setShowAdvancedCalc(!showAdvancedCalc)}
+                            className="text-sm px-3 py-1 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+                          >
+                            {showAdvancedCalc ? 'Switch to Simple' : 'Switch to Monthly'}
+                          </button>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                              Monthly conversations:
+                            </label>
+                            <input
+                              type="number"
+                              value={monthlyConversations}
+                              onChange={(e) => setMonthlyConversations(e.target.value)}
+                              placeholder="1000"
+                              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                              Tokens per conversation:
+                            </label>
+                            <input
+                              type="number"
+                              value={tokensPerConversation}
+                              onChange={(e) => setTokensPerConversation(e.target.value)}
+                              placeholder="500"
+                              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+                            />
+                          </div>
+                        </div>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                          Monthly usage: {formatNumber(monthlyConvs * tokensPerConv)} tokens
+                        </p>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead className="bg-gray-50 dark:bg-gray-800">
+                              <tr>
+                                <th className="px-3 py-2 text-left font-semibold">Model</th>
+                                <th className="px-3 py-2 text-right font-semibold">Monthly Cost</th>
+                                <th className="px-3 py-2 text-right font-semibold">Per Conversation</th>
+                                <th className="px-3 py-2 text-right font-semibold">Annual Cost</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                              {llmModels
+                                .filter(m => selectedForCalculator.includes(m.id))
+                                .map(model => {
+                                  const monthlyCost = calculateMonthlyCost(monthlyConvs, tokensPerConv, model.inputCostPer1M, model.outputCostPer1M);
+                                  const perConv = monthlyCost.total / monthlyConvs;
+                                  return (
+                                    <tr key={model.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                      <td className="px-3 py-2 font-medium">{model.name}</td>
+                                      <td className="px-3 py-2 text-right font-mono font-bold text-green-600 dark:text-green-400">
+                                        ${monthlyCost.total.toFixed(2)}
+                                      </td>
+                                      <td className="px-3 py-2 text-right font-mono">${perConv.toFixed(4)}</td>
+                                      <td className="px-3 py-2 text-right font-mono">${(monthlyCost.total * 12).toFixed(2)}</td>
+                                    </tr>
+                                  );
+                                })}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+                  </>
+            )}
           </div>
         )}
 
-        {/* Model Comparison */}
-        {compareMode && selectedForCompare.length > 0 && (
-          <div className="mb-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 border-2 border-purple-500">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+        {/* Enhanced Model Comparison Modal */}
+        {showEnhancedComparison && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
+            <div className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-7xl w-full max-h-[90vh] overflow-y-auto my-8">
+              <EnhancedModelComparison
+                models={llmModels}
+                preSelectedModels={selectedForCompare}
+                onClose={() => {
+                  setShowEnhancedComparison(false);
+                  setCompareMode(false);
+                  setSelectedForCompare([]);
+                }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Comparison Mode Banner - Only shows when selecting models */}
+        {compareMode && selectedForCompare.length > 0 && !showEnhancedComparison && (
+          <div className="mb-6 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg shadow-lg p-4 border-2 border-purple-300 dark:border-purple-700">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
                 <GitCompare className="w-6 h-6 text-purple-600" />
-                Model Comparison ({selectedForCompare.length}/3)
-              </h2>
+                <div>
+                  <h3 className="font-bold text-purple-900 dark:text-purple-100">
+                    {selectedForCompare.length} Model{selectedForCompare.length > 1 ? 's' : ''} Selected
+                  </h3>
+                  <p className="text-sm text-purple-700 dark:text-purple-300">
+                    {selectedForCompare.length >= 2
+                      ? 'Ready to compare! Click "View Comparison" to see detailed analysis.'
+                      : 'Select at least 2 models to compare'}
+                  </p>
+                </div>
+              </div>
               <div className="flex gap-2">
-                {selectedForCompare.length > 0 && (
+                {selectedForCompare.length >= 2 && (
                   <button
-                    onClick={shareComparison}
-                    className="flex items-center gap-1 text-sm text-purple-600 hover:text-purple-700"
+                    onClick={() => setShowEnhancedComparison(true)}
+                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 font-semibold shadow-lg hover:shadow-xl transition-all"
                   >
-                    <Share2 className="w-4 h-4" />
-                    Share
+                    <Sparkles className="w-5 h-5" />
+                    View Comparison
                   </button>
                 )}
                 <button
-                  onClick={() => setSelectedForCompare([])}
-                  className="text-sm text-purple-600 hover:text-purple-700"
+                  onClick={() => {
+                    setSelectedForCompare([]);
+                    setCompareMode(false);
+                  }}
+                  className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
-                  Clear All
+                  Cancel
                 </button>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Quick Model Selection Cards for Comparison */}
+        {compareMode && selectedForCompare.length > 0 && !showEnhancedComparison && (
+          <div className="mb-6">
+            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Selected Models:</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+              {comparedModels.map(model => (
+                <div key={model.id} className="bg-white dark:bg-gray-800 rounded-lg border-2 border-purple-300 dark:border-purple-700 p-3">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex-1">
+                      <h5 className="font-semibold text-gray-900 dark:text-white">{model.name}</h5>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">{model.provider}</p>
+                    </div>
+                    <button
+                      onClick={() => toggleCompare(model.id)}
+                      className="text-red-500 hover:text-red-700 p-1"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="text-xs space-y-1">
+                    <p className="text-gray-600 dark:text-gray-400">
+                      Context: {model.contextWindow.toLocaleString()} tokens
+                    </p>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      Cost: ${model.inputCostPer1M.toFixed(2)}/1M
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Old comparison table - REMOVED */}
+        {false && compareMode && selectedForCompare.length > 0 && (
+          <div className="mb-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 border-2 border-purple-500">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead className="bg-gray-50 dark:bg-gray-800">
@@ -932,7 +1084,7 @@ export default function Home() {
         <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
           Showing {filteredModels.length} of {llmModels.length} models
           {compareMode && <span className="ml-2 text-purple-600 dark:text-purple-400 font-medium">
-            (Compare mode: Select up to 3 models)
+            (Compare mode: Select up to 4 models from the table)
           </span>}
         </div>
 
@@ -1032,13 +1184,32 @@ export default function Home() {
                       </td>
                       <td className="px-4 py-4">
                         <div className="flex flex-col gap-1">
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-2 flex-wrap">
                             <div className="font-medium text-gray-900 dark:text-white">
                               {model.name}
                             </div>
                             {hasNewData && (
                               <span title="Enhanced data available">
                                 <TrendingUp className="w-3 h-3 text-green-500" />
+                              </span>
+                            )}
+                            {/* Status Badges */}
+                            {model.status?.isNew && (
+                              <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-green-500 text-white rounded text-[10px] font-bold" title="Released within last 3 months">
+                                <Sparkles className="w-2.5 h-2.5" />
+                                NEW
+                              </span>
+                            )}
+                            {model.status?.pricingUpdated && (
+                              <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-amber-500 text-white rounded text-[10px] font-bold" title={`Pricing updated: ${model.status.pricingUpdateDate || 'recently'}`}>
+                                <TrendingUp className="w-2.5 h-2.5" />
+                                UPDATED
+                              </span>
+                            )}
+                            {model.status?.isDeprecated && (
+                              <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold" title={`Deprecated${model.status.deprecationDate ? ': ' + model.status.deprecationDate : ''}`}>
+                                <AlertCircle className="w-2.5 h-2.5" />
+                                DEPRECATED
                               </span>
                             )}
                           </div>

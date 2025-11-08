@@ -7,8 +7,10 @@ export interface LLMModel {
   outputCostPer1M: number;
   description: string;
   released?: string;
+  releaseDate?: string;
   tags?: string[];
   bestFor?: string[];
+  strengths?: string[];
   purpose?: string; // Primary use case
   keyFeatures?: string[]; // Unique capabilities
   benchmarks?: {
@@ -16,13 +18,26 @@ export interface LLMModel {
     humanEval?: number;
     speed?: 'fast' | 'medium' | 'slow';
   };
+  apiInfo?: {
+    endpoint: string;
+    authentication: string;
+    rateLimits?: string;
+    regionalAvailability?: string;
+    documentation?: string;
+  };
+  status?: {
+    isNew?: boolean;
+    isDeprecated?: boolean;
+    deprecationDate?: string;
+    pricingUpdated?: boolean;
+    pricingUpdateDate?: string;
+  };
   lastUpdated?: string;
   website?: string;
   qualityScore?: number;
 }
 
 export const llmModels: LLMModel[] = [
-  // OpenAI Models - Latest Generation
   {
     id: "gpt-4-turbo",
     name: "GPT-4 Turbo",
@@ -44,9 +59,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 92.5,
       humanEval: 94.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+      endpoint: "https://api.openai.com/v1/chat/completions",
+      authentication: "Bearer Token (API Key)",
+      rateLimits: "10,000 TPM (Tier 1), up to 2M TPM (Tier 5)",
+      regionalAvailability: "Global",
+      documentation: "https://platform.openai.com/docs/api-reference"
+    },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
   },
   {
     id: "gpt-4",
@@ -69,9 +96,20 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 86.4,
       humanEval: 89.8,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.openai.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 TPM (Tier 1), up to 2M TPM (Tier 5)",
+    regionalAvailability: "Global",
+    documentation: "https://platform.openai.com/docs/api-reference"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "gpt-4-32k",
@@ -94,9 +132,20 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 86.4,
       humanEval: 89.8,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.openai.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 TPM (Tier 1), up to 2M TPM (Tier 5)",
+    regionalAvailability: "Global",
+    documentation: "https://platform.openai.com/docs/api-reference"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "gpt-3.5-turbo",
@@ -119,9 +168,20 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 70.0,
       humanEval: 72.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.openai.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 TPM (Tier 1), up to 2M TPM (Tier 5)",
+    regionalAvailability: "Global",
+    documentation: "https://platform.openai.com/docs/api-reference"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "gpt-3.5-turbo-16k",
@@ -144,9 +204,20 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 70.0,
       humanEval: 72.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.openai.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 TPM (Tier 1), up to 2M TPM (Tier 5)",
+    regionalAvailability: "Global",
+    documentation: "https://platform.openai.com/docs/api-reference"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "gpt-4o",
@@ -160,7 +231,19 @@ export const llmModels: LLMModel[] = [
     tags: ["Multimodal", "Vision", "Flagship"],
     bestFor: ["Complex reasoning", "Image analysis", "Long documents"],
     benchmarks: { mmlu: 88.7, humanEval: 90.2, speed: "fast" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.openai.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 TPM (Tier 1), up to 2M TPM (Tier 5)",
+    regionalAvailability: "Global",
+    documentation: "https://platform.openai.com/docs/api-reference"
+  },
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "gpt-4o-mini",
@@ -174,7 +257,19 @@ export const llmModels: LLMModel[] = [
     tags: ["Budget", "Fast", "Multimodal"],
     bestFor: ["High-volume tasks", "Simple queries", "Cost optimization"],
     benchmarks: { mmlu: 82.0, humanEval: 87.2, speed: "fast" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.openai.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 TPM (Tier 1), up to 2M TPM (Tier 5)",
+    regionalAvailability: "Global",
+    documentation: "https://platform.openai.com/docs/api-reference"
+  },
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "o1-preview",
@@ -188,7 +283,19 @@ export const llmModels: LLMModel[] = [
     tags: ["Reasoning", "Premium", "Problem Solving"],
     bestFor: ["Math problems", "Complex logic", "Research tasks"],
     benchmarks: { mmlu: 90.8, humanEval: 92.0, speed: "slow" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.openai.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 TPM (Tier 1), up to 2M TPM (Tier 5)",
+    regionalAvailability: "Global",
+    documentation: "https://platform.openai.com/docs/api-reference"
+  },
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "o1-mini",
@@ -202,10 +309,20 @@ export const llmModels: LLMModel[] = [
     tags: ["Coding", "STEM", "Reasoning"],
     bestFor: ["Code generation", "STEM problems", "Algorithm design"],
     benchmarks: { mmlu: 85.2, humanEval: 89.7, speed: "medium" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.openai.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 TPM (Tier 1), up to 2M TPM (Tier 5)",
+    regionalAvailability: "Global",
+    documentation: "https://platform.openai.com/docs/api-reference"
   },
-
-  // Anthropic Models
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "claude-opus-4",
     name: "Claude Opus 4",
@@ -218,7 +335,19 @@ export const llmModels: LLMModel[] = [
     tags: ["Premium", "Flagship", "Long Context"],
     bestFor: ["Complex analysis", "Long-form writing", "Code review"],
     benchmarks: { mmlu: 86.8, humanEval: 84.9, speed: "medium" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.anthropic.com/v1/messages",
+    authentication: "API Key (x-api-key header)",
+    rateLimits: "Varies by tier, 50-4000 requests/min",
+    regionalAvailability: "Global",
+    documentation: "https://docs.anthropic.com/claude/reference"
+  },
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "claude-sonnet-4",
@@ -232,7 +361,19 @@ export const llmModels: LLMModel[] = [
     tags: ["Balanced", "Popular", "Long Context"],
     bestFor: ["General tasks", "Content creation", "Analysis"],
     benchmarks: { mmlu: 88.3, humanEval: 92.0, speed: "fast" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.anthropic.com/v1/messages",
+    authentication: "API Key (x-api-key header)",
+    rateLimits: "Varies by tier, 50-4000 requests/min",
+    regionalAvailability: "Global",
+    documentation: "https://docs.anthropic.com/claude/reference"
+  },
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "claude-3.5-sonnet",
@@ -246,7 +387,19 @@ export const llmModels: LLMModel[] = [
     tags: ["Coding", "Popular", "Balanced"],
     bestFor: ["Software development", "Technical writing", "Analysis"],
     benchmarks: { mmlu: 88.7, humanEval: 92.0, speed: "fast" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.anthropic.com/v1/messages",
+    authentication: "API Key (x-api-key header)",
+    rateLimits: "Varies by tier, 50-4000 requests/min",
+    regionalAvailability: "Global",
+    documentation: "https://docs.anthropic.com/claude/reference"
+  },
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "claude-3.5-haiku",
@@ -256,7 +409,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.80,
     outputCostPer1M: 4.00,
     description: "Fast and cost-effective with improved capabilities",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.anthropic.com/v1/messages",
+    authentication: "API Key (x-api-key header)",
+    rateLimits: "Varies by tier, 50-4000 requests/min",
+    regionalAvailability: "Global",
+    documentation: "https://docs.anthropic.com/claude/reference"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "claude-sonnet-4.5",
@@ -279,9 +442,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 91.5,
       humanEval: 93.8,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+    endpoint: "https://api.anthropic.com/v1/messages",
+    authentication: "API Key (x-api-key header)",
+    rateLimits: "Varies by tier, 50-4000 requests/min",
+    regionalAvailability: "Global",
+    documentation: "https://docs.anthropic.com/claude/reference"
+  },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
   },
   {
     id: "claude-opus-4.1",
@@ -304,9 +479,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 92.0,
       humanEval: 94.0,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+    endpoint: "https://api.anthropic.com/v1/messages",
+    authentication: "API Key (x-api-key header)",
+    rateLimits: "Varies by tier, 50-4000 requests/min",
+    regionalAvailability: "Global",
+    documentation: "https://docs.anthropic.com/claude/reference"
+  },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
   },
   {
     id: "claude-3-opus",
@@ -329,9 +516,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 89.5,
       humanEval: 91.8,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.anthropic.com/v1/messages",
+    authentication: "API Key (x-api-key header)",
+    rateLimits: "Varies by tier, 50-4000 requests/min",
+    regionalAvailability: "Global",
+    documentation: "https://docs.anthropic.com/claude/reference"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "claude-3-sonnet",
@@ -341,7 +540,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 3.00,
     outputCostPer1M: 15.00,
     description: "Balanced Claude 3 model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.anthropic.com/v1/messages",
+    authentication: "API Key (x-api-key header)",
+    rateLimits: "Varies by tier, 50-4000 requests/min",
+    regionalAvailability: "Global",
+    documentation: "https://docs.anthropic.com/claude/reference"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "claude-3-haiku",
@@ -364,9 +573,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 78.5,
       humanEval: 82.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.anthropic.com/v1/messages",
+    authentication: "API Key (x-api-key header)",
+    rateLimits: "Varies by tier, 50-4000 requests/min",
+    regionalAvailability: "Global",
+    documentation: "https://docs.anthropic.com/claude/reference"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "claude-sonnet-4.5-xl",
@@ -389,12 +610,22 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 92.0,
       humanEval: 94.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+    endpoint: "https://api.anthropic.com/v1/messages",
+    authentication: "API Key (x-api-key header)",
+    rateLimits: "Varies by tier, 50-4000 requests/min",
+    regionalAvailability: "Global",
+    documentation: "https://docs.anthropic.com/claude/reference"
   },
-
-  // Google Models
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
+  },
   {
     id: "gemini-1.5-pro",
     name: "Gemini 1.5 Pro",
@@ -416,9 +647,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 87.5,
       humanEval: 89.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://generativelanguage.googleapis.com/v1/models",
+    authentication: "API Key or OAuth 2.0",
+    rateLimits: "60 requests/min (free), higher for paid",
+    regionalAvailability: "Global",
+    documentation: "https://ai.google.dev/docs"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "gemini-1.5-flash",
@@ -441,9 +684,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 80.0,
       humanEval: 82.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://generativelanguage.googleapis.com/v1/models",
+    authentication: "API Key or OAuth 2.0",
+    rateLimits: "60 requests/min (free), higher for paid",
+    regionalAvailability: "Global",
+    documentation: "https://ai.google.dev/docs"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "gemini-1.5-flash-8b",
@@ -453,7 +708,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.0375,
     outputCostPer1M: 0.15,
     description: "Smaller, faster variant of Flash",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://generativelanguage.googleapis.com/v1/models",
+    authentication: "API Key or OAuth 2.0",
+    rateLimits: "60 requests/min (free), higher for paid",
+    regionalAvailability: "Global",
+    documentation: "https://ai.google.dev/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "gemini-1.0-pro",
@@ -476,9 +741,20 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 78.5,
       humanEval: 80.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://generativelanguage.googleapis.com/v1/models",
+    authentication: "API Key or OAuth 2.0",
+    rateLimits: "60 requests/min (free), higher for paid",
+    regionalAvailability: "Global",
+    documentation: "https://ai.google.dev/docs"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "gemini-2.5-ultra",
@@ -501,9 +777,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 93.0,
       humanEval: 94.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+    endpoint: "https://generativelanguage.googleapis.com/v1/models",
+    authentication: "API Key or OAuth 2.0",
+    rateLimits: "60 requests/min (free), higher for paid",
+    regionalAvailability: "Global",
+    documentation: "https://ai.google.dev/docs"
+  },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
   },
   {
     id: "gemini-2.5-pro",
@@ -526,9 +814,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 90.5,
       humanEval: 91.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+    endpoint: "https://generativelanguage.googleapis.com/v1/models",
+    authentication: "API Key or OAuth 2.0",
+    rateLimits: "60 requests/min (free), higher for paid",
+    regionalAvailability: "Global",
+    documentation: "https://ai.google.dev/docs"
+  },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
   },
   {
     id: "gemini-2.5-flash",
@@ -551,9 +851,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 84.5,
       humanEval: 86.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+    endpoint: "https://generativelanguage.googleapis.com/v1/models",
+    authentication: "API Key or OAuth 2.0",
+    rateLimits: "60 requests/min (free), higher for paid",
+    regionalAvailability: "Global",
+    documentation: "https://ai.google.dev/docs"
+  },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
   },
   {
     id: "gemini-2.5-flash-lite",
@@ -576,9 +888,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 82.0,
       humanEval: 84.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+    endpoint: "https://generativelanguage.googleapis.com/v1/models",
+    authentication: "API Key or OAuth 2.0",
+    rateLimits: "60 requests/min (free), higher for paid",
+    regionalAvailability: "Global",
+    documentation: "https://ai.google.dev/docs"
+  },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
   },
   {
     id: "gemini-pro-vision",
@@ -601,12 +925,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 81.0,
       humanEval: 83.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://generativelanguage.googleapis.com/v1/models",
+    authentication: "API Key or OAuth 2.0",
+    rateLimits: "60 requests/min (free), higher for paid",
+    regionalAvailability: "Global",
+    documentation: "https://ai.google.dev/docs"
   },
-
-  // Meta Llama Models
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "llama-3.3-70b",
     name: "Llama 3.3 70B",
@@ -628,9 +961,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 85.5,
       humanEval: 88.0,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "llama-3.2-90b",
@@ -653,9 +998,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 86.5,
       humanEval: 89.0,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "llama-3.2-11b",
@@ -678,9 +1035,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 74.5,
       humanEval: 77.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "llama-3.2-3b",
@@ -703,9 +1072,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 65.0,
       humanEval: 68.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "llama-3.2-1b",
@@ -715,7 +1096,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.04,
     outputCostPer1M: 0.04,
     description: "Tiny, ultra-efficient Llama model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "llama-3.1-405b",
@@ -725,7 +1116,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 2.50,
     outputCostPer1M: 2.50,
     description: "Largest and most capable Llama model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "llama-3.1-70b",
@@ -735,7 +1136,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.50,
     outputCostPer1M: 0.75,
     description: "Cost-effective model for diverse tasks",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "llama-3.1-8b",
@@ -745,7 +1156,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.10,
     outputCostPer1M: 0.10,
     description: "Lightweight and fast model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "llama-3-70b",
@@ -755,7 +1176,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.60,
     outputCostPer1M: 0.60,
     description: "Powerful open-source model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "llama-3-8b",
@@ -765,7 +1196,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.10,
     outputCostPer1M: 0.10,
     description: "Efficient open-source model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "llama-3.3-200b",
@@ -788,9 +1229,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 91.5,
       humanEval: 93.0,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
   },
   {
     id: "llama-3.3-70b-vision",
@@ -813,9 +1266,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 89.0,
       humanEval: 91.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
   },
   {
     id: "llama-3.3-13b-chat",
@@ -838,9 +1303,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 85.5,
       humanEval: 88.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
   },
   {
     id: "codellama-70b",
@@ -863,9 +1340,20 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 75.0,
       humanEval: 88.5,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "codellama-34b",
@@ -888,9 +1376,20 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 72.0,
       humanEval: 85.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "codellama-13b",
@@ -913,12 +1412,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 68.0,
       humanEval: 82.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://llama.meta.com/docs"
   },
-
-  // Mistral Models
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "mistral-large-2",
     name: "Mistral Large 2",
@@ -940,9 +1448,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 89.2,
       humanEval: 91.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.mistral.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.mistral.ai/api"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "mistral-medium",
@@ -965,9 +1485,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 85.6,
       humanEval: 88.3,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.mistral.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.mistral.ai/api"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "mistral-small",
@@ -990,9 +1522,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 82.4,
       humanEval: 85.1,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.mistral.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.mistral.ai/api"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "mistral-next",
@@ -1015,12 +1559,22 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 91.5,
       humanEval: 93.2,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.mistral.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.mistral.ai/api"
   },
-
-  // Cohere Models
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "cohere-command-r",
     name: "Command-R",
@@ -1042,9 +1596,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 87.8,
       humanEval: 89.4,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.cohere.ai/v1/generate",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 requests/min (production)",
+    regionalAvailability: "Global",
+    documentation: "https://docs.cohere.com/reference/about"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "cohere-command",
@@ -1067,9 +1633,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 85.6,
       humanEval: 87.2,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.cohere.ai/v1/generate",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 requests/min (production)",
+    regionalAvailability: "Global",
+    documentation: "https://docs.cohere.com/reference/about"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "embed-english",
@@ -1090,12 +1668,22 @@ export const llmModels: LLMModel[] = [
       "Semantic understanding"
     ],
     benchmarks: {
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.cohere.ai/v1/generate",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 requests/min (production)",
+    regionalAvailability: "Global",
+    documentation: "https://docs.cohere.com/reference/about"
   },
-
-  // AI21 Models
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "j2-ultra",
     name: "Jurassic-2 Ultra",
@@ -1117,9 +1705,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 86.5,
       humanEval: 88.7,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.ai21.com/studio/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.ai21.com/reference"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "j2-mid",
@@ -1142,12 +1742,22 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 83.2,
       humanEval: 85.4,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.ai21.com/studio/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.ai21.com/reference"
   },
-
-  // Together AI Models
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "together-ai-ultra",
     name: "Together AI Ultra",
@@ -1169,9 +1779,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 85.9,
       humanEval: 87.8,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.together.xyz/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.together.ai/reference"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "together-ai-light",
@@ -1194,9 +1816,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 81.4,
       humanEval: 83.6,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.together.xyz/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.together.ai/reference"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "mistral-nemo",
@@ -1219,9 +1853,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 79.5,
       humanEval: 82.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.mistral.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.mistral.ai/api"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "mistral-7b",
@@ -1231,7 +1877,14 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.25,
     outputCostPer1M: 0.25,
     description: "Open-source small model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "https://api.mistral.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.mistral.ai/api"
+  },
   },
   {
     id: "mixtral-8x7b",
@@ -1254,9 +1907,20 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 81.5,
       humanEval: 84.0,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.mistral.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.mistral.ai/api"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "mixtral-8x22b",
@@ -1279,12 +1943,22 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 84.5,
       humanEval: 87.0,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.mistral.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.mistral.ai/api"
   },
-
-  // Cohere Models
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "command-r-plus",
     name: "Command R+",
@@ -1306,9 +1980,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 84.0,
       humanEval: 86.5,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.cohere.ai/v1/generate",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 requests/min (production)",
+    regionalAvailability: "Global",
+    documentation: "https://docs.cohere.com/reference/about"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "command-r",
@@ -1318,7 +2004,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.15,
     outputCostPer1M: 0.60,
     description: "Optimized for conversational interaction and long context",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.cohere.ai/v1/generate",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 requests/min (production)",
+    regionalAvailability: "Global",
+    documentation: "https://docs.cohere.com/reference/about"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "command",
@@ -1328,7 +2024,14 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 1.00,
     outputCostPer1M: 2.00,
     description: "Standard Cohere command model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "https://api.cohere.ai/v1/generate",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 requests/min (production)",
+    regionalAvailability: "Global",
+    documentation: "https://docs.cohere.com/reference/about"
+  },
   },
   {
     id: "command-light",
@@ -1351,12 +2054,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 72.0,
       humanEval: 74.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.cohere.ai/v1/generate",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "10,000 requests/min (production)",
+    regionalAvailability: "Global",
+    documentation: "https://docs.cohere.com/reference/about"
   },
-
-  // AWS Bedrock Models
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "titan-text-premier",
     name: "Titan Text Premier",
@@ -1378,9 +2090,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 82.0,
       humanEval: 84.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://bedrock-runtime.{region}.amazonaws.com",
+    authentication: "AWS Signature V4",
+    rateLimits: "Varies by model and region",
+    regionalAvailability: "Global",
+    documentation: "https://docs.aws.amazon.com/bedrock"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "titan-text-express",
@@ -1403,9 +2127,20 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 75.5,
       humanEval: 78.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://bedrock-runtime.{region}.amazonaws.com",
+    authentication: "AWS Signature V4",
+    rateLimits: "Varies by model and region",
+    regionalAvailability: "Global",
+    documentation: "https://docs.aws.amazon.com/bedrock"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "titan-text-lite",
@@ -1428,12 +2163,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 70.0,
       humanEval: 72.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://bedrock-runtime.{region}.amazonaws.com",
+    authentication: "AWS Signature V4",
+    rateLimits: "Varies by model and region",
+    regionalAvailability: "Global",
+    documentation: "https://docs.aws.amazon.com/bedrock"
   },
-
-  // xAI Models
+    lastUpdated: "2025-01-07",
+    status: {
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "grok-beta",
     name: "Grok Beta",
@@ -1455,9 +2199,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 86.2,
       humanEval: 88.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.x.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.x.ai/api"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "grok-4",
@@ -1480,9 +2236,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 87.5,
       humanEval: 89.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-11-08"
+    apiInfo: {
+    endpoint: "https://api.x.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.x.ai/api"
+  },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-11-08"
+    },
   },
   {
     id: "grok-2",
@@ -1505,9 +2273,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 85.5,
       humanEval: 87.0,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.x.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.x.ai/api"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "grok-1.5",
@@ -1530,12 +2310,22 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 82.5,
       humanEval: 84.0,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.x.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.x.ai/api"
   },
-
-  // DeepSeek Models
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "deepseek-chat",
     name: "DeepSeek Chat",
@@ -1557,9 +2347,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 82.5,
       humanEval: 84.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.deepseek.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.deepseek.com/docs"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "deepseek-coder",
@@ -1582,9 +2384,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 76.0,
       humanEval: 86.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.deepseek.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.deepseek.com/docs"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "deepseek-v2",
@@ -1607,12 +2421,22 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 83.0,
       humanEval: 85.5,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.deepseek.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.deepseek.com/docs"
   },
-
-  // Perplexity Models
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "perplexity-sonar-large",
     name: "Sonar Large",
@@ -1621,7 +2445,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 1.00,
     outputCostPer1M: 1.00,
     description: "Online LLM with real-time search capabilities",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.perplexity.ai/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.perplexity.ai"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "perplexity-sonar-small",
@@ -1644,9 +2478,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 75.0,
       humanEval: 77.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://api.perplexity.ai/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.perplexity.ai"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "perplexity-sonar-medium",
@@ -1656,10 +2502,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.60,
     outputCostPer1M: 0.60,
     description: "Balanced online search model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.perplexity.ai/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.perplexity.ai"
   },
-
-  // Alibaba Qwen Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "qwen-2.5-72b",
     name: "Qwen 2.5 72B",
@@ -1681,9 +2535,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 84.5,
       humanEval: 86.0,
-      speed: "medium"
+      speed: "medium",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation",
+    authentication: "API Key (Alibaba Cloud)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://help.aliyun.com/zh/dashscope"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "qwen-2.5-32b",
@@ -1693,7 +2559,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.20,
     outputCostPer1M: 0.20,
     description: "Medium-sized multilingual model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation",
+    authentication: "API Key (Alibaba Cloud)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://help.aliyun.com/zh/dashscope"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "qwen-2.5-14b",
@@ -1716,9 +2592,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 75.5,
       humanEval: 78.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation",
+    authentication: "API Key (Alibaba Cloud)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://help.aliyun.com/zh/dashscope"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "qwen-2.5-7b",
@@ -1741,9 +2629,21 @@ export const llmModels: LLMModel[] = [
     benchmarks: {
       mmlu: 70.5,
       humanEval: 73.0,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation",
+    authentication: "API Key (Alibaba Cloud)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://help.aliyun.com/zh/dashscope"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "qwen-2-72b",
@@ -1753,10 +2653,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.50,
     outputCostPer1M: 0.50,
     description: "Previous generation large model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation",
+    authentication: "API Key (Alibaba Cloud)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://help.aliyun.com/zh/dashscope"
   },
-
-  // AI21 Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "jamba-1.5-large",
     name: "Jamba 1.5 Large",
@@ -1765,7 +2673,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 2.00,
     outputCostPer1M: 8.00,
     description: "Hybrid SSM-Transformer with 256K context",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.ai21.com/studio/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.ai21.com/reference"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "jamba-1.5-mini",
@@ -1775,7 +2693,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.20,
     outputCostPer1M: 0.40,
     description: "Compact model with large context window",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.ai21.com/studio/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.ai21.com/reference"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "jurassic-2-ultra",
@@ -1785,7 +2713,14 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 15.00,
     outputCostPer1M: 15.00,
     description: "Most powerful Jurassic model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "https://api.ai21.com/studio/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.ai21.com/reference"
+  },
   },
   {
     id: "jurassic-2-mid",
@@ -1795,10 +2730,15 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 10.00,
     outputCostPer1M: 10.00,
     description: "Balanced Jurassic model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "https://api.ai21.com/studio/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.ai21.com/reference"
   },
-
-  // Together AI Models
+  },
   {
     id: "together-llama-3.1-405b-turbo",
     name: "Llama 3.1 405B Turbo",
@@ -1807,7 +2747,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 3.50,
     outputCostPer1M: 3.50,
     description: "Optimized Llama hosted on Together AI",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.together.xyz/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.together.ai/reference"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "together-llama-3.1-70b-turbo",
@@ -1817,7 +2767,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.88,
     outputCostPer1M: 0.88,
     description: "Fast 70B Llama on Together",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.together.xyz/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.together.ai/reference"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "together-mixtral-8x22b",
@@ -1827,10 +2787,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 1.20,
     outputCostPer1M: 1.20,
     description: "Large MoE on Together AI",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.together.xyz/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.together.ai/reference"
   },
-
-  // Databricks Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "dbrx-instruct",
     name: "DBRX Instruct",
@@ -1839,10 +2807,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.75,
     outputCostPer1M: 2.25,
     description: "Open MoE model for general purpose",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://{workspace}.cloud.databricks.com/serving-endpoints",
+    authentication: "Personal Access Token",
+    rateLimits: "Varies by deployment",
+    regionalAvailability: "Global",
+    documentation: "https://docs.databricks.com/machine-learning/model-serving"
   },
-
-  // Nvidia Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "nemotron-4-340b",
     name: "Nemotron 4 340B",
@@ -1851,10 +2827,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 4.20,
     outputCostPer1M: 4.20,
     description: "Synthetic data generation and reasoning",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://integrate.api.nvidia.com/v1",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.nvidia.com/nim"
   },
-
-  // Reka Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "reka-core",
     name: "Reka Core",
@@ -1863,7 +2847,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 3.00,
     outputCostPer1M: 15.00,
     description: "Multimodal AI with vision and language",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.reka.ai/v1/chat",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.reka.ai"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "reka-flash",
@@ -1873,7 +2867,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.80,
     outputCostPer1M: 2.00,
     description: "Fast multimodal inference",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.reka.ai/v1/chat",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.reka.ai"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "reka-edge",
@@ -1883,10 +2887,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.40,
     outputCostPer1M: 1.00,
     description: "Efficient edge-optimized model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.reka.ai/v1/chat",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.reka.ai"
   },
-
-  // 01.AI (Yi) Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "yi-large",
     name: "Yi Large",
@@ -1895,7 +2907,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.60,
     outputCostPer1M: 0.60,
     description: "Bilingual model with strong performance",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.01.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.01.ai/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "yi-medium",
@@ -1905,7 +2927,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.25,
     outputCostPer1M: 0.25,
     description: "Balanced model for various tasks",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.01.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.01.ai/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "yi-34b",
@@ -1915,10 +2947,15 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.30,
     outputCostPer1M: 0.30,
     description: "Open-source bilingual model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "https://api.01.ai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.01.ai/docs"
   },
-
-  // Writer Models
+  },
   {
     id: "palmyra-x-004",
     name: "Palmyra X 004",
@@ -1927,10 +2964,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.38,
     outputCostPer1M: 0.38,
     description: "Enterprise-focused content generation",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.writer.com/v1/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://dev.writer.com/api-reference"
   },
-
-  // Inflection Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "inflection-2.5",
     name: "Inflection 2.5",
@@ -1939,10 +2984,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 1.00,
     outputCostPer1M: 1.00,
     description: "Empathetic AI focused on personal interaction",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.inflection.ai/v1/chat/completions",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://developers.inflection.ai"
   },
-
-  // Hugging Face Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "falcon-180b",
     name: "Falcon 180B",
@@ -1951,7 +3004,14 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 1.80,
     outputCostPer1M: 1.80,
     description: "Large open-source model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "https://api-inference.huggingface.co/models/{model_id}",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://huggingface.co/docs/api-inference"
+  },
   },
   {
     id: "falcon-40b",
@@ -1961,10 +3021,15 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.60,
     outputCostPer1M: 0.60,
     description: "Medium open-source model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "https://api-inference.huggingface.co/models/{model_id}",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://huggingface.co/docs/api-inference"
   },
-
-  // Stability AI Models
+  },
   {
     id: "stablelm-2-12b",
     name: "StableLM 2 12B",
@@ -1973,7 +3038,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.15,
     outputCostPer1M: 0.15,
     description: "Stable language model for general use",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.stability.ai/v1/generation",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.stability.ai/docs/api-reference"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "stablecode-3b",
@@ -1983,10 +3058,15 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.10,
     outputCostPer1M: 0.10,
     description: "Code-focused stable model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "https://api.stability.ai/v1/generation",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.stability.ai/docs/api-reference"
   },
-
-  // Moonshot AI Models
+  },
   {
     id: "moonshot-v1-128k",
     name: "Moonshot v1 128K",
@@ -1995,7 +3075,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.84,
     outputCostPer1M: 0.84,
     description: "Chinese model with large context",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.moonshot.cn/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.moonshot.cn/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "moonshot-v1-32k",
@@ -2005,10 +3095,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.48,
     outputCostPer1M: 0.48,
     description: "Efficient Chinese language model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.moonshot.cn/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.moonshot.cn/docs"
   },
-
-  // Zhipu AI Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "glm-4",
     name: "GLM-4",
@@ -2017,7 +3115,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.50,
     outputCostPer1M: 0.50,
     description: "Chinese bilingual model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://open.bigmodel.cn/dev/api"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "glm-3-turbo",
@@ -2027,10 +3135,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.05,
     outputCostPer1M: 0.05,
     description: "Fast and efficient GLM model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://open.bigmodel.cn/dev/api"
   },
-
-  // Baidu Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "ernie-4.0",
     name: "ERNIE 4.0",
@@ -2039,7 +3155,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.90,
     outputCostPer1M: 0.90,
     description: "Latest ERNIE with strong Chinese capabilities",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat",
+    authentication: "Access Token (OAuth 2.0)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://cloud.baidu.com/doc/WENXINWORKSHOP"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "ernie-3.5",
@@ -2049,7 +3175,14 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.30,
     outputCostPer1M: 0.30,
     description: "Balanced ERNIE model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat",
+    authentication: "Access Token (OAuth 2.0)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://cloud.baidu.com/doc/WENXINWORKSHOP"
+  },
   },
   {
     id: "ernie-lite",
@@ -2059,10 +3192,15 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.05,
     outputCostPer1M: 0.05,
     description: "Lightweight ERNIE model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat",
+    authentication: "Access Token (OAuth 2.0)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://cloud.baidu.com/doc/WENXINWORKSHOP"
   },
-
-  // MiniMax Models
+  },
   {
     id: "minimax-abab6",
     name: "MiniMax ABAB 6",
@@ -2071,7 +3209,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 1.00,
     outputCostPer1M: 1.00,
     description: "Long context Chinese model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.minimax.chat/v1/text/chatcompletion",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://api.minimax.chat/document"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "minimax-abab5.5",
@@ -2081,10 +3229,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.50,
     outputCostPer1M: 0.50,
     description: "Efficient MiniMax model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.minimax.chat/v1/text/chatcompletion",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://api.minimax.chat/document"
   },
-
-  // SenseTime Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "sensechat-5",
     name: "SenseChat 5",
@@ -2093,10 +3249,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.60,
     outputCostPer1M: 0.60,
     description: "Advanced Chinese language model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.sensenova.cn/v1/llm/chat-completions",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.sensenova.cn/doc"
   },
-
-  // Open Source Community Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "vicuna-33b",
     name: "Vicuna 33B",
@@ -2105,7 +3269,14 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.30,
     outputCostPer1M: 0.30,
     description: "Open assistant model based on LLaMA",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "Via Hugging Face or research access",
+    authentication: "Varies by platform",
+    rateLimits: "Research/academic access",
+    regionalAvailability: "Global",
+    documentation: "https://lmsys.org"
+  },
   },
   {
     id: "vicuna-13b",
@@ -2115,7 +3286,14 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.15,
     outputCostPer1M: 0.15,
     description: "Smaller Vicuna variant",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "Via Hugging Face or research access",
+    authentication: "Varies by platform",
+    rateLimits: "Research/academic access",
+    regionalAvailability: "Global",
+    documentation: "https://lmsys.org"
+  },
   },
   {
     id: "wizardlm-70b",
@@ -2125,7 +3303,14 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.70,
     outputCostPer1M: 0.70,
     description: "Instruction-following model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "Via Hugging Face or third-party platforms",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://github.com/nlpxucan/WizardLM"
+  },
   },
   {
     id: "wizardlm-13b",
@@ -2135,10 +3320,15 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.15,
     outputCostPer1M: 0.15,
     description: "Smaller instruction model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "Via Hugging Face or third-party platforms",
+    authentication: "Varies by platform",
+    rateLimits: "Depends on hosting platform",
+    regionalAvailability: "Global",
+    documentation: "https://github.com/nlpxucan/WizardLM"
   },
-
-  // Tencent Models
+  },
   {
     id: "hunyuan-pro-plus",
     name: "Hunyuan Pro Plus",
@@ -2159,9 +3349,21 @@ export const llmModels: LLMModel[] = [
     ],
     benchmarks: {
       mmlu: 84.5,
-      speed: "fast"
+      speed: "fast",
     },
-    lastUpdated: "2025-01-07"
+    apiInfo: {
+    endpoint: "https://hunyuan.tencentcloudapi.com",
+    authentication: "Tencent Cloud Signature",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://cloud.tencent.com/document/product/1729"
+  },
+    lastUpdated: "2025-01-07",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "hunyuan-lite",
@@ -2171,7 +3373,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.10,
     outputCostPer1M: 0.10,
     description: "Lightweight Tencent model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://hunyuan.tencentcloudapi.com",
+    authentication: "Tencent Cloud Signature",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://cloud.tencent.com/document/product/1729"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "hunyuan-standard",
@@ -2181,7 +3393,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.40,
     outputCostPer1M: 0.40,
     description: "Standard Tencent AI model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://hunyuan.tencentcloudapi.com",
+    authentication: "Tencent Cloud Signature",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://cloud.tencent.com/document/product/1729"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "hunyuan-pro",
@@ -2191,10 +3413,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 1.00,
     outputCostPer1M: 1.00,
     description: "Advanced Tencent model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://hunyuan.tencentcloudapi.com",
+    authentication: "Tencent Cloud Signature",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://cloud.tencent.com/document/product/1729"
   },
-
-  // Amazon Nova Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "amazon-nova-micro",
     name: "Amazon Nova Micro",
@@ -2203,7 +3433,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.035,
     outputCostPer1M: 0.14,
     description: "Ultra-fast text-only model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://bedrock-runtime.{region}.amazonaws.com",
+    authentication: "AWS Signature V4",
+    rateLimits: "Varies by model and region",
+    regionalAvailability: "Global",
+    documentation: "https://docs.aws.amazon.com/bedrock"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "amazon-nova-lite",
@@ -2213,7 +3453,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.06,
     outputCostPer1M: 0.24,
     description: "Low-cost multimodal model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://bedrock-runtime.{region}.amazonaws.com",
+    authentication: "AWS Signature V4",
+    rateLimits: "Varies by model and region",
+    regionalAvailability: "Global",
+    documentation: "https://docs.aws.amazon.com/bedrock"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "amazon-nova-pro",
@@ -2223,10 +3473,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.80,
     outputCostPer1M: 3.20,
     description: "High capability multimodal model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://bedrock-runtime.{region}.amazonaws.com",
+    authentication: "AWS Signature V4",
+    rateLimits: "Varies by model and region",
+    regionalAvailability: "Global",
+    documentation: "https://docs.aws.amazon.com/bedrock"
   },
-
-  // Groq Models (Ultra Fast Inference)
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "groq-llama-3.3-70b",
     name: "Llama 3.3 70B (Groq)",
@@ -2235,7 +3493,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.59,
     outputCostPer1M: 0.79,
     description: "Ultra-fast inference with Groq LPU",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.groq.com/openai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "High throughput, varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://console.groq.com/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "groq-llama-3.1-8b",
@@ -2245,7 +3513,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.05,
     outputCostPer1M: 0.08,
     description: "Lightning fast small model on Groq",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.groq.com/openai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "High throughput, varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://console.groq.com/docs"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "groq-mixtral-8x7b",
@@ -2255,10 +3533,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.24,
     outputCostPer1M: 0.24,
     description: "MoE model with Groq acceleration",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.groq.com/openai/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "High throughput, varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://console.groq.com/docs"
   },
-
-  // Fireworks AI Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "fireworks-llama-3.1-405b",
     name: "Llama 3.1 405B (Fireworks)",
@@ -2267,7 +3553,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 3.00,
     outputCostPer1M: 3.00,
     description: "Largest Llama on Fireworks",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.fireworks.ai/inference/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.fireworks.ai/api-reference"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "fireworks-llama-3.1-70b",
@@ -2277,10 +3573,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.90,
     outputCostPer1M: 0.90,
     description: "Fast inference Llama 70B",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.fireworks.ai/inference/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.fireworks.ai/api-reference"
   },
-
-  // Anyscale Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "anyscale-llama-3.1-70b",
     name: "Llama 3.1 70B (Anyscale)",
@@ -2289,7 +3593,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 1.00,
     outputCostPer1M: 1.00,
     description: "Llama on Anyscale infrastructure",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.endpoints.anyscale.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.endpoints.anyscale.com"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "anyscale-mistral-7b",
@@ -2299,10 +3613,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.15,
     outputCostPer1M: 0.15,
     description: "Cost-effective Mistral deployment",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.endpoints.anyscale.com/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://docs.endpoints.anyscale.com"
   },
-
-  // OpenRouter Models (Aggregator)
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "openrouter-auto",
     name: "Auto (Best)",
@@ -2311,10 +3633,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.00,
     outputCostPer1M: 0.00,
     description: "Automatically selects best available model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://openrouter.ai/api/v1/chat/completions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier and model",
+    regionalAvailability: "Global",
+    documentation: "https://openrouter.ai/docs"
   },
-
-  // Replicate Models
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "replicate-llama-3.1-405b",
     name: "Llama 3.1 405B (Replicate)",
@@ -2323,10 +3653,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 9.50,
     outputCostPer1M: 9.50,
     description: "On-demand Llama inference",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://api.replicate.com/v1/predictions",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://replicate.com/docs/reference/http"
   },
-
-  // Additional Open Source
+    status: {
+      isNew: true
+    },
+  },
   {
     id: "orca-2-13b",
     name: "Orca 2 13B",
@@ -2335,7 +3673,14 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.20,
     outputCostPer1M: 0.20,
     description: "Microsoft reasoning model",
-    released: "2023"
+    released: "2023",
+  apiInfo: {
+    endpoint: "https://{resource}.openai.azure.com/openai/deployments/{deployment-id}",
+    authentication: "API Key or Azure AD",
+    rateLimits: "Varies by deployment tier",
+    regionalAvailability: "Global",
+    documentation: "https://learn.microsoft.com/azure/ai-services/openai"
+  },
   },
   {
     id: "phi-3-medium",
@@ -2345,7 +3690,17 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.10,
     outputCostPer1M: 0.10,
     description: "Small but powerful Microsoft model",
-    released: "2024"
+    released: "2024",
+  apiInfo: {
+    endpoint: "https://{resource}.openai.azure.com/openai/deployments/{deployment-id}",
+    authentication: "API Key or Azure AD",
+    rateLimits: "Varies by deployment tier",
+    regionalAvailability: "Global",
+    documentation: "https://learn.microsoft.com/azure/ai-services/openai"
+  },
+    status: {
+      isNew: true
+    },
   },
   {
     id: "phi-3-mini",
@@ -2355,180 +3710,18 @@ export const llmModels: LLMModel[] = [
     inputCostPer1M: 0.05,
     outputCostPer1M: 0.05,
     description: "Ultra-compact efficient model",
-    released: "2024"
-  },
-
-  // Specialized Domain Models
-  {
-    id: "medgpt-4",
-    name: "MedGPT 4",
-    provider: "HealthAI",
-    contextWindow: 128000,
-    inputCostPer1M: 5.00,
-    outputCostPer1M: 15.00,
-    description: "Advanced medical AI for healthcare professionals",
     released: "2024",
-    tags: ["Healthcare", "Medical", "Professional"],
-    bestFor: ["Clinical decision support", "Medical research", "Healthcare documentation"],
-    purpose: "Clinical and medical applications",
-    keyFeatures: [
-      "Medical knowledge base",
-      "Clinical guidelines integration",
-      "Healthcare compliance",
-      "Medical imaging analysis"
-    ],
-    benchmarks: {
-      mmlu: 94.5,
-      speed: "medium"
-    },
-    lastUpdated: "2025-01-07"
+  apiInfo: {
+    endpoint: "https://{resource}.openai.azure.com/openai/deployments/{deployment-id}",
+    authentication: "API Key or Azure AD",
+    rateLimits: "Varies by deployment tier",
+    regionalAvailability: "Global",
+    documentation: "https://learn.microsoft.com/azure/ai-services/openai"
   },
-  {
-    id: "legalgpt-pro",
-    name: "LegalGPT Pro",
-    provider: "LawAI",
-    contextWindow: 128000,
-    inputCostPer1M: 4.50,
-    outputCostPer1M: 13.50,
-    description: "Specialized legal AI assistant",
-    released: "2024",
-    tags: ["Legal", "Professional", "Compliance"],
-    bestFor: ["Legal research", "Contract analysis", "Regulatory compliance"],
-    purpose: "Legal professional assistance",
-    keyFeatures: [
-      "Legal precedent analysis",
-      "Multi-jurisdiction support",
-      "Contract review automation",
-      "Legal citation checking"
-    ],
-    benchmarks: {
-      mmlu: 92.8,
-      speed: "fast"
+    status: {
+      isNew: true
     },
-    lastUpdated: "2025-01-07"
   },
-  {
-    id: "finbert-pro",
-    name: "FinBERT Pro",
-    provider: "FinanceAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.00,
-    outputCostPer1M: 12.00,
-    description: "Advanced financial analysis model",
-    released: "2024",
-    tags: ["Finance", "Banking", "Analysis"],
-    bestFor: ["Financial modeling", "Market analysis", "Risk assessment"],
-    purpose: "Financial analysis and reporting",
-    keyFeatures: [
-      "Real-time market data integration",
-      "Financial forecasting",
-      "Risk modeling",
-      "Regulatory compliance"
-    ],
-    benchmarks: {
-      mmlu: 91.2,
-      speed: "fast"
-    },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "edugpt-plus",
-    name: "EduGPT Plus",
-    provider: "EduAI",
-    contextWindow: 64000,
-    inputCostPer1M: 2.00,
-    outputCostPer1M: 6.00,
-    description: "Advanced educational AI assistant",
-    released: "2024",
-    tags: ["Education", "Learning", "Adaptive"],
-    bestFor: ["Personalized learning", "Educational content", "Assessment"],
-    purpose: "Educational support and content creation",
-    keyFeatures: [
-      "Adaptive learning paths",
-      "Multi-subject expertise",
-      "Assessment generation",
-      "Learning analytics"
-    ],
-    benchmarks: {
-      mmlu: 89.6,
-      speed: "fast"
-    },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "scibert-ultra",
-    name: "SciBERT Ultra",
-    provider: "ScienceAI",
-    contextWindow: 128000,
-    inputCostPer1M: 3.50,
-    outputCostPer1M: 10.50,
-    description: "Advanced scientific research assistant",
-    released: "2024",
-    tags: ["Science", "Research", "Technical"],
-    bestFor: ["Scientific research", "Technical writing", "Data analysis"],
-    purpose: "Scientific research and analysis",
-    keyFeatures: [
-      "Research paper analysis",
-      "Technical writing assistance",
-      "Data visualization",
-      "Citation management"
-    ],
-    benchmarks: {
-      mmlu: 93.5,
-      speed: "medium"
-    },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "cybersec-gpt",
-    name: "CyberSec GPT",
-    provider: "SecurityAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.00,
-    outputCostPer1M: 12.00,
-    description: "Specialized cybersecurity AI assistant",
-    released: "2024",
-    tags: ["Security", "Cybersecurity", "Enterprise"],
-    bestFor: ["Threat analysis", "Security auditing", "Incident response"],
-    purpose: "Cybersecurity analysis and protection",
-    keyFeatures: [
-      "Threat detection",
-      "Security assessment",
-      "Vulnerability analysis",
-      "Incident response planning"
-    ],
-    benchmarks: {
-      mmlu: 90.8,
-      speed: "fast"
-    },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "creative-gpt",
-    name: "Creative GPT",
-    provider: "ArtAI",
-    contextWindow: 32000,
-    inputCostPer1M: 2.50,
-    outputCostPer1M: 7.50,
-    description: "Specialized creative writing and design assistant",
-    released: "2024",
-    tags: ["Creative", "Design", "Content"],
-    bestFor: ["Content creation", "Creative writing", "Design concepts"],
-    purpose: "Creative content generation",
-    keyFeatures: [
-      "Story development",
-      "Creative writing",
-      "Design ideation",
-      "Brand voice adaptation"
-    ],
-    benchmarks: {
-      mmlu: 88.4,
-      speed: "fast"
-    },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Amazon Models
   {
     id: "amazon-titan-express",
     name: "Titan Express",
@@ -2543,7 +3736,19 @@ export const llmModels: LLMModel[] = [
     purpose: "AWS-integrated language processing",
     keyFeatures: ["AWS integration", "Low latency", "High availability"],
     benchmarks: { mmlu: 85.6, speed: "fast" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://bedrock-runtime.{region}.amazonaws.com",
+    authentication: "AWS Signature V4",
+    rateLimits: "Varies by model and region",
+    regionalAvailability: "Global",
+    documentation: "https://docs.aws.amazon.com/bedrock"
+  },
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "amazon-titan-large",
@@ -2559,10 +3764,20 @@ export const llmModels: LLMModel[] = [
     purpose: "Enterprise-grade language processing",
     keyFeatures: ["Advanced reasoning", "Enterprise security", "AWS ecosystem integration"],
     benchmarks: { mmlu: 87.8, speed: "medium" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://bedrock-runtime.{region}.amazonaws.com",
+    authentication: "AWS Signature V4",
+    rateLimits: "Varies by model and region",
+    regionalAvailability: "Global",
+    documentation: "https://docs.aws.amazon.com/bedrock"
   },
-
-  // Stability AI Models
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "stable-lm-3b",
     name: "StableLM 3B",
@@ -2577,7 +3792,19 @@ export const llmModels: LLMModel[] = [
     purpose: "Edge and mobile deployment",
     keyFeatures: ["Low resource usage", "Fast inference", "Mobile optimization"],
     benchmarks: { mmlu: 78.5, speed: "fast" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.stability.ai/v1/generation",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.stability.ai/docs/api-reference"
+  },
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "stable-lm-7b",
@@ -2593,10 +3820,20 @@ export const llmModels: LLMModel[] = [
     purpose: "General language processing",
     keyFeatures: ["Balanced performance", "Research-friendly", "Open development"],
     benchmarks: { mmlu: 82.3, speed: "fast" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.stability.ai/v1/generation",
+    authentication: "Bearer Token (API Key)",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://platform.stability.ai/docs/api-reference"
   },
-
-  // Intel Models
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "intel-neural-1",
     name: "Neural Chat 1",
@@ -2611,7 +3848,19 @@ export const llmModels: LLMModel[] = [
     purpose: "Hardware-optimized processing",
     keyFeatures: ["Intel optimization", "Enterprise support", "Edge deployment"],
     benchmarks: { mmlu: 83.4, speed: "fast" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.neural-chat.intel.com/v1",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://www.intel.com/neural-chat/docs"
+  },
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "intel-neural-2",
@@ -2627,10 +3876,20 @@ export const llmModels: LLMModel[] = [
     purpose: "High-performance language processing",
     keyFeatures: ["Advanced optimization", "High performance", "Enterprise integration"],
     benchmarks: { mmlu: 86.7, speed: "fast" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.neural-chat.intel.com/v1",
+    authentication: "API Key",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://www.intel.com/neural-chat/docs"
   },
-
-  // IBM Models
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
   {
     id: "ibm-granite-1",
     name: "Granite 1",
@@ -2645,7 +3904,19 @@ export const llmModels: LLMModel[] = [
     purpose: "Enterprise language processing",
     keyFeatures: ["Enterprise security", "Business integration", "Compliance features"],
     benchmarks: { mmlu: 85.9, speed: "medium" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.watsonx.ai/v1/text/generation",
+    authentication: "IBM Cloud IAM Token",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://cloud.ibm.com/docs/watsonx"
+  },
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
   },
   {
     id: "ibm-granite-2",
@@ -2661,1267 +3932,195 @@ export const llmModels: LLMModel[] = [
     purpose: "Advanced enterprise processing",
     keyFeatures: ["Advanced security", "Regulatory compliance", "Business analytics"],
     benchmarks: { mmlu: 88.2, speed: "medium" },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-01-07",
+  apiInfo: {
+    endpoint: "https://api.watsonx.ai/v1/text/generation",
+    authentication: "IBM Cloud IAM Token",
+    rateLimits: "Varies by tier",
+    regionalAvailability: "Global",
+    documentation: "https://cloud.ibm.com/docs/watsonx"
+  },
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-07"
+    },
+  },
+  {
+    id: "o1",
+    name: "o1",
+    provider: "OpenAI",
+    contextWindow: 200000,
+    inputCostPer1M: 15.0,
+    outputCostPer1M: 60.0,
+    releaseDate: "2024-12-05",
+    description: "OpenAI's most capable reasoning model with advanced problem-solving abilities.",
+    strengths: ["Advanced reasoning", "Complex problem-solving", "Mathematical tasks", "Code generation"],
+    apiInfo: {
+      endpoint: "https://api.openai.com/v1/chat/completions",
+      authentication: "API Key (Bearer token)",
+      rateLimits: "10,000 TPM on tier 1, up to 30M TPM on tier 5",
+      regionalAvailability: "Global",
+      documentation: "https://platform.openai.com/docs/models/o1"
+    },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2024-12-05"
+    }
   },
 
-  // Speciality Models - Manufacturing
   {
-    id: "mfg-expert-1",
-    name: "Manufacturing Expert 1",
-    provider: "IndustryAI",
+    id: "o3-mini",
+    name: "o3-mini",
+    provider: "OpenAI",
+    contextWindow: 200000,
+    inputCostPer1M: 1.1,
+    outputCostPer1M: 4.4,
+    releaseDate: "2025-01-31",
+    description: "OpenAI's efficient reasoning model with strong performance at lower cost.",
+    strengths: ["Cost-effective reasoning", "STEM tasks", "Coding", "Efficient processing"],
+    apiInfo: {
+      endpoint: "https://api.openai.com/v1/chat/completions",
+      authentication: "API Key (Bearer token)",
+      rateLimits: "10,000 TPM on tier 1, up to 30M TPM on tier 5",
+      regionalAvailability: "Global",
+      documentation: "https://platform.openai.com/docs/models/o3-mini"
+    },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2025-01-31"
+    }
+  },
+
+  {
+    id: "codestral",
+    name: "Codestral",
+    provider: "Mistral",
     contextWindow: 32000,
-    inputCostPer1M: 3.00,
-    outputCostPer1M: 9.00,
-    description: "Specialized for manufacturing processes",
-    released: "2024",
-    tags: ["Manufacturing", "Industry", "Specialized"],
-    bestFor: ["Process optimization", "Quality control", "Industrial automation"],
-    purpose: "Manufacturing process optimization",
-    keyFeatures: ["Process analysis", "Quality monitoring", "Automation support"],
-    benchmarks: { mmlu: 89.5, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "mfg-expert-2",
-    name: "Manufacturing Expert 2",
-    provider: "IndustryAI",
-    contextWindow: 64000,
-    inputCostPer1M: 5.00,
-    outputCostPer1M: 15.00,
-    description: "Advanced manufacturing AI assistant",
-    released: "2024",
-    tags: ["Advanced Manufacturing", "Industry 4.0", "IoT"],
-    bestFor: ["Smart manufacturing", "Industrial IoT", "Predictive maintenance"],
-    purpose: "Advanced manufacturing solutions",
-    keyFeatures: ["IoT integration", "Predictive analytics", "Real-time monitoring"],
-    benchmarks: { mmlu: 91.2, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Speciality Models - Healthcare Analytics
-  {
-    id: "health-analytics-pro",
-    name: "Healthcare Analytics Pro",
-    provider: "HealthAI",
-    contextWindow: 128000,
-    inputCostPer1M: 5.50,
-    outputCostPer1M: 16.50,
-    description: "Healthcare data analytics and insights",
-    released: "2024",
-    tags: ["Healthcare", "Analytics", "Medical"],
-    bestFor: ["Healthcare analytics", "Patient data analysis", "Medical research"],
-    purpose: "Healthcare data analysis",
-    keyFeatures: ["Patient analytics", "Health trends", "Medical insights"],
-    benchmarks: { mmlu: 93.2, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "clinical-insights",
-    name: "Clinical Insights",
-    provider: "HealthAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.50,
-    outputCostPer1M: 13.50,
-    description: "Clinical data analysis and reporting",
-    released: "2024",
-    tags: ["Clinical", "Medical", "Analytics"],
-    bestFor: ["Clinical analysis", "Medical reporting", "Healthcare insights"],
-    purpose: "Clinical data processing",
-    keyFeatures: ["Clinical analytics", "Medical reporting", "Health insights"],
-    benchmarks: { mmlu: 92.8, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Speciality Models - Financial Analytics
-  {
-    id: "finance-analytics-pro",
-    name: "Finance Analytics Pro",
-    provider: "FinanceAI",
-    contextWindow: 128000,
-    inputCostPer1M: 5.00,
-    outputCostPer1M: 15.00,
-    description: "Advanced financial data analytics",
-    released: "2024",
-    tags: ["Finance", "Analytics", "Enterprise"],
-    bestFor: ["Financial analysis", "Market research", "Investment insights"],
-    purpose: "Financial data analysis",
-    keyFeatures: ["Market analytics", "Investment analysis", "Risk assessment"],
-    benchmarks: { mmlu: 91.5, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "market-insight-pro",
-    name: "Market Insight Pro",
-    provider: "FinanceAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.00,
-    outputCostPer1M: 12.00,
-    description: "Market analysis and trading insights",
-    released: "2024",
-    tags: ["Markets", "Trading", "Analysis"],
-    bestFor: ["Market analysis", "Trading strategies", "Investment research"],
-    purpose: "Market analysis and insights",
-    keyFeatures: ["Market trends", "Trading signals", "Investment research"],
-    benchmarks: { mmlu: 90.8, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Speciality Models - Legal Research
-  {
-    id: "legal-research-pro",
-    name: "Legal Research Pro",
-    provider: "LawAI",
-    contextWindow: 128000,
-    inputCostPer1M: 5.50,
-    outputCostPer1M: 16.50,
-    description: "Advanced legal research assistant",
-    released: "2024",
-    tags: ["Legal", "Research", "Professional"],
-    bestFor: ["Legal research", "Case analysis", "Document review"],
-    purpose: "Legal research and analysis",
-    keyFeatures: ["Case research", "Legal analysis", "Document review"],
-    benchmarks: { mmlu: 92.4, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "compliance-expert",
-    name: "Compliance Expert",
-    provider: "LawAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.50,
-    outputCostPer1M: 13.50,
-    description: "Regulatory compliance analysis",
-    released: "2024",
-    tags: ["Compliance", "Regulatory", "Legal"],
-    bestFor: ["Compliance analysis", "Regulatory review", "Risk assessment"],
-    purpose: "Compliance and regulatory analysis",
-    keyFeatures: ["Compliance checking", "Regulatory updates", "Risk assessment"],
-    benchmarks: { mmlu: 91.6, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Speciality Models - Education
-  {
-    id: "education-pro",
-    name: "Education Pro",
-    provider: "EduAI",
-    contextWindow: 64000,
-    inputCostPer1M: 3.50,
-    outputCostPer1M: 10.50,
-    description: "Advanced educational content assistant",
-    released: "2024",
-    tags: ["Education", "Content", "Learning"],
-    bestFor: ["Course creation", "Learning content", "Educational planning"],
-    purpose: "Educational content development",
-    keyFeatures: ["Course planning", "Content creation", "Learning assessment"],
-    benchmarks: { mmlu: 90.5, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "learning-analytics",
-    name: "Learning Analytics",
-    provider: "EduAI",
-    contextWindow: 32000,
-    inputCostPer1M: 2.50,
-    outputCostPer1M: 7.50,
-    description: "Learning progress analytics",
-    released: "2024",
-    tags: ["Analytics", "Education", "Assessment"],
-    bestFor: ["Learning analysis", "Progress tracking", "Performance assessment"],
-    purpose: "Learning analytics and assessment",
-    keyFeatures: ["Progress tracking", "Performance analysis", "Learning insights"],
-    benchmarks: { mmlu: 89.8, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Language-Specific Models
-  {
-    id: "mandarin-gpt",
-    name: "Mandarin GPT",
-    provider: "AsiaAI",
-    contextWindow: 64000,
-    inputCostPer1M: 3.00,
-    outputCostPer1M: 9.00,
-    description: "Specialized model for Mandarin Chinese language processing",
-    released: "2024",
-    tags: ["Chinese", "Language", "Specialized"],
-    bestFor: ["Chinese content", "Translation", "Cultural context"],
-    purpose: "Chinese language processing",
-    keyFeatures: [
-      "Native Chinese understanding",
-      "Cultural context awareness",
-      "Idiomatic translation",
-      "Chinese writing styles"
-    ],
-    benchmarks: { mmlu: 89.5, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "hindi-nlp",
-    name: "Hindi NLP",
-    provider: "IndiaAI",
-    contextWindow: 32000,
-    inputCostPer1M: 2.00,
-    outputCostPer1M: 6.00,
-    description: "Advanced Hindi language model",
-    released: "2024",
-    tags: ["Hindi", "Indian", "Language"],
-    bestFor: ["Hindi content", "Indian languages", "Cultural context"],
-    purpose: "Indian language processing",
-    keyFeatures: [
-      "Hindi language expertise",
-      "Indian cultural context",
-      "Multi-script support",
-      "Regional language understanding"
-    ],
-    benchmarks: { mmlu: 88.7, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Industry-Specific Models
-  {
-    id: "retail-ai-pro",
-    name: "Retail AI Pro",
-    provider: "RetailTech",
-    contextWindow: 64000,
-    inputCostPer1M: 3.50,
-    outputCostPer1M: 10.50,
-    description: "Specialized retail and e-commerce AI",
-    released: "2024",
-    tags: ["Retail", "E-commerce", "Business"],
-    bestFor: ["Retail analytics", "Customer insights", "Inventory management"],
-    purpose: "Retail optimization",
-    keyFeatures: [
-      "Customer behavior analysis",
-      "Inventory optimization",
-      "Price optimization",
-      "Trend prediction"
-    ],
-    benchmarks: { mmlu: 90.2, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "telecom-gpt",
-    name: "Telecom GPT",
-    provider: "TelecomAI",
-    contextWindow: 32000,
-    inputCostPer1M: 2.50,
-    outputCostPer1M: 7.50,
-    description: "Telecommunications industry specialist",
-    released: "2024",
-    tags: ["Telecom", "Network", "Communications"],
-    bestFor: ["Network analysis", "Telecom operations", "Service optimization"],
-    purpose: "Telecom operations",
-    keyFeatures: [
-      "Network optimization",
-      "Service quality analysis",
-      "Customer support",
-      "Technical documentation"
-    ],
-    benchmarks: { mmlu: 89.8, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Research & Academic Models
-  {
-    id: "quantum-llm",
-    name: "Quantum LLM",
-    provider: "QuantumAI",
-    contextWindow: 128000,
-    inputCostPer1M: 8.00,
-    outputCostPer1M: 24.00,
-    description: "Quantum computing research specialist",
-    released: "2024",
-    tags: ["Quantum", "Research", "Academic"],
-    bestFor: ["Quantum research", "Physics", "Advanced computation"],
-    purpose: "Quantum computing research",
-    keyFeatures: [
-      "Quantum algorithm analysis",
-      "Physics simulation",
-      "Research assistance",
-      "Technical documentation"
-    ],
-    benchmarks: { mmlu: 94.5, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "bio-research",
-    name: "Bio Research",
-    provider: "BioAI",
-    contextWindow: 128000,
-    inputCostPer1M: 7.00,
-    outputCostPer1M: 21.00,
-    description: "Specialized biological research assistant",
-    released: "2024",
-    tags: ["Biology", "Research", "Science"],
-    bestFor: ["Biological research", "Genomics", "Molecular biology"],
-    purpose: "Biological research",
-    keyFeatures: [
-      "Genomics analysis",
-      "Protein folding",
-      "Research literature",
-      "Lab protocol assistance"
-    ],
-    benchmarks: { mmlu: 93.8, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Security & Privacy Models
-  {
-    id: "security-ai-pro",
-    name: "Security AI Pro",
-    provider: "SecureAI",
-    contextWindow: 64000,
-    inputCostPer1M: 5.00,
-    outputCostPer1M: 15.00,
-    description: "Advanced security and privacy model",
-    released: "2024",
-    tags: ["Security", "Privacy", "Enterprise"],
-    bestFor: ["Security analysis", "Threat detection", "Privacy compliance"],
-    purpose: "Security operations",
-    keyFeatures: [
-      "Threat detection",
-      "Privacy analysis",
-      "Security auditing",
-      "Compliance checking"
-    ],
-    benchmarks: { mmlu: 91.5, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "privacy-guard",
-    name: "Privacy Guard",
-    provider: "SecureAI",
-    contextWindow: 32000,
-    inputCostPer1M: 4.00,
-    outputCostPer1M: 12.00,
-    description: "Privacy-focused language model",
-    released: "2024",
-    tags: ["Privacy", "Security", "Compliance"],
-    bestFor: ["Privacy protection", "Data anonymization", "Compliance"],
-    purpose: "Privacy protection",
-    keyFeatures: [
-      "Data anonymization",
-      "Privacy compliance",
-      "PII detection",
-      "GDPR alignment"
-    ],
-    benchmarks: { mmlu: 90.8, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Emerging Technology Models
-  {
-    id: "iot-expert",
-    name: "IoT Expert",
-    provider: "IoTAI",
-    contextWindow: 32000,
-    inputCostPer1M: 3.00,
-    outputCostPer1M: 9.00,
-    description: "IoT and embedded systems specialist",
-    released: "2024",
-    tags: ["IoT", "Embedded", "Technology"],
-    bestFor: ["IoT systems", "Device management", "Sensor networks"],
-    purpose: "IoT operations",
-    keyFeatures: [
-      "Device management",
-      "Sensor analysis",
-      "Network optimization",
-      "Edge computing"
-    ],
-    benchmarks: { mmlu: 89.4, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "blockchain-ai",
-    name: "Blockchain AI",
-    provider: "ChainAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.50,
-    outputCostPer1M: 13.50,
-    description: "Blockchain and smart contract specialist",
-    released: "2024",
-    tags: ["Blockchain", "Crypto", "Smart Contracts"],
-    bestFor: ["Smart contracts", "Blockchain analysis", "DeFi"],
-    purpose: "Blockchain operations",
-    keyFeatures: [
-      "Smart contract analysis",
-      "Blockchain optimization",
-      "Security auditing",
-      "DeFi analytics"
-    ],
-    benchmarks: { mmlu: 90.6, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Multimedia Processing Models
-  {
-    id: "media-fusion",
-    name: "Media Fusion",
-    provider: "MediaAI",
-    contextWindow: 128000,
-    inputCostPer1M: 6.00,
-    outputCostPer1M: 18.00,
-    description: "Advanced multimedia processing model",
-    released: "2024",
-    tags: ["Multimedia", "Processing", "Content"],
-    bestFor: ["Media processing", "Content analysis", "Video understanding"],
-    purpose: "Multimedia processing",
-    keyFeatures: [
-      "Video analysis",
-      "Audio processing",
-      "Image understanding",
-      "Content moderation"
-    ],
-    benchmarks: { mmlu: 91.2, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "content-studio",
-    name: "Content Studio",
-    provider: "MediaAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.00,
-    outputCostPer1M: 12.00,
-    description: "Creative content generation specialist",
-    released: "2024",
-    tags: ["Content", "Creative", "Media"],
-    bestFor: ["Content creation", "Media generation", "Creative assistance"],
-    purpose: "Content creation",
-    keyFeatures: [
-      "Content generation",
-      "Style adaptation",
-      "Brand alignment",
-      "Multi-format support"
-    ],
-    benchmarks: { mmlu: 90.4, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Speciality Models - Research
-  {
-    id: "research-assistant-pro",
-    name: "Research Assistant Pro",
-    provider: "ScienceAI",
-    contextWindow: 128000,
-    inputCostPer1M: 4.00,
-    outputCostPer1M: 12.00,
-    description: "Advanced research and academic assistant",
-    released: "2024",
-    tags: ["Research", "Academic", "Scientific"],
-    bestFor: ["Academic research", "Literature review", "Scientific writing"],
-    purpose: "Academic research assistance",
-    keyFeatures: ["Literature analysis", "Research methodology", "Academic writing"],
-    benchmarks: { mmlu: 92.5, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "climate-ai",
-    name: "Climate AI",
-    provider: "ClimateAI",
-    contextWindow: 128000,
-    inputCostPer1M: 5.00,
-    outputCostPer1M: 15.00,
-    description: "Climate and environmental research specialist",
-    released: "2024",
-    tags: ["Climate", "Environmental", "Research"],
-    bestFor: ["Climate research", "Environmental analysis", "Sustainability"],
-    purpose: "Climate research",
-    keyFeatures: [
-      "Climate modeling",
-      "Environmental analysis",
-      "Sustainability metrics",
-      "Impact assessment"
-    ],
-    benchmarks: { mmlu: 92.3, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "space-research",
-    name: "Space Research",
-    provider: "SpaceAI",
-    contextWindow: 128000,
-    inputCostPer1M: 6.00,
-    outputCostPer1M: 18.00,
-    description: "Space and astronomy research specialist",
-    released: "2024",
-    tags: ["Space", "Astronomy", "Research"],
-    bestFor: ["Space research", "Astronomical data", "Mission planning"],
-    purpose: "Space research",
-    keyFeatures: [
-      "Astronomical analysis",
-      "Mission planning",
-      "Data processing",
-      "Space engineering"
-    ],
-    benchmarks: { mmlu: 93.1, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "materials-science",
-    name: "Materials Science",
-    provider: "MaterialsAI",
-    contextWindow: 64000,
-    inputCostPer1M: 5.50,
-    outputCostPer1M: 16.50,
-    description: "Materials science research specialist",
-    released: "2024",
-    tags: ["Materials", "Science", "Research"],
-    bestFor: ["Materials research", "Chemical analysis", "Property prediction"],
-    purpose: "Materials research",
-    keyFeatures: [
-      "Materials analysis",
-      "Property prediction",
-      "Structure analysis",
-      "Research assistance"
-    ],
-    benchmarks: { mmlu: 91.8, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-  // Additional Language Models
-  {
-    id: "arabic-ai",
-    name: "Arabic AI",
-    provider: "ArabicAI",
-    contextWindow: 64000,
-    inputCostPer1M: 3.50,
-    outputCostPer1M: 10.50,
-    description: "Specialized Arabic language model",
-    released: "2024",
-    tags: ["Arabic", "Language", "Regional"],
-    bestFor: ["Arabic content", "Middle East context", "Islamic studies"],
-    purpose: "Arabic language processing",
-    keyFeatures: [
-      "Arabic script mastery",
-      "Dialectal variations",
-      "Cultural context",
-      "Islamic terminology"
-    ],
-    benchmarks: { mmlu: 89.6, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "japanese-llm",
-    name: "Japanese LLM",
-    provider: "JapanAI",
-    contextWindow: 64000,
-    inputCostPer1M: 3.50,
-    outputCostPer1M: 10.50,
-    description: "Advanced Japanese language model",
-    released: "2024",
-    tags: ["Japanese", "Language", "Regional"],
-    bestFor: ["Japanese content", "Business etiquette", "Manga/Anime"],
-    purpose: "Japanese language processing",
-    keyFeatures: [
-      "Keigo mastery",
-      "Kanji understanding",
-      "Cultural nuances",
-      "Business formality"
-    ],
-    benchmarks: { mmlu: 90.2, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "espanol-gpt",
-    name: "Español GPT",
-    provider: "HispanicAI",
-    contextWindow: 64000,
-    inputCostPer1M: 3.00,
-    outputCostPer1M: 9.00,
-    description: "Spanish language specialist",
-    released: "2024",
-    tags: ["Spanish", "Language", "Regional"],
-    bestFor: ["Spanish content", "Latin American context", "Hispanic culture"],
-    purpose: "Spanish language processing",
-    keyFeatures: [
-      "Regional variations",
-      "Cultural context",
-      "Idiomatic expressions",
-      "Business Spanish"
-    ],
-    benchmarks: { mmlu: 89.8, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Industry Vertical Models
-  {
-    id: "agri-expert",
-    name: "Agriculture Expert",
-    provider: "AgriAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.00,
-    outputCostPer1M: 12.00,
-    description: "Agricultural AI specialist",
-    released: "2024",
-    tags: ["Agriculture", "Farming", "Sustainability"],
-    bestFor: ["Crop management", "Agricultural research", "Farm optimization"],
-    purpose: "Agricultural optimization",
-    keyFeatures: [
-      "Crop analysis",
-      "Weather integration",
-      "Soil management",
-      "Yield prediction"
-    ],
-    benchmarks: { mmlu: 90.5, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "construction-ai",
-    name: "Construction AI",
-    provider: "BuildAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.50,
-    outputCostPer1M: 13.50,
-    description: "Construction industry specialist",
-    released: "2024",
-    tags: ["Construction", "Building", "Engineering"],
-    bestFor: ["Project management", "Safety compliance", "Resource planning"],
-    purpose: "Construction management",
-    keyFeatures: [
-      "Project planning",
-      "Safety analysis",
-      "Resource optimization",
-      "Compliance checking"
-    ],
-    benchmarks: { mmlu: 89.7, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "energy-expert",
-    name: "Energy Expert",
-    provider: "EnergyAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.00,
-    outputCostPer1M: 12.00,
-    description: "Energy sector specialist",
-    released: "2024",
-    tags: ["Energy", "Utilities", "Sustainability"],
-    bestFor: ["Energy optimization", "Grid management", "Renewable energy"],
-    purpose: "Energy management",
-    keyFeatures: [
-      "Grid analysis",
-      "Energy forecasting",
-      "Efficiency optimization",
-      "Renewable integration"
-    ],
-    benchmarks: { mmlu: 91.3, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Research Domain Models
-  {
-    id: "neuro-ai",
-    name: "Neuro AI",
-    provider: "BrainAI",
-    contextWindow: 128000,
-    inputCostPer1M: 6.00,
-    outputCostPer1M: 18.00,
-    description: "Neuroscience research specialist",
-    released: "2024",
-    tags: ["Neuroscience", "Research", "Medical"],
-    bestFor: ["Brain research", "Neural analysis", "Cognitive science"],
-    purpose: "Neuroscience research",
-    keyFeatures: [
-      "Brain mapping",
-      "Neural analysis",
-      "Cognitive modeling",
-      "Research assistance"
-    ],
-    benchmarks: { mmlu: 93.4, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "psych-research",
-    name: "Psychology Research",
-    provider: "PsychAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.50,
-    outputCostPer1M: 13.50,
-    description: "Psychology research specialist",
-    released: "2024",
-    tags: ["Psychology", "Research", "Behavioral"],
-    bestFor: ["Psychological research", "Behavioral analysis", "Clinical studies"],
-    purpose: "Psychology research",
-    keyFeatures: [
-      "Behavioral analysis",
-      "Clinical research",
-      "Study design",
-      "Data interpretation"
-    ],
-    benchmarks: { mmlu: 90.8, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "econometrics-pro",
-    name: "Econometrics Pro",
-    provider: "EconAI",
-    contextWindow: 128000,
-    inputCostPer1M: 5.50,
-    outputCostPer1M: 16.50,
-    description: "Economics research specialist",
-    released: "2024",
-    tags: ["Economics", "Research", "Finance"],
-    bestFor: ["Economic analysis", "Market research", "Policy analysis"],
-    purpose: "Economic research",
-    keyFeatures: [
-      "Economic modeling",
-      "Policy analysis",
-      "Market forecasting",
-      "Data analysis"
-    ],
-    benchmarks: { mmlu: 92.1, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Edge Computing Models
-  {
-    id: "edge-ai-pro",
-    name: "Edge AI Pro",
-    provider: "EdgeAI",
-    contextWindow: 16000,
-    inputCostPer1M: 1.50,
-    outputCostPer1M: 4.50,
-    description: "Edge computing optimized model",
-    released: "2024",
-    tags: ["Edge", "Efficient", "IoT"],
-    bestFor: ["Edge deployment", "IoT devices", "Mobile applications"],
-    purpose: "Edge computing",
-    keyFeatures: [
-      "Low latency",
-      "Resource efficient",
-      "Offline capability",
-      "Device optimization"
-    ],
-    benchmarks: { mmlu: 85.6, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "mobile-ai",
-    name: "Mobile AI",
-    provider: "EdgeAI",
-    contextWindow: 8000,
-    inputCostPer1M: 1.00,
-    outputCostPer1M: 3.00,
-    description: "Mobile-optimized AI model",
-    released: "2024",
-    tags: ["Mobile", "Edge", "Efficient"],
-    bestFor: ["Mobile apps", "Battery efficiency", "Quick inference"],
-    purpose: "Mobile computing",
-    keyFeatures: [
-      "Battery efficient",
-      "Fast inference",
-      "Small footprint",
-      "Mobile optimization"
-    ],
-    benchmarks: { mmlu: 83.9, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // AutoML Models
-  {
-    id: "automl-expert",
-    name: "AutoML Expert",
-    provider: "AutoAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.00,
-    outputCostPer1M: 12.00,
-    description: "Automated machine learning specialist",
-    released: "2024",
-    tags: ["AutoML", "ML", "AI"],
-    bestFor: ["Model selection", "Hyperparameter tuning", "Architecture search"],
-    purpose: "AutoML optimization",
-    keyFeatures: [
-      "Architecture search",
-      "Hyperparameter optimization",
-      "Model evaluation",
-      "Training automation"
-    ],
-    benchmarks: { mmlu: 91.7, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "ml-optimizer",
-    name: "ML Optimizer",
-    provider: "AutoAI",
-    contextWindow: 32000,
-    inputCostPer1M: 3.00,
-    outputCostPer1M: 9.00,
-    description: "Machine learning optimization specialist",
-    released: "2024",
-    tags: ["ML", "Optimization", "AI"],
-    bestFor: ["Model optimization", "Performance tuning", "Efficiency"],
-    purpose: "ML optimization",
-    keyFeatures: [
-      "Performance tuning",
-      "Resource optimization",
-      "Training efficiency",
-      "Model compression"
-    ],
-    benchmarks: { mmlu: 90.3, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  
-  {
-    id: "research-specialist",
-    name: "Research Specialist",
-    provider: "ScienceAI",
-    contextWindow: 256000,
-    inputCostPer1M: 6.00,
-    outputCostPer1M: 18.00,
-    description: "Specialized research and analysis model",
-    released: "2024",
-    tags: ["Specialized Research", "Analysis", "Technical"],
-    bestFor: ["Deep research", "Technical analysis", "Specialized studies"],
-    purpose: "Specialized research support",
-    keyFeatures: ["Deep analysis", "Technical expertise", "Research tools"],
-    benchmarks: { mmlu: 94.1, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-
-  // Additional Regional Language Models
-  {
-    id: "korean-ai",
-    name: "Korean AI",
-    provider: "KoreanAI",
-    contextWindow: 64000,
-    inputCostPer1M: 3.50,
-    outputCostPer1M: 10.50,
-    description: "Advanced Korean language processing model with cultural context",
-    released: "2024",
-    tags: ["Korean", "Language", "Regional", "Cultural"],
-    bestFor: [
-      "Korean content creation",
-      "Business communication",
-      "K-pop/Entertainment",
-      "Cultural localization"
-    ],
-    purpose: "Korean language and cultural processing",
-    keyFeatures: [
-      "Honorific system mastery",
-      "Korean cultural context",
-      "Entertainment industry terminology",
-      "Business Korean expertise",
-      "Hangul optimization"
-    ],
-    benchmarks: {
-      mmlu: 89.8,
-      humanEval: 88.5,
-      speed: "fast"
+    inputCostPer1M: 1.0,
+    outputCostPer1M: 3.0,
+    releaseDate: "2024-05-29",
+    description: "Mistral's specialized coding model optimized for code generation and completion.",
+    strengths: ["Code generation", "Code completion", "Multi-language support", "Fast inference"],
+    apiInfo: {
+      endpoint: "https://api.mistral.ai/v1/chat/completions",
+      authentication: "API Key (Bearer token)",
+      rateLimits: "Varies by subscription tier",
+      regionalAvailability: "Global",
+      documentation: "https://docs.mistral.ai/api"
     },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "russian-nlp",
-    name: "Russian NLP",
-    provider: "RussianAI",
-    contextWindow: 64000,
-    inputCostPer1M: 3.50,
-    outputCostPer1M: 10.50,
-    description: "Comprehensive Russian language model with cultural understanding",
-    released: "2024",
-    tags: ["Russian", "Language", "Regional", "Slavic"],
-    bestFor: [
-      "Russian content generation",
-      "Slavic language processing",
-      "Cultural adaptation",
-      "Academic research"
-    ],
-    purpose: "Russian and Slavic language processing",
-    keyFeatures: [
-      "Cyrillic script mastery",
-      "Russian grammar system",
-      "Slavic language family understanding",
-      "Cultural context awareness",
-      "Scientific literature processing"
-    ],
-    benchmarks: {
-      mmlu: 90.1,
-      humanEval: 89.2,
-      speed: "fast"
-    },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "portuguese-br",
-    name: "Portuguese BR",
-    provider: "BrazilAI",
-    contextWindow: 64000,
-    inputCostPer1M: 3.00,
-    outputCostPer1M: 9.00,
-    description: "Brazilian Portuguese language specialist with regional variations",
-    released: "2024",
-    tags: ["Portuguese", "Brazilian", "Regional", "LATAM"],
-    bestFor: [
-      "Brazilian content",
-      "Portuguese localization",
-      "LATAM business",
-      "Cultural adaptation"
-    ],
-    purpose: "Brazilian Portuguese processing",
-    keyFeatures: [
-      "Brazilian dialect expertise",
-      "Cultural nuances",
-      "Regional expressions",
-      "Business Portuguese",
-      "Cross-cultural communication"
-    ],
-    benchmarks: {
-      mmlu: 89.5,
-      humanEval: 88.8,
-      speed: "fast"
-    },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2024-05-29"
+    }
   },
 
-  // Additional Industry Vertical Models
   {
-    id: "pharma-expert",
-    name: "Pharma Expert",
-    provider: "PharmaAI",
-    contextWindow: 128000,
-    inputCostPer1M: 6.00,
-    outputCostPer1M: 18.00,
-    description: "Pharmaceutical industry specialist with regulatory expertise",
-    released: "2024",
-    tags: ["Pharmaceutical", "Healthcare", "Regulatory", "Research"],
-    bestFor: [
-      "Drug development",
-      "Clinical trials",
-      "Regulatory compliance",
-      "Research analysis"
-    ],
-    purpose: "Pharmaceutical research and compliance",
-    keyFeatures: [
-      "Drug development assistance",
-      "Clinical trial analysis",
-      "Regulatory compliance checking",
-      "Research literature analysis",
-      "Patent processing"
-    ],
-    benchmarks: {
-      mmlu: 93.2,
-      humanEval: 91.5,
-      speed: "medium"
+    id: "gemini-2.0-flash",
+    name: "Gemini 2.0 Flash",
+    provider: "Google",
+    contextWindow: 1000000,
+    inputCostPer1M: 0.1,
+    outputCostPer1M: 0.4,
+    releaseDate: "2024-12-11",
+    description: "Google's fast and efficient multimodal model with native tool use.",
+    strengths: ["Multimodal", "Native tool use", "Fast inference", "Cost-effective"],
+    apiInfo: {
+      endpoint: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+      authentication: "API Key",
+      rateLimits: "15 RPM free tier, higher on paid tiers",
+      regionalAvailability: "Global (restricted in some regions)",
+      documentation: "https://ai.google.dev/gemini-api/docs"
     },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "automotive-ai",
-    name: "Automotive AI",
-    provider: "AutoTechAI",
-    contextWindow: 64000,
-    inputCostPer1M: 4.50,
-    outputCostPer1M: 13.50,
-    description: "Automotive industry specialist with manufacturing expertise",
-    released: "2024",
-    tags: ["Automotive", "Manufacturing", "Engineering", "Technical"],
-    bestFor: [
-      "Vehicle design",
-      "Manufacturing processes",
-      "Quality control",
-      "Technical documentation"
-    ],
-    purpose: "Automotive industry support",
-    keyFeatures: [
-      "Vehicle systems analysis",
-      "Manufacturing optimization",
-      "Quality control processes",
-      "Technical documentation",
-      "Supply chain management"
-    ],
-    benchmarks: {
-      mmlu: 90.8,
-      humanEval: 89.7,
-      speed: "fast"
-    },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "mining-expert",
-    name: "Mining Expert",
-    provider: "MiningAI",
-    contextWindow: 64000,
-    inputCostPer1M: 5.00,
-    outputCostPer1M: 15.00,
-    description: "Mining industry specialist with safety and operations focus",
-    released: "2024",
-    tags: ["Mining", "Industrial", "Safety", "Operations"],
-    bestFor: [
-      "Mining operations",
-      "Safety protocols",
-      "Resource management",
-      "Environmental compliance"
-    ],
-    purpose: "Mining operations and safety",
-    keyFeatures: [
-      "Safety protocol management",
-      "Resource estimation",
-      "Environmental impact analysis",
-      "Operational optimization",
-      "Risk assessment"
-    ],
-    benchmarks: {
-      mmlu: 91.3,
-      humanEval: 90.1,
-      speed: "fast"
-    },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2024-12-11"
+    }
   },
 
-  // Specialized Analytics Models
   {
-    id: "predictive-analytics",
-    name: "Predictive Analytics",
-    provider: "AnalyticsAI",
-    contextWindow: 128000,
-    inputCostPer1M: 5.00,
-    outputCostPer1M: 15.00,
-    description: "Advanced predictive analytics specialist",
-    released: "2024",
-    tags: ["Analytics", "Prediction", "Business"],
-    bestFor: ["Predictive modeling", "Trend analysis", "Forecasting"],
-    purpose: "Predictive analytics",
-    keyFeatures: [
-      "Time series analysis",
-      "Pattern recognition",
-      "Trend forecasting",
-      "Risk assessment"
-    ],
-    benchmarks: { mmlu: 92.4, speed: "medium" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "marketing-analytics",
-    name: "Marketing Analytics",
-    provider: "AnalyticsAI",
+    id: "deepseek-v3",
+    name: "DeepSeek V3",
+    provider: "DeepSeek",
     contextWindow: 64000,
-    inputCostPer1M: 4.00,
-    outputCostPer1M: 12.00,
-    description: "Marketing analytics specialist",
-    released: "2024",
-    tags: ["Marketing", "Analytics", "Business"],
-    bestFor: ["Campaign analysis", "Customer insights", "Market research"],
-    purpose: "Marketing optimization",
-    keyFeatures: [
-      "Campaign analysis",
-      "Customer segmentation",
-      "ROI prediction",
-      "Market trends"
-    ],
-    benchmarks: { mmlu: 89.9, speed: "fast" },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "social-analytics",
-    name: "Social Analytics",
-    provider: "AnalyticsAI",
-    contextWindow: 64000,
-    inputCostPer1M: 3.50,
-    outputCostPer1M: 10.50,
-    description: "Social media analytics specialist",
-    released: "2024",
-    tags: ["Social", "Analytics", "Media"],
-    bestFor: ["Social media analysis", "Trend tracking", "Engagement metrics"],
-    purpose: "Social media analytics",
-    keyFeatures: [
-      "Sentiment analysis",
-      "Trend detection",
-      "Engagement tracking",
-      "Influencer analytics"
-    ],
-    benchmarks: { mmlu: 88.7, speed: "fast" },
-    lastUpdated: "2025-01-07"
+    inputCostPer1M: 0.27,
+    outputCostPer1M: 1.1,
+    releaseDate: "2024-12-26",
+    description: "DeepSeek's most capable model with 671B parameters and MoE architecture.",
+    strengths: ["Cost-effective", "Strong reasoning", "Code generation", "Long context"],
+    apiInfo: {
+      endpoint: "https://api.deepseek.com/v1/chat/completions",
+      authentication: "API Key (Bearer token)",
+      rateLimits: "Varies by subscription tier",
+      regionalAvailability: "Global",
+      documentation: "https://platform.deepseek.com/api-docs"
+    },
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2024-12-26"
+    }
   },
 
-  // Emerging Technology Models
   {
-    id: "quantum-compute",
-    name: "Quantum Compute",
-    provider: "QuantumAI",
-    contextWindow: 128000,
-    inputCostPer1M: 8.00,
-    outputCostPer1M: 24.00,
-    description: "Quantum computing optimization and research specialist",
-    released: "2024",
-    tags: ["Quantum", "Computing", "Research", "Advanced"],
-    bestFor: [
-      "Quantum algorithm design",
-      "Quantum circuit optimization",
-      "Research analysis",
-      "Quantum simulation"
-    ],
-    purpose: "Quantum computing advancement",
-    keyFeatures: [
-      "Quantum algorithm analysis",
-      "Circuit optimization",
-      "Error correction",
-      "Quantum simulation",
-      "Research documentation"
-    ],
-    benchmarks: {
-      mmlu: 94.8,
-      humanEval: 93.5,
-      speed: "medium"
+    id: "gemma-2-9b",
+    name: "Gemma 2 9B",
+    provider: "Google",
+    contextWindow: 8192,
+    inputCostPer1M: 0.2,
+    outputCostPer1M: 0.2,
+    releaseDate: "2024-06-27",
+    description: "Google's open-source lightweight model for efficient deployment.",
+    strengths: ["Open-source", "Efficient", "On-device capable", "Cost-effective"],
+    apiInfo: {
+      endpoint: "https://generativelanguage.googleapis.com/v1beta/models/gemma-2-9b:generateContent",
+      authentication: "API Key",
+      rateLimits: "15 RPM free tier, higher on paid tiers",
+      regionalAvailability: "Global",
+      documentation: "https://ai.google.dev/gemma/docs"
     },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "ar-vr-expert",
-    name: "AR/VR Expert",
-    provider: "MetaverseAI",
-    contextWindow: 64000,
-    inputCostPer1M: 5.00,
-    outputCostPer1M: 15.00,
-    description: "AR/VR development and optimization specialist",
-    released: "2024",
-    tags: ["AR", "VR", "Metaverse", "Interactive"],
-    bestFor: [
-      "AR/VR development",
-      "Spatial computing",
-      "User experience",
-      "Interactive content"
-    ],
-    purpose: "AR/VR advancement",
-    keyFeatures: [
-      "Spatial computing",
-      "Interactive design",
-      "Performance optimization",
-      "User experience",
-      "Content generation"
-    ],
-    benchmarks: {
-      mmlu: 91.2,
-      humanEval: 90.5,
-      speed: "fast"
-    },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "robotics-expert",
-    name: "Robotics Expert",
-    provider: "RoboAI",
-    contextWindow: 64000,
-    inputCostPer1M: 6.00,
-    outputCostPer1M: 18.00,
-    description: "Advanced robotics and automation specialist",
-    released: "2024",
-    tags: ["Robotics", "Automation", "Control", "Engineering"],
-    bestFor: [
-      "Robot control systems",
-      "Automation design",
-      "Motion planning",
-      "System integration"
-    ],
-    purpose: "Robotics advancement",
-    keyFeatures: [
-      "Motion control",
-      "System integration",
-      "Sensor fusion",
-      "Path planning",
-      "Safety protocols"
-    ],
-    benchmarks: {
-      mmlu: 92.3,
-      humanEval: 91.8,
-      speed: "fast"
-    },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2024-06-27"
+    }
   },
 
-  // Additional Research Fields
   {
-    id: "genetics-expert",
-    name: "Genetics Expert",
-    provider: "GeneAI",
-    contextWindow: 128000,
-    inputCostPer1M: 7.00,
-    outputCostPer1M: 21.00,
-    description: "Genetics research and analysis specialist",
-    released: "2024",
-    tags: ["Genetics", "Research", "Biology", "Medical"],
-    bestFor: [
-      "Genetic research",
-      "DNA analysis",
-      "Mutation studies",
-      "Clinical genetics"
-    ],
-    purpose: "Genetics research",
-    keyFeatures: [
-      "Gene sequence analysis",
-      "Mutation prediction",
-      "Research literature",
-      "Clinical interpretation",
-      "Genomic database integration"
-    ],
-    benchmarks: {
-      mmlu: 93.7,
-      humanEval: 92.9,
-      speed: "medium"
+    id: "gemma-2-27b",
+    name: "Gemma 2 27B",
+    provider: "Google",
+    contextWindow: 8192,
+    inputCostPer1M: 0.27,
+    outputCostPer1M: 0.27,
+    releaseDate: "2024-06-27",
+    description: "Google's larger open-source model with enhanced capabilities.",
+    strengths: ["Open-source", "Strong performance", "Versatile", "Self-hostable"],
+    apiInfo: {
+      endpoint: "https://generativelanguage.googleapis.com/v1beta/models/gemma-2-27b:generateContent",
+      authentication: "API Key",
+      rateLimits: "15 RPM free tier, higher on paid tiers",
+      regionalAvailability: "Global",
+      documentation: "https://ai.google.dev/gemma/docs"
     },
-    lastUpdated: "2025-01-07"
+    lastUpdated: "2025-11-08",
+    status: {
+      isNew: true,
+      pricingUpdated: true,
+      pricingUpdateDate: "2024-06-27"
+    }
   },
-  {
-    id: "astro-physics",
-    name: "Astrophysics",
-    provider: "SpaceAI",
-    contextWindow: 128000,
-    inputCostPer1M: 7.50,
-    outputCostPer1M: 22.50,
-    description: "Astrophysics research and analysis specialist",
-    released: "2024",
-    tags: ["Astrophysics", "Space", "Research", "Physics"],
-    bestFor: [
-      "Astronomical research",
-      "Cosmological studies",
-      "Data analysis",
-      "Theory development"
-    ],
-    purpose: "Astrophysics research",
-    keyFeatures: [
-      "Astronomical calculations",
-      "Data analysis",
-      "Theoretical modeling",
-      "Research literature",
-      "Visualization support"
-    ],
-    benchmarks: {
-      mmlu: 94.1,
-      humanEval: 93.2,
-      speed: "medium"
-    },
-    lastUpdated: "2025-01-07"
-  },
-  {
-    id: "nano-tech",
-    name: "Nanotech",
-    provider: "NanoAI",
-    contextWindow: 128000,
-    inputCostPer1M: 7.00,
-    outputCostPer1M: 21.00,
-    description: "Nanotechnology research and development specialist",
-    released: "2024",
-    tags: ["Nanotechnology", "Research", "Materials", "Engineering"],
-    bestFor: [
-      "Nanotech research",
-      "Material design",
-      "Process optimization",
-      "Molecular engineering"
-    ],
-    purpose: "Nanotechnology advancement",
-    keyFeatures: [
-      "Molecular modeling",
-      "Material properties",
-      "Process simulation",
-      "Research analysis",
-      "Design optimization"
-    ],
-    benchmarks: {
-      mmlu: 93.5,
-      humanEval: 92.7,
-      speed: "medium"
-    },
-    lastUpdated: "2025-01-07"
-  }
+
 ];
 
 export const TOKENS_PER_BOOK = 100000;

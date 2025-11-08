@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import { type LLMModel } from '../data/llm-data';
 import {
   Book, Tag, Zap, Calendar, Link, ArrowUpRight, Award, Clock,
-  DollarSign, FileText, TrendingUp, Code, Copy, Check, ChevronDown, ChevronUp
+  DollarSign, FileText, TrendingUp, Code, Copy, Check, ChevronDown, ChevronUp,
+  Sparkles, AlertCircle, Globe
 } from 'lucide-react';
 
 interface ModelDetailsCardProps {
@@ -844,7 +845,7 @@ print(response.choices[0].message.content)
             <h1 id={`model-${model.id}-title`} className="text-2xl font-bold mb-1">
               {model.name}
             </h1>
-            <div className="flex items-center gap-2 text-blue-100 text-sm">
+            <div className="flex items-center gap-2 text-blue-100 text-sm flex-wrap">
               <span className="px-2 py-0.5 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium">
                 {model.provider}
               </span>
@@ -852,6 +853,25 @@ print(response.choices[0].message.content)
                 <span className="flex items-center gap-1 text-xs">
                   <Calendar className="w-3 h-3" />
                   {model.released}
+                </span>
+              )}
+              {/* Status Badges */}
+              {model.status?.isNew && (
+                <span className="flex items-center gap-1 px-2 py-0.5 bg-green-500/90 backdrop-blur-sm rounded-full text-xs font-semibold text-white shadow-md">
+                  <Sparkles className="w-3 h-3" />
+                  New
+                </span>
+              )}
+              {model.status?.pricingUpdated && (
+                <span className="flex items-center gap-1 px-2 py-0.5 bg-amber-500/90 backdrop-blur-sm rounded-full text-xs font-semibold text-white shadow-md">
+                  <TrendingUp className="w-3 h-3" />
+                  Price Updated
+                </span>
+              )}
+              {model.status?.isDeprecated && (
+                <span className="flex items-center gap-1 px-2 py-0.5 bg-red-500/90 backdrop-blur-sm rounded-full text-xs font-semibold text-white shadow-md">
+                  <AlertCircle className="w-3 h-3" />
+                  Deprecated
                 </span>
               )}
             </div>
@@ -1023,6 +1043,68 @@ print(response.choices[0].message.content)
                       <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">Inference Speed</div>
                       <div className="text-2xl font-bold text-green-600 dark:text-green-400 capitalize">{model.benchmarks.speed}</div>
                       <div className="text-xs text-gray-500 mt-1">Response generation</div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* API Availability Section */}
+        {model.apiInfo && (
+          <div className="space-y-2">
+            <SectionHeader title="API Availability" icon={<Globe className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />} sectionKey="api" />
+            {expandedSections.has('api') && (
+              <div className="p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {model.apiInfo.endpoint && (
+                    <div className="col-span-full bg-white dark:bg-gray-800 p-3 rounded-lg border-l-4 border-cyan-500">
+                      <div className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">API ENDPOINT</div>
+                      <code className="text-sm text-cyan-700 dark:text-cyan-300 break-all font-mono">
+                        {model.apiInfo.endpoint}
+                      </code>
+                    </div>
+                  )}
+
+                  {model.apiInfo.authentication && (
+                    <div className="bg-white dark:bg-gray-800 p-3 rounded-lg">
+                      <div className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">AUTHENTICATION</div>
+                      <div className="text-sm text-gray-900 dark:text-white font-medium">{model.apiInfo.authentication}</div>
+                    </div>
+                  )}
+
+                  {model.apiInfo.rateLimits && (
+                    <div className="bg-white dark:bg-gray-800 p-3 rounded-lg">
+                      <div className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">RATE LIMITS</div>
+                      <div className="text-sm text-gray-900 dark:text-white">{model.apiInfo.rateLimits}</div>
+                    </div>
+                  )}
+
+                  {model.apiInfo.regionalAvailability && (
+                    <div className="col-span-full bg-white dark:bg-gray-800 p-3 rounded-lg">
+                      <div className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">REGIONAL AVAILABILITY</div>
+                      <div className="text-sm text-gray-900 dark:text-white">{model.apiInfo.regionalAvailability}</div>
+                    </div>
+                  )}
+
+                  {model.apiInfo.documentation && (
+                    <div className="col-span-full bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 p-3 rounded-lg border border-cyan-200 dark:border-cyan-800">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">API DOCUMENTATION</div>
+                          <div className="text-sm text-gray-900 dark:text-white">{model.apiInfo.documentation}</div>
+                        </div>
+                        <a
+                          href={model.apiInfo.documentation}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 px-3 py-1.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg text-xs font-medium transition-colors shadow-sm"
+                        >
+                          View Docs
+                          <ArrowUpRight className="w-3 h-3" />
+                        </a>
+                      </div>
                     </div>
                   )}
                 </div>
