@@ -5,6 +5,7 @@ import { llmModels, calculateBooksInContext, type LLMModel } from './data/llm-da
 import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Keyboard, TrendingUp, Clock, Filter, Sparkles, AlertCircle } from 'lucide-react';
 import { APIIntegrationHelper } from '../components/APIIntegrationHelper';
 import { ModelDetailsCard } from './components/ModelDetailsCard';
+import { MobileModelCard } from './components/MobileModelCard';
 import AdvancedSearch from './components/AdvancedSearch';
 import EnhancedModelComparison from './components/EnhancedModelComparison';
 import { findSimilarModels, findCheaperAlternatives, findBetterPerformance } from './utils/modelRecommendations';
@@ -294,7 +295,7 @@ export default function Home() {
       {/* Advanced Search Modal */}
       {showAdvancedFilters && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto" onClick={() => setShowAdvancedFilters(false)}>
-          <div className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-5xl w-full max-h-[90vh] overflow-y-auto my-8" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-gray-900 rounded-lg p-4 sm:p-6 max-w-5xl w-full max-h-[90vh] overflow-y-auto my-8" onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-bold flex items-center gap-2 text-gray-900 dark:text-white">
                 <Filter className="w-7 h-7 text-indigo-600" />
@@ -352,7 +353,7 @@ export default function Home() {
       {/* API Integration Modal */}
       {showApiIntegration && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowApiIntegration(false)}>
-          <div className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-2xl w-full" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-gray-900 rounded-lg p-4 sm:p-6 max-w-2xl w-full" onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold">API Integration Helper</h3>
               <button onClick={() => setShowApiIntegration(false)} className="text-gray-500 hover:text-gray-700">
@@ -367,7 +368,7 @@ export default function Home() {
       {/* Keyboard Help Modal */}
       {showKeyboardHelp && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowKeyboardHelp(false)}>
-          <div className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-md" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-gray-900 rounded-lg p-4 sm:p-6 max-w-md" onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold flex items-center gap-2">
                 <Keyboard className="w-6 h-6" />
@@ -403,7 +404,7 @@ export default function Home() {
       {/* Model Details Modal */}
       {selectedModel && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto" onClick={() => setSelectedModel(null)}>
-          <div className="max-w-7xl w-full my-8" onClick={(e) => e.stopPropagation()}>
+          <div className="max-w-7xl w-full my-2 sm:my-8" onClick={(e) => e.stopPropagation()}>
             <div className="relative">
               <button
                 onClick={() => setSelectedModel(null)}
@@ -420,34 +421,27 @@ export default function Home() {
 
       {/* Header */}
       <header className="bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-1">
                 LLM DB
               </h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 Compare {llmModels.length} AI models • Updated Nov 2025
               </p>
             </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setShowKeyboardHelp(true)}
-                className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-                title="Keyboard shortcuts (?)"
-              >
-                <Keyboard className="w-5 h-5" />
-              </button>
+            <div className="flex flex-wrap gap-2 w-full md:w-auto">
               <button
                 onClick={() => setShowCalculator(!showCalculator)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors ${
                   showCalculator
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                 }`}
               >
                 <Calculator className="w-5 h-5" />
-                Calculator
+                <span className="hidden sm:inline">Calculator</span>
               </button>
               <button
                 onClick={() => {
@@ -460,25 +454,34 @@ export default function Home() {
                     if (compareMode) setSelectedForCompare([]);
                   }
                 }}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg ${
+                className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg ${
                   compareMode
                     ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                 }`}
               >
                 <GitCompare className="w-5 h-5" />
-                {compareMode && selectedForCompare.length >= 2
-                  ? `View Comparison (${selectedForCompare.length})`
-                  : compareMode
-                  ? `Select Models ${selectedForCompare.length > 0 ? `(${selectedForCompare.length})` : ''}`
-                  : 'Compare Models'}
+                <span className="hidden sm:inline">
+                  {compareMode && selectedForCompare.length >= 2
+                    ? `View Comparison (${selectedForCompare.length})`
+                    : compareMode
+                    ? `Select Models ${selectedForCompare.length > 0 ? `(${selectedForCompare.length})` : ''}`
+                    : 'Compare Models'}
+                </span>
+                <span className="inline sm:hidden">
+                  {compareMode && selectedForCompare.length >= 2
+                    ? `Compare (${selectedForCompare.length})`
+                    : compareMode
+                    ? `Select ${selectedForCompare.length > 0 ? `(${selectedForCompare.length})` : ''}`
+                    : 'Compare'}
+                </span>
               </button>
               <button
                 onClick={() => setShowKeyboardHelp(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
               >
                 <Keyboard className="w-5 h-5" />
-                Shortcuts
+                <span className="hidden sm:inline">Shortcuts</span>
               </button>
             </div>
           </div>
@@ -494,7 +497,7 @@ export default function Home() {
                 <Calculator className="w-6 h-6 text-blue-600" />
                 Advanced Cost Calculator
               </h2>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2 w-full md:w-auto">
                 <button
                   onClick={() => setShowAdvancedCalc(!showAdvancedCalc)}
                   className="text-sm text-blue-600 hover:text-blue-700"
@@ -575,7 +578,7 @@ export default function Home() {
                             That&apos;s approximately {(tokensForCalc / 100000).toFixed(2)} books
                           </p>
                         </div>
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto -mx-3 sm:mx-0">
                           <table className="w-full text-sm">
                             <thead className="bg-gray-50 dark:bg-gray-800">
                               <tr>
@@ -644,7 +647,7 @@ export default function Home() {
                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                           Monthly usage: {formatNumber(monthlyConvs * tokensPerConv)} tokens
                         </p>
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto -mx-3 sm:mx-0">
                           <table className="w-full text-sm">
                             <thead className="bg-gray-50 dark:bg-gray-800">
                               <tr>
@@ -684,7 +687,7 @@ export default function Home() {
         {/* Enhanced Model Comparison Modal */}
         {showEnhancedComparison && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-            <div className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-7xl w-full max-h-[90vh] overflow-y-auto my-8">
+            <div className="bg-white dark:bg-gray-900 rounded-lg p-4 sm:p-6 max-w-7xl w-full max-h-[90vh] overflow-y-auto my-8">
               <EnhancedModelComparison
                 models={llmModels}
                 preSelectedModels={selectedForCompare}
@@ -701,28 +704,29 @@ export default function Home() {
         {/* Comparison Mode Banner - Only shows when selecting models */}
         {compareMode && selectedForCompare.length > 0 && !showEnhancedComparison && (
           <div className="mb-6 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg shadow-lg p-4 border-2 border-purple-300 dark:border-purple-700">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <GitCompare className="w-6 h-6 text-purple-600" />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-start gap-3">
+                <GitCompare className="w-6 h-6 text-purple-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-bold text-purple-900 dark:text-purple-100">
+                  <h3 className="font-bold text-purple-900 dark:text-purple-100 text-sm sm:text-base">
                     {selectedForCompare.length} Model{selectedForCompare.length > 1 ? 's' : ''} Selected
                   </h3>
-                  <p className="text-sm text-purple-700 dark:text-purple-300">
+                  <p className="text-xs sm:text-sm text-purple-700 dark:text-purple-300">
                     {selectedForCompare.length >= 2
                       ? 'Ready to compare! Click "View Comparison" to see detailed analysis.'
                       : 'Select at least 2 models to compare'}
                   </p>
                 </div>
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2 w-full sm:w-auto">
                 {selectedForCompare.length >= 2 && (
                   <button
                     onClick={() => setShowEnhancedComparison(true)}
-                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 font-semibold shadow-lg hover:shadow-xl transition-all"
+                    className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 font-semibold shadow-lg hover:shadow-xl transition-all text-sm sm:text-base flex-1 sm:flex-none"
                   >
-                    <Sparkles className="w-5 h-5" />
-                    View Comparison
+                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="hidden sm:inline">View Comparison</span>
+                    <span className="inline sm:hidden">Compare</span>
                   </button>
                 )}
                 <button
@@ -730,7 +734,7 @@ export default function Home() {
                     setSelectedForCompare([]);
                     setCompareMode(false);
                   }}
-                  className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                  className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm"
                 >
                   Cancel
                 </button>
@@ -743,7 +747,7 @@ export default function Home() {
         {compareMode && selectedForCompare.length > 0 && !showEnhancedComparison && (
           <div className="mb-6">
             <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Selected Models:</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {comparedModels.map(model => (
                 <div key={model.id} className="bg-white dark:bg-gray-800 rounded-lg border-2 border-purple-300 dark:border-purple-700 p-3">
                   <div className="flex items-start justify-between mb-2">
@@ -775,7 +779,7 @@ export default function Home() {
         {/* Old comparison table - REMOVED */}
         {false && compareMode && selectedForCompare.length > 0 && (
           <div className="mb-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 border-2 border-purple-500">
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto -mx-3 sm:mx-0">
               <table className="w-full text-sm">
                 <thead className="bg-gray-50 dark:bg-gray-800">
                   <tr>
@@ -867,54 +871,59 @@ export default function Home() {
         <div className="flex flex-wrap gap-2 mb-4">
           <button
             onClick={() => setActiveTab('all')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
               activeTab === 'all'
                 ? 'bg-blue-600 text-white'
                 : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
-            All Models ({llmModels.length})
+            <span className="hidden sm:inline">All Models ({llmModels.length})</span>
+            <span className="inline sm:hidden">All ({llmModels.length})</span>
           </button>
           <button
             onClick={() => setActiveTab('favorites')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-1 ${
+            className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-1 text-sm ${
               activeTab === 'favorites'
                 ? 'bg-yellow-600 text-white'
                 : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
             <Star className="w-4 h-4" />
-            Favorites ({favorites.length})
+            <span className="hidden sm:inline">Favorites ({favorites.length})</span>
+            <span className="inline sm:hidden">Fav ({favorites.length})</span>
           </button>
           <button
             onClick={() => setActiveTab('cheapest')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
               activeTab === 'cheapest'
                 ? 'bg-green-600 text-white'
                 : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
-            Cheapest (&lt;$1/1M)
+            <span className="hidden sm:inline">Cheapest (&lt;$1/1M)</span>
+            <span className="inline sm:hidden">Cheap</span>
           </button>
           <button
             onClick={() => setActiveTab('largeContext')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
               activeTab === 'largeContext'
                 ? 'bg-purple-600 text-white'
                 : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
-            Large Context (100K+)
+            <span className="hidden sm:inline">Large Context (100K+)</span>
+            <span className="inline sm:hidden">Large</span>
           </button>
           <button
             onClick={() => setActiveTab('bestValue')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
               activeTab === 'bestValue'
                 ? 'bg-orange-600 text-white'
                 : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
-            Best Value
+            <span className="hidden sm:inline">Best Value</span>
+            <span className="inline sm:hidden">Value</span>
           </button>
         </div>
 
@@ -935,7 +944,7 @@ export default function Home() {
             value={selectedProvider}
             onChange={(e) => setSelectedProvider(e.target.value)}
             disabled={isAdvancedSearchActive}
-            className="px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-2 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             {providers.map(provider => (
               <option key={provider} value={provider}>
@@ -1088,63 +1097,85 @@ export default function Home() {
           </span>}
         </div>
 
-        {/* Table */}
-        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
+        {/* Mobile Card View */}
+        <div className="md:hidden space-y-3 mb-6">
+          {filteredModels.map((model) => {
+            const isFavorite = favorites.includes(model.id);
+            const isSelected = selectedForCompare.includes(model.id);
+            return (
+              <MobileModelCard
+                key={model.id}
+                model={model}
+                isFavorite={isFavorite}
+                isSelected={isSelected}
+                compareMode={compareMode}
+                onToggleFavorite={() => toggleFavorite(model.id)}
+                onToggleCompare={() => toggleCompare(model.id)}
+                onShowDetails={() => setSelectedModel(model)}
+                formatNumber={formatNumber}
+                formatCost={formatCost}
+              />
+            );
+          })}
+        </div>
+
+        {/* Desktop Table View */}
+        <div className="hidden md:block bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+          <div className="overflow-x-auto -mx-3 sm:mx-0">
+            <table className="w-full min-w-[800px]">
               <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <tr>
                   {compareMode && (
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                    <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
                       Select
                     </th>
                   )}
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                  <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
                     Fav
                   </th>
                   <th
                     onClick={() => handleSort('name')}
-                    className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    className="px-2 sm:px-4 py-2 sm:py-3 text-left text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
                     Model <SortIcon field="name" />
                   </th>
                   <th
                     onClick={() => handleSort('provider')}
-                    className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    className="px-2 sm:px-4 py-2 sm:py-3 text-left text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
                     Provider <SortIcon field="provider" />
                   </th>
                   <th
                     onClick={() => handleSort('quality')}
-                    className="px-4 py-3 text-right text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    className="px-2 sm:px-4 py-2 sm:py-3 text-right text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
                     Quality <SortIcon field="quality" />
                   </th>
                   <th
                     onClick={() => handleSort('contextWindow')}
-                    className="px-4 py-3 text-right text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    className="px-2 sm:px-4 py-2 sm:py-3 text-right text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
                     Context <SortIcon field="contextWindow" />
                   </th>
                   <th
                     onClick={() => handleSort('books')}
-                    className="px-4 py-3 text-right text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    className="px-2 sm:px-4 py-2 sm:py-3 text-right text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
                     Books <SortIcon field="books" />
                   </th>
                   <th
                     onClick={() => handleSort('inputCost')}
-                    className="px-4 py-3 text-right text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    className="px-2 sm:px-4 py-2 sm:py-3 text-right text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
                     Input/1M <SortIcon field="inputCost" />
                   </th>
                   <th
                     onClick={() => handleSort('outputCost')}
-                    className="px-4 py-3 text-right text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    className="px-2 sm:px-4 py-2 sm:py-3 text-right text-sm font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
                     Output/1M <SortIcon field="outputCost" />
                   </th>
-                  <th className="px-4 py-3 text-center text-sm font-semibold text-gray-900 dark:text-white">
+                  <th className="px-2 sm:px-4 py-2 sm:py-3 text-center text-sm font-semibold text-gray-900 dark:text-white">
                     Actions
                   </th>
                 </tr>
@@ -1164,7 +1195,7 @@ export default function Home() {
                       }`}
                     >
                       {compareMode && (
-                        <td className="px-4 py-4">
+                        <td className="px-2 sm:px-4 py-3 sm:py-4">
                           <input
                             type="checkbox"
                             checked={isSelected}
@@ -1174,7 +1205,7 @@ export default function Home() {
                           />
                         </td>
                       )}
-                      <td className="px-4 py-4">
+                      <td className="px-2 sm:px-4 py-3 sm:py-4">
                         <button
                           onClick={() => toggleFavorite(model.id)}
                           className="text-gray-400 hover:text-yellow-500 transition-colors"
@@ -1182,7 +1213,7 @@ export default function Home() {
                           <Star className={`w-5 h-5 ${isFavorite ? 'fill-yellow-500 text-yellow-500' : ''}`} />
                         </button>
                       </td>
-                      <td className="px-4 py-4">
+                      <td className="px-2 sm:px-4 py-3 sm:py-4">
                         <div className="flex flex-col gap-1">
                           <div className="flex items-center gap-2 flex-wrap">
                             <div className="font-medium text-gray-900 dark:text-white">
@@ -1224,33 +1255,33 @@ export default function Home() {
                           )}
                         </div>
                       </td>
-                      <td className="px-4 py-4">
+                      <td className="px-2 sm:px-4 py-3 sm:py-4">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                           {model.provider}
                         </span>
                       </td>
-                      <td className="px-4 py-4 text-right">
+                      <td className="px-2 sm:px-4 py-3 sm:py-4 text-right">
                         {model.benchmarks?.mmlu ? (
                           <span className="font-mono text-sm text-gray-900 dark:text-white">{model.benchmarks.mmlu}%</span>
                         ) : (
                           <span className="text-gray-400">-</span>
                         )}
                       </td>
-                      <td className="px-4 py-4 text-right font-mono text-sm text-gray-900 dark:text-white">
+                      <td className="px-2 sm:px-4 py-3 sm:py-4 text-right font-mono text-sm text-gray-900 dark:text-white">
                         {formatNumber(model.contextWindow)}
                       </td>
-                      <td className="px-4 py-4 text-right">
+                      <td className="px-2 sm:px-4 py-3 sm:py-4 text-right">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
                           {books}
                         </span>
                       </td>
-                      <td className="px-4 py-4 text-right font-mono text-sm text-gray-900 dark:text-white">
+                      <td className="px-2 sm:px-4 py-3 sm:py-4 text-right font-mono text-sm text-gray-900 dark:text-white">
                         {formatCost(model.inputCostPer1M)}
                       </td>
-                      <td className="px-4 py-4 text-right font-mono text-sm text-gray-900 dark:text-white">
+                      <td className="px-2 sm:px-4 py-3 sm:py-4 text-right font-mono text-sm text-gray-900 dark:text-white">
                         {formatCost(model.outputCostPer1M)}
                       </td>
-                      <td className="px-4 py-4 text-center">
+                      <td className="px-2 sm:px-4 py-3 sm:py-4 text-center">
                         <div className="flex items-center justify-center gap-2">
                           <button
                             onClick={() => setSelectedModel(model)}
