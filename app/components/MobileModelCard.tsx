@@ -11,6 +11,7 @@ interface MobileModelCardProps {
   onToggleFavorite: () => void;
   onToggleCompare: () => void;
   onShowDetails: () => void;
+  onFindRecommendations: () => void;
   formatNumber: (num: number) => string;
   formatCost: (cost: number) => string;
 }
@@ -23,6 +24,7 @@ export function MobileModelCard({
   onToggleFavorite,
   onToggleCompare,
   onShowDetails,
+  onFindRecommendations,
   formatNumber,
   formatCost
 }: MobileModelCardProps) {
@@ -139,14 +141,24 @@ export function MobileModelCard({
         </div>
       )}
 
-      {/* Action Button */}
-      <div className="px-4 pb-4">
+      {/* Action Buttons */}
+      <div className="px-4 pb-4 flex gap-2">
         <button
           onClick={onShowDetails}
-          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all font-medium text-sm"
+          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all font-medium text-sm"
         >
           <Info className="w-4 h-4" />
-          View Details
+          <span className="hidden xs:inline">View Details</span>
+          <span className="inline xs:hidden">Details</span>
+        </button>
+        <button
+          onClick={onFindRecommendations}
+          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all font-medium text-sm"
+          title="Find Recommendations"
+        >
+          <Sparkles className="w-4 h-4" />
+          <span className="hidden xs:inline">Recommendations</span>
+          <span className="inline xs:hidden">Similar</span>
         </button>
       </div>
     </div>

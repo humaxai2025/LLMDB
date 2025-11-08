@@ -1112,6 +1112,19 @@ export default function Home() {
                 onToggleFavorite={() => toggleFavorite(model.id)}
                 onToggleCompare={() => toggleCompare(model.id)}
                 onShowDetails={() => setSelectedModel(model)}
+                onFindRecommendations={() => {
+                  const recs = {
+                    similar: findSimilarModels(model, llmModels),
+                    cheaper: findCheaperAlternatives(model, llmModels),
+                    better: findBetterPerformance(model, llmModels)
+                  };
+                  setRecommendations(recs);
+                  setShowRecommendations(true);
+                  // Scroll to top to see recommendations
+                  setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }, 100);
+                }}
                 formatNumber={formatNumber}
                 formatCost={formatCost}
               />
