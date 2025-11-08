@@ -6,7 +6,7 @@ import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Shar
 import { APIIntegrationHelper } from '../components/APIIntegrationHelper';
 import { ModelDetailsCard } from './components/ModelDetailsCard';
 import AdvancedSearch from './components/AdvancedSearch';
-import { findSimilarModels, findCheaperAlternatives, findBetterPerformance } from './utils/modelFilters';
+import { findSimilarModels, findCheaperAlternatives, findBetterPerformance } from './utils/modelRecommendations';
 
 type SortField = 'name' | 'provider' | 'contextWindow' | 'books' | 'inputCost' | 'outputCost' | 'quality';
 type SortDirection = 'asc' | 'desc';
@@ -18,7 +18,6 @@ export default function Home() {
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
   const [activeTab, setActiveTab] = useState<FilterTab>('all');
   const [selectedProvider, setSelectedProvider] = useState<string>('all');
-  const [filteredResults, setFilteredResults] = useState<LLMModel[]>(llmModels);
   const [recommendations, setRecommendations] = useState<{
     similar: LLMModel[];
     cheaper: LLMModel[];
@@ -106,7 +105,47 @@ export default function Home() {
   const filteredModels = useMemo(() => {
     // If advanced search is active, use those results instead
     if (isAdvancedSearchActive) {
-      return advancedSearchResults;
+      return advancedSearchResults.sort((a, b) => {
+        let aValue: number | string;
+        let bValue: number | string;
+
+        switch (sortField) {
+          case 'name':
+            aValue = a.name.toLowerCase();
+            bValue = b.name.toLowerCase();
+            break;
+          case 'provider':
+            aValue = a.provider.toLowerCase();
+            bValue = b.provider.toLowerCase();
+            break;
+          case 'contextWindow':
+            aValue = a.contextWindow;
+            bValue = b.contextWindow;
+            break;
+          case 'books':
+            aValue = calculateBooksInContext(a.contextWindow);
+            bValue = calculateBooksInContext(b.contextWindow);
+            break;
+          case 'inputCost':
+            aValue = a.inputCostPer1M;
+            bValue = b.inputCostPer1M;
+            break;
+          case 'outputCost':
+            aValue = a.outputCostPer1M;
+            bValue = b.outputCostPer1M;
+            break;
+          case 'quality':
+            aValue = a.benchmarks?.mmlu || 0;
+            bValue = b.benchmarks?.mmlu || 0;
+            break;
+          default:
+            return 0;
+        }
+
+        if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
+        if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
+        return 0;
+      });
     }
 
     const filtered = [...llmModels].filter(model => {
@@ -180,7 +219,7 @@ export default function Home() {
     });
 
     return filtered;
-  }, [searchTerm, activeTab, selectedProvider, sortField, sortDirection, favorites]);
+  }, [searchTerm, activeTab, selectedProvider, sortField, sortDirection, favorites, isAdvancedSearchActive, advancedSearchResults]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -242,23 +281,58 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       {/* Advanced Search Modal */}
       {showAdvancedFilters && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowAdvancedFilters(false)}>
-          <div className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold flex items-center gap-2">
-                <Filter className="w-6 h-6" />
-                Advanced Search
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto" onClick={() => setShowAdvancedFilters(false)}>
+          <div className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-5xl w-full max-h-[90vh] overflow-y-auto my-8" onClick={(e) => e.stopPropagation()}>
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-bold flex items-center gap-2 text-gray-900 dark:text-white">
+                <Filter className="w-7 h-7 text-indigo-600" />
+                Advanced Search & Filters
               </h3>
-              <button onClick={() => setShowAdvancedFilters(false)} className="text-gray-500 hover:text-gray-700">
-                <X className="w-5 h-5" />
+              <button
+                onClick={() => setShowAdvancedFilters(false)}
+                className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                <X className="w-6 h-6" />
               </button>
             </div>
-            <AdvancedSearch
-              models={llmModels}
-              onSearchResults={handleAdvancedSearchResults}
-              selectedModel={selectedModel || undefined}
-              onRecommendations={setRecommendations}
-            />
+            <div className="mb-4">
+              <AdvancedSearch
+                models={llmModels}
+                onSearchResults={(results) => {
+                  handleAdvancedSearchResults(results);
+                  setShowAdvancedFilters(false);
+                }}
+                selectedModel={selectedModel || undefined}
+                onRecommendations={(recs) => {
+                  setRecommendations(recs);
+                  setShowRecommendations(true);
+                  setShowAdvancedFilters(false);
+                }}
+              />
+            </div>
+            <div className="flex justify-between items-center gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Select filters above, then click Apply to see results
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowAdvancedFilters(false)}
+                  className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 font-medium transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    // Trigger the search by calling the Apply Filters functionality
+                    const applyButton = document.querySelector('[data-apply-filters]') as HTMLButtonElement;
+                    applyButton?.click();
+                  }}
+                  className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 font-semibold transition-all shadow-md hover:shadow-lg"
+                >
+                  Apply Filters & Search
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -736,30 +810,32 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Advanced Search Component */}
-        {showAdvancedFilters && (
-          <div className="mb-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 border-2 border-indigo-500">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <Filter className="w-6 h-6 text-indigo-600" />
-                Advanced Filters & Search
-              </h2>
-              <button onClick={() => setShowAdvancedFilters(false)} className="text-gray-500 hover:text-gray-700">
-                <X className="w-5 h-5" />
+        {/* Active Advanced Search Indicator */}
+        {isAdvancedSearchActive && (
+          <div className="mb-4 bg-indigo-50 dark:bg-indigo-900/30 border-2 border-indigo-500 rounded-lg p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Filter className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                <div>
+                  <p className="font-semibold text-indigo-900 dark:text-indigo-100">
+                    Advanced Search Active
+                  </p>
+                  <p className="text-sm text-indigo-700 dark:text-indigo-300">
+                    Showing {filteredModels.length} filtered results
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  setIsAdvancedSearchActive(false);
+                  setAdvancedSearchResults([]);
+                }}
+                className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition-colors flex items-center gap-2"
+              >
+                <X className="w-4 h-4" />
+                Clear Filters
               </button>
             </div>
-            <AdvancedSearch
-              models={llmModels}
-              onSearchResults={(results) => {
-                handleAdvancedSearchResults(results);
-                setShowAdvancedFilters(false);
-              }}
-              onRecommendations={(recs) => {
-                setRecommendations(recs);
-                setShowRecommendations(true);
-              }}
-              selectedModel={selectedModel || undefined}
-            />
           </div>
         )}
 

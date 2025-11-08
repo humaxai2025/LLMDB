@@ -12,7 +12,10 @@
       "WebSearch",
       "WebFetch(domain:en.wikipedia.org)",
       "Bash(findstr:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []

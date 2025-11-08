@@ -48,15 +48,6 @@ export function ModelDetailsCard({ model }: ModelDetailsCardProps) {
     return 'bg-gradient-to-br from-orange-500 to-red-500';
   };
 
-  const getQualityRating = (score: number | undefined) => {
-    if (!score) return 'N/A';
-    if (score >= 9) return 'Excellent';
-    if (score >= 8) return 'Very Good';
-    if (score >= 7) return 'Good';
-    if (score >= 6) return 'Fair';
-    return 'Average';
-  };
-
   const toggleSection = (section: string) => {
     setExpandedSections(prev => {
       const newSet = new Set(prev);
