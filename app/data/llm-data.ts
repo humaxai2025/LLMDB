@@ -1,3 +1,32 @@
+// Phase 1 Feature Interfaces
+export interface CodeExample {
+  language: 'python' | 'javascript' | 'curl';
+  title: string;
+  code: string;
+  description?: string;
+}
+
+export interface RealWorldUseCase {
+  title: string;
+  industry: string;
+  description: string;
+  implementation: string;
+  results: string;
+  metrics: {
+    [key: string]: string;
+  };
+  difficulty: 'easy' | 'medium' | 'hard';
+}
+
+export interface ModelLimitations {
+  knownIssues: string[];
+  commonFailures: string[];
+  contentPolicies: string[];
+  performance: string[];
+  bestPractices: string[];
+  workarounds: string[];
+}
+
 export interface LLMModel {
   id: string;
   name: string;
@@ -35,6 +64,11 @@ export interface LLMModel {
   lastUpdated?: string;
   website?: string;
   qualityScore?: number;
+
+  // Phase 1 Features
+  codeExamples?: CodeExample[];
+  realWorldUseCases?: RealWorldUseCase[];
+  limitations?: ModelLimitations;
 }
 
 export const llmModels: LLMModel[] = [

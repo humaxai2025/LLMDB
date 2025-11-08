@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { llmModels, calculateBooksInContext, type LLMModel } from './data/llm-data';
+import { calculateBooksInContext, type LLMModel } from './data/llm-data';
+import { enrichedModels } from './data/enriched-models';
 import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Keyboard, TrendingUp, Clock, Filter, Sparkles, AlertCircle } from 'lucide-react';
 import { APIIntegrationHelper } from '../components/APIIntegrationHelper';
 import { ModelDetailsCard } from './components/ModelDetailsCard';
@@ -9,6 +10,9 @@ import { MobileModelCard } from './components/MobileModelCard';
 import AdvancedSearch from './components/AdvancedSearch';
 import EnhancedModelComparison from './components/EnhancedModelComparison';
 import { findSimilarModels, findCheaperAlternatives, findBetterPerformance } from './utils/modelRecommendations';
+
+// Use enriched models with Phase 1 features
+const llmModels = enrichedModels;
 
 type SortField = 'name' | 'provider' | 'contextWindow' | 'books' | 'inputCost' | 'outputCost' | 'quality';
 type SortDirection = 'asc' | 'desc';
@@ -403,17 +407,19 @@ export default function Home() {
 
       {/* Model Details Modal */}
       {selectedModel && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto" onClick={() => setSelectedModel(null)}>
-          <div className="max-w-7xl w-full my-2 sm:my-8" onClick={(e) => e.stopPropagation()}>
-            <div className="relative">
-              <button
-                onClick={() => setSelectedModel(null)}
-                className="absolute -top-4 right-0 z-10 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                aria-label="Close"
-              >
-                <X className="w-6 h-6 text-gray-600 dark:text-gray-300" />
-              </button>
-              <ModelDetailsCard model={selectedModel} />
+        <div className="fixed inset-0 bg-black/50 z-50 overflow-y-auto" onClick={() => setSelectedModel(null)}>
+          <div className="min-h-screen px-4 py-8 flex items-start justify-center">
+            <div className="max-w-7xl w-full my-8" onClick={(e) => e.stopPropagation()}>
+              <div className="relative">
+                <button
+                  onClick={() => setSelectedModel(null)}
+                  className="sticky top-4 float-right z-10 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors mb-4"
+                  aria-label="Close"
+                >
+                  <X className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+                </button>
+                <ModelDetailsCard model={selectedModel} />
+              </div>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { type LLMModel } from '../data/llm-data';
+import { CodeExamplesSection, RealWorldUseCasesSection, LimitationsSection } from './Phase1Features';
 import {
   Book, Tag, Zap, Calendar, Link, ArrowUpRight, Award, Clock,
   DollarSign, FileText, TrendingUp, Code, Copy, Check, ChevronDown, ChevronUp,
@@ -1201,9 +1202,22 @@ print(response.choices[0].message.content)
           )}
         </div>
 
+        {/* Phase 1 Features */}
+        {model.codeExamples && model.codeExamples.length > 0 && (
+          <CodeExamplesSection examples={model.codeExamples} />
+        )}
+
+        {model.realWorldUseCases && model.realWorldUseCases.length > 0 && (
+          <RealWorldUseCasesSection useCases={model.realWorldUseCases} />
+        )}
+
+        {model.limitations && (
+          <LimitationsSection limitations={model.limitations} />
+        )}
+
         {/* Tags */}
         {model.tags && (
-          <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+          <div className="pt-6 mt-6 border-t border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-1.5 mb-2">
               <Tag className="w-3 h-3 text-gray-600 dark:text-gray-400" />
               <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400">TAGS</h3>
@@ -1222,7 +1236,7 @@ print(response.choices[0].message.content)
         )}
 
         {/* Raw Data Toggle */}
-        <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+        <div className="pt-6 mt-6 border-t border-gray-200 dark:border-gray-700">
           <button
             onClick={() => setShowRaw(p => !p)}
             className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium"

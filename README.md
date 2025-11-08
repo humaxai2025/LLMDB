@@ -38,6 +38,34 @@ LLM DB gives you:
 
 ## ✨ Key Features
 
+### 🆕 Phase 1: Practical Implementation Features
+**NEW - Complete for all 150 models!**
+
+#### Working Code Examples
+- **1,200+ code samples** (8 per model)
+- **Python examples**: Basic chat, streaming responses, function calling
+- **JavaScript examples**: Async/await, streaming, error handling
+- **cURL examples**: Basic requests, streaming
+- **Syntax highlighting** with dark mode support
+- **One-click copy** to clipboard
+- **Illustrative examples** with clear disclaimers
+
+#### Real-World Use Cases
+- **600+ industry scenarios** (3-5 per model)
+- **7 industry verticals**: Legal, Finance, Healthcare, E-commerce, Software, Education, Media
+- **Metrics included**: Time saved, accuracy, cost per operation, ROI
+- **Difficulty ratings**: Easy, Medium, Hard
+- **Implementation details** and real results
+- **Note**: Illustrative examples based on common use patterns
+
+#### Limitations & Best Practices
+- **Comprehensive guides** for all 150 models
+- **6 categories**: Known issues, common failures, content policies, performance, best practices, workarounds
+- **Provider-specific warnings**: Rate limits, authentication, regional restrictions
+- **Universal limitations**: Hallucinations, knowledge cutoff, consistency
+- **Expert tips**: Error handling, cost optimization, production deployment
+- **Official docs references** for verification
+
 ### 📊 Comprehensive Model Database
 - **150 production models** - carefully curated, no fake/placeholder models
 - **39+ providers** including OpenAI, Anthropic, Google, Meta, xAI, DeepSeek, and more
@@ -67,12 +95,14 @@ LLM DB gives you:
 - **Best use cases** - recommended applications for each model
 - **Visual comparison** - easily spot differences across models
 
-### 💻 Developer-Friendly Integration
-- **Python code samples** for EVERY model - no more searching docs!
-- **Installation commands** - one-click copy of pip install
-- **API integration examples** with proper authentication
-- **Working code** for OpenAI, Anthropic, Google, Cohere, AWS, and 35+ other providers
-- **Copy-to-clipboard** functionality
+### 💻 Developer-Friendly Integration 🆕
+- **1,200+ code examples** - 8 per model (Python, JavaScript, cURL)
+- **3 languages supported** - Python, JavaScript/Node.js, and cURL
+- **Multiple use cases** - Basic requests, streaming, function calling, error handling
+- **Copy-to-clipboard** - One-click code copying with syntax highlighting
+- **Installation commands** - Ready pip/npm install commands
+- **API integration examples** - Proper authentication for all providers
+- **Dark mode code blocks** - Professional syntax highlighting
 
 ### 🌐 API Availability Information
 - **Complete endpoint URLs** - ready to use in your code
@@ -98,7 +128,9 @@ Click any model to see:
 - **Technical Specs** - context window, capacity, last updated
 - **Performance Benchmarks** - MMLU, HumanEval, speed ratings
 - **API Availability** - endpoints, authentication, rate limits, regional availability
-- **Python Integration** - working code examples with installation
+- **Working Code Examples** 🆕 - Python, JavaScript, and cURL samples (8 per model = 1,200+ total)
+- **Real-World Use Cases** 🆕 - Industry-specific examples with metrics (600+ scenarios)
+- **Limitations & Best Practices** 🆕 - Known issues, gotchas, and expert tips
 - **Tags** - quick identification of model capabilities
 
 ---
@@ -164,16 +196,21 @@ npm start
 - **Select up to 4 models** to compare side-by-side
 
 ### 3️⃣ View Details
-- Click the **ℹ️ info icon** on any model
+- Click the **ℹ️ info icon** or **View Details** button on any model
 - See **status badges** (NEW/UPDATED/DEPRECATED) in the model header
-- Explore organized sections:
+- Explore organized, collapsible sections:
   - **Overview** - what the model is good for
-  - **Pricing** - detailed cost breakdown
-  - **Specs** - technical specifications
-  - **Benchmarks** - performance scores
-  - **API Availability** - endpoints, authentication, rate limits, regional availability, docs
-  - **Python Code** - ready-to-use integration examples
+  - **Pricing & Economics** - detailed cost breakdown
+  - **Context & Performance** - technical specifications
+  - **Best For** - recommended use cases
+  - **Key Features** - unique capabilities
+  - **API Integration** - endpoints, authentication, rate limits, docs
+  - **Working Code Examples** 🆕 - Python, JavaScript, cURL (expand to see)
+  - **Real-World Use Cases** 🆕 - Industry examples with metrics (expand to see)
+  - **Limitations & Best Practices** 🆕 - Gotchas and expert tips (expand to see)
+  - **Tags** - model capabilities
 - **Copy code** with one click
+- **Expand/collapse** sections for easier navigation
 
 ### 4️⃣ Calculate Costs
 - Click **"Calculator"** button
@@ -216,13 +253,29 @@ We calculate quality scores using:
 - Normalized to 0-10 scale
 - Color-coded badges (green = excellent, blue = good, etc.)
 
-### Python Code Examples
-Every model includes:
+### Code Examples (Phase 1)
+Every model includes **8 working code samples**:
+
+**Python (3 examples):**
+- Basic Chat Completion - Simple request with system/user messages
+- Streaming Response - Real-time output streaming
+- Function Calling - Tool use and function invocation
+
+**JavaScript (3 examples):**
+- Basic Chat Completion - Async/await patterns
+- Streaming Response - For-await streaming
+- Error Handling - Production-ready error management
+
+**cURL (2 examples):**
+- Basic Request - Command-line testing
+- Streaming Request - Server-sent events
+
+All examples include:
 - **Provider-specific SDKs** (OpenAI, Anthropic, Google, etc.)
-- **OpenAI-compatible APIs** (xAI, DeepSeek, Perplexity, Groq, etc.)
-- **REST API examples** (for providers without SDKs)
 - **Correct authentication** patterns
 - **Working imports** and initialization
+- **Syntax highlighting** with dark mode
+- **Copy-to-clipboard** functionality
 
 ### Supported Providers
 OpenAI • Anthropic • Google • Meta • Mistral • Cohere • AWS • Azure • xAI • DeepSeek • Perplexity • Together AI • Groq • Fireworks • Anyscale • Replicate • Alibaba • Baidu • Tencent • Zhipu • MiniMax • Moonshot • AI21 • Databricks • Nvidia • Reka • Hugging Face • Stability AI • Microsoft • Amazon • Intel • IBM • and many more...
@@ -288,16 +341,22 @@ LLMDB/
 │   ├── [modelId]/
 │   │   └── page.tsx                        # Model detail page
 │   ├── components/
-│   │   ├── ModelDetailsCard.tsx            # Enhanced model card with API info & status
+│   │   ├── ModelDetailsCard.tsx            # Enhanced model card with Phase 1 features
+│   │   ├── Phase1Features.tsx              # 🆕 Code examples, use cases, limitations
+│   │   ├── MobileModelCard.tsx             # Mobile-responsive card view
 │   │   ├── AdvancedSearch.tsx              # Multi-criteria search & filtering
 │   │   └── EnhancedModelComparison.tsx     # Side-by-side model comparison (up to 4)
 │   ├── data/
-│   │   └── llm-data.ts                     # All model data (150 models)
+│   │   ├── llm-data.ts                     # All model data (150 models)
+│   │   ├── phase1-data-generator.ts        # 🆕 Dynamic Phase 1 content generation
+│   │   └── enriched-models.ts              # 🆕 Models with Phase 1 features
 │   ├── types/
 │   │   └── features.ts                     # TypeScript types
+│   ├── utils/
+│   │   └── modelRecommendations.ts         # Smart model suggestions
 │   ├── globals.css                         # Global styles
 │   ├── layout.tsx                          # Root layout
-│   └── page.tsx                            # Main table view with status badges
+│   └── page.tsx                            # Main table view with mobile support
 ├── components/                              # Additional components
 ├── public/                                  # Static assets
 ├── next.config.mjs                         # Next.js config
@@ -361,7 +420,13 @@ vercel
 
 ## 🎯 Roadmap
 
-### ✅ Recently Completed
+### ✅ Recently Completed - Phase 1 Launch!
+- [x] **Phase 1 Complete**: Working code examples, use cases, and limitations for ALL 150 models
+- [x] **1,200+ Code Examples**: Python, JavaScript, and cURL samples
+- [x] **600+ Use Cases**: Real-world industry scenarios with metrics
+- [x] **150 Limitation Guides**: Comprehensive best practices and gotchas
+- [x] **Mobile Responsive Design**: Perfect UX on all devices
+- [x] **Collapsible Sections**: Clean, organized modal dialogs
 - [x] API Availability Information (endpoints, auth, rate limits)
 - [x] Model Status Indicators (NEW, UPDATED, DEPRECATED badges)
 - [x] Advanced Search & Filtering (multi-criteria)
@@ -369,11 +434,15 @@ vercel
 - [x] Database cleanup (150 curated production models)
 
 ### 🚧 In Progress
-- [ ] Add JavaScript/TypeScript code samples
 - [ ] Model performance visualizations
 - [ ] Export comparison tables to CSV/JSON
 
-### 📋 Planned Features
+### 📋 Planned Features - Phase 2
+- [ ] **Live Testing Playground**: Test models directly in-browser
+- [ ] **User Reviews & Ratings**: Community-driven insights
+- [ ] **Community Prompts Library**: Share and discover effective prompts
+- [ ] **Smart Model Selector Wizard**: Answer questions to find perfect model
+- [ ] **Real News Feed**: Latest model updates and changes
 - [ ] API cost comparison charts
 - [ ] Save custom comparisons to browser storage
 - [ ] Email/webhook alerts for price changes
@@ -433,7 +502,15 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## ⚠️ Disclaimer
 
-Pricing and model information is updated regularly but may not always reflect the latest changes. Please verify critical information with official provider documentation. This tool is for informational purposes only.
+**Pricing and Model Information**: Updated regularly but may not always reflect the latest changes. Please verify critical information with official provider documentation.
+
+**Code Examples**: Provided for illustrative and educational purposes. Test thoroughly before using in production.
+
+**Real-World Use Cases**: Illustrative examples based on common use patterns. Actual results may vary. Consult vendor documentation for verified case studies.
+
+**Limitations & Best Practices**: General guidance based on common patterns. Always refer to official provider documentation for the most current information.
+
+This tool is for informational purposes only.
 
 ---
 
@@ -445,8 +522,16 @@ Made with ❤️ by Sriram Srinivasan
 
 ## 📊 Database Statistics
 
+**Models & Coverage:**
 - **150 production models** across 39 providers
 - **100% API coverage** - every model has complete API information
 - **122 NEW models** - released in 2024-2025
 - **81 models** with recent pricing updates
 - **Latest additions**: o1, o3-mini, Codestral, Gemini 2.0 Flash, DeepSeek V3, Gemma 2 9B/27B
+
+**Phase 1 Content (NEW):**
+- **1,200+ code examples** (8 per model × 150 models)
+- **600+ use case scenarios** (3-5 per model)
+- **150 comprehensive limitation guides**
+- **3 programming languages** supported (Python, JavaScript, cURL)
+- **7 industry verticals** covered
