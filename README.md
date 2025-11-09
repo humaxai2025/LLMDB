@@ -1,8 +1,8 @@
-# LLM DB 🤖
+# LLM DB v1.0 🤖
 
-**The Ultimate Large Language Model Comparison Tool**
+**The Ultimate Large Language Model Comparison Tool with Advanced Analytics**
 
-LLM DB is a comprehensive, user-friendly web application that helps developers, researchers, and AI enthusiasts compare and choose the right Large Language Model (LLM) for their needs. With 150 carefully curated production models from 39+ providers, you'll never struggle to find pricing, context windows, or API integration details again.
+LLM DB is a comprehensive, user-friendly web application that helps developers, researchers, and AI enthusiasts compare and choose the right Large Language Model (LLM) for their needs. With 150 carefully curated production models from 39+ providers, powerful cost analytics, token optimization, and intelligent model recommendations, you'll never struggle to find pricing, context windows, or API integration details again.
 
 [![Made with ❤️](https://img.shields.io/badge/Made%20with-%E2%9D%A4%EF%B8%8F-red)](https://github.com)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
@@ -26,7 +26,10 @@ Choosing the right LLM can be overwhelming. Different providers, different prici
 ### The Solution
 LLM DB gives you:
 - ✅ **Instant comparison** of 150 production models in a sortable table
-- ✅ **Real-time cost calculator** to estimate your expenses
+- ✅ **Enhanced cost calculator** with visual charts and budget tracking
+- ✅ **Token optimization assistant** to reduce costs by 20-40%
+- ✅ **Interactive usage dashboard** with detailed analytics and trends
+- ✅ **Smart model recommender** to find the perfect model for your needs
 - ✅ **Accurate token counting** with real-time cost estimation
 - ✅ **Usage analytics** to track your LLM spending and patterns
 - ✅ **Quality scores** based on benchmark performance
@@ -134,11 +137,80 @@ LLM DB gives you:
   - Quick clear button to reset selections
   - No arbitrary limits
 
+### 💎 Advanced Analytics & Optimization Tools (NEW in v1.0)
+
+#### 📊 Enhanced Cost Calculator with Visual Charts
+- **Beautiful Visualizations** - Interactive pie and bar charts powered by Recharts
+  - Cost distribution across selected models
+  - Input vs Output cost breakdowns
+  - Budget vs actual cost comparisons
+- **Three Powerful Modes**:
+  - **Simple Calculator** - Quick cost estimation for specific token counts
+  - **Monthly Projections** - Forecast costs based on conversations and usage
+  - **Budget Tracker** - Set budgets and see which models exceed limits with visual alerts
+- **Smart Insights**:
+  - Automatic cheapest vs most expensive model identification
+  - Potential savings calculator
+  - Per-conversation and annual cost projections
+- **Export Built-in** - Download calculations in CSV, JSON, or Markdown
+
+#### 💡 Token Optimization Assistant
+- **Intelligent Prompt Analysis** - Get efficiency scores (1-10) for your prompts
+- **Automatic Optimization** - AI-powered suggestions to reduce token usage
+- **Savings Calculator** - See exact token and cost savings (typically 20-40%)
+- **Issue Detection**:
+  - Redundant phrases and filler words
+  - Excessive punctuation
+  - Verbose instructions
+  - High token-to-word ratios
+- **Before/After Comparison** - Visual side-by-side with improvements
+- **Best Practices Guide** - Learn token optimization techniques
+- **One-Click Copy** - Copy optimized prompts instantly
+
+#### 📈 Interactive Usage Dashboard
+- **Multiple Visualization Views**:
+  - **Overview** - Model distribution pie charts and daily activity
+  - **Usage Heatmap** - Activity by hour of day to identify peak times
+  - **Cost Trends** - Track spending over time with line charts
+  - **Provider Analysis** - Compare costs across different providers
+- **Comprehensive Statistics**:
+  - Total sessions, tokens, and costs
+  - Average cost per session
+  - Most-used models and providers
+- **Flexible Time Filters** - Today, Last 7 Days, Last 30 Days, All Time
+- **Top Models Table** - Detailed breakdown of usage by model
+- **Privacy-First** - All data stored locally in your browser
+
+#### 🎯 Smart Model Recommender
+- **Wizard-Style Interface** - Answer a few questions to find your perfect model
+- **Task Type Selection**:
+  - Creative Writing
+  - Code Generation
+  - Data Analysis
+  - Chat/Conversation
+  - Complex Reasoning
+  - Translation
+- **Priority Options**:
+  - **Quality** - Best performance regardless of cost
+  - **Cost** - Cheapest while maintaining quality
+  - **Balanced** - Optimal quality-to-cost ratio
+  - **Speed** - Fastest response times
+- **Advanced Constraints**:
+  - Maximum cost per 1M tokens
+  - Minimum quality score (MMLU %)
+  - Minimum context window size
+- **Smart Scoring Algorithm**:
+  - Match score (0-100) for each model
+  - Quality-per-dollar value calculations
+  - Top 5 recommendations with detailed metrics
+- **One-Click Selection** - View details or add to comparison instantly
+
 ### 📥 Universal Export Functionality
 - **Export from Anywhere** - Available in all major views
   - Model Details view - export single model data
   - Comparison view - export compared models
   - Cost Calculator - export calculation results
+  - Enhanced Cost Calculator - export with charts data
   - Analytics - comprehensive reports
 - **Multiple Formats**
   - CSV - Excel/Google Sheets compatible
@@ -272,19 +344,65 @@ npm start
   - Clear button to quickly reset selections
 
 ### 5️⃣ Calculate Costs
-- Click **"Calculator"** button
+- Click **"Calculator"** button (basic calculator)
 - Add models for cost calculation
 - Enter your expected token usage
 - See estimated costs for selected models
 - Click **green Export button** to download calculation results
 
-### 6️⃣ Compare Models
+### 6️⃣ Enhanced Cost Calculator with Charts (NEW!)
+- Click **"Cost Charts"** button (green gradient in header)
+- Select models from the comprehensive list
+- Choose mode:
+  - **Simple** - Calculate costs for specific token counts
+  - **Monthly** - Project monthly and annual costs based on usage patterns
+  - **Budget** - Set a budget and see which models fit
+- View beautiful interactive charts:
+  - Pie charts showing cost distribution
+  - Bar charts comparing input/output costs
+  - Budget tracking visualizations
+- Get instant insights on cheapest vs most expensive models
+- Export all data with one click
+
+### 7️⃣ Optimize Your Prompts (NEW!)
+- Click **"Optimize"** button (purple-pink gradient in header)
+- Paste your prompt in the text area
+- Get instant efficiency score (1-10)
+- See detected issues and optimization suggestions
+- View optimized version with token savings
+- Copy optimized prompt with one click
+- Learn best practices for token efficiency
+
+### 8️⃣ View Usage Analytics (NEW!)
+- Click **"Dashboard"** button (indigo-blue gradient in header)
+- Select time period (Today, Last 7 Days, Last 30 Days, All Time)
+- Explore different views:
+  - **Overview** - Model usage pie charts and daily activity
+  - **Usage Heatmap** - See your peak usage hours
+  - **Cost Trends** - Track spending over time
+  - **Provider Analysis** - Compare costs by provider
+- View comprehensive statistics
+- Analyze top models table with detailed metrics
+
+### 9️⃣ Find the Perfect Model (NEW!)
+- Click **"Find Model"** button (amber-orange gradient in header)
+- Select your task type (Creative Writing, Code, Analysis, etc.)
+- Choose priority (Quality, Cost, Balanced, or Speed)
+- Set constraints:
+  - Maximum cost per 1M tokens
+  - Minimum quality score
+  - Minimum context window
+- Click "Find Best Models"
+- Review top 5 recommendations with match scores
+- Click to view details or add to comparison
+
+### 🔟 Compare Models
 - Select up to 4 models for comparison
 - Click **"Compare"** button
 - View side-by-side comparison with benchmarks and costs
 - Click **green Export button** to download comparison data
 
-### 7️⃣ Keyboard Shortcuts
+### ⌨️ Keyboard Shortcuts
 Press **?** to see all keyboard shortcuts:
 - `/` - Focus search
 - `c` - Toggle calculator
@@ -299,6 +417,9 @@ Press **?** to see all keyboard shortcuts:
 | **Next.js 15** | React framework with App Router |
 | **TypeScript** | Type-safe development |
 | **Tailwind CSS** | Utility-first styling |
+| **Recharts** | Interactive data visualizations |
+| **GPT-Tokenizer** | Accurate token counting |
+| **PapaParse** | CSV export functionality |
 | **Lucide React** | Beautiful icons |
 | **Vercel** | Deployment platform |
 
@@ -409,21 +530,29 @@ LLMDB/
 │   │   └── page.tsx                        # Model detail page
 │   ├── components/
 │   │   ├── ModelDetailsCard.tsx            # Enhanced model card with Phase 1 features
-│   │   ├── Phase1Features.tsx              # 🆕 Code examples, use cases, limitations
+│   │   ├── Phase1Features.tsx              # Code examples, use cases, limitations
 │   │   ├── MobileModelCard.tsx             # Mobile-responsive card view
 │   │   ├── AdvancedSearch.tsx              # Multi-criteria search & filtering
-│   │   └── EnhancedModelComparison.tsx     # Side-by-side model comparison (up to 4)
+│   │   ├── EnhancedModelComparison.tsx     # Side-by-side model comparison (up to 4)
+│   │   ├── Sprint1Dashboard.tsx            # Analytics dashboard (token counter, history)
+│   │   ├── ExportButton.tsx                # Universal export component
+│   │   ├── EnhancedCostCalculator.tsx      # 🆕 Cost calculator with charts
+│   │   ├── TokenOptimizationAssistant.tsx  # 🆕 Prompt optimization tool
+│   │   ├── InteractiveUsageDashboard.tsx   # 🆕 Advanced analytics dashboard
+│   │   └── SmartModelRecommender.tsx       # 🆕 Intelligent model finder
 │   ├── data/
 │   │   ├── llm-data.ts                     # All model data (150 models)
-│   │   ├── phase1-data-generator.ts        # 🆕 Dynamic Phase 1 content generation
-│   │   └── enriched-models.ts              # 🆕 Models with Phase 1 features
+│   │   ├── phase1-data-generator.ts        # Dynamic Phase 1 content generation
+│   │   └── enriched-models.ts              # Models with Phase 1 features
 │   ├── types/
 │   │   └── features.ts                     # TypeScript types
 │   ├── utils/
-│   │   └── modelRecommendations.ts         # Smart model suggestions
+│   │   ├── modelRecommendations.ts         # Smart model suggestions
+│   │   ├── sessionStorage.ts               # 🆕 LocalStorage manager for sessions
+│   │   └── exportUtils.ts                  # 🆕 Export utilities (CSV/JSON/Markdown)
 │   ├── globals.css                         # Global styles
 │   ├── layout.tsx                          # Root layout
-│   └── page.tsx                            # Main table view with mobile support
+│   └── page.tsx                            # Main table view with v1.0 features
 ├── components/                              # Additional components
 ├── public/                                  # Static assets
 ├── next.config.mjs                         # Next.js config
@@ -487,7 +616,11 @@ vercel
 
 ## 🎯 Roadmap
 
-### ✅ Recently Completed
+### ✅ v1.0 - Recently Completed
+- [x] **Enhanced Cost Calculator with Charts**: Interactive visualizations with pie/bar charts, budget tracking
+- [x] **Token Optimization Assistant**: AI-powered prompt analysis with 20-40% savings
+- [x] **Interactive Usage Dashboard**: Advanced analytics with heatmaps, trends, and provider analysis
+- [x] **Smart Model Recommender**: Intelligent wizard to find the perfect model for any task
 - [x] **Enhanced Token Counter**: Accurate tokenization with real-time cost estimation
 - [x] **Session History & Analytics**: Track usage, costs, and patterns over time
 - [x] **Universal Export**: Export from any view (Model Details, Comparison, Calculator, Analytics)
@@ -503,18 +636,19 @@ vercel
 - [x] Enhanced Model Comparison (up to 4 models)
 - [x] Database cleanup (150 curated production models)
 
-### 📋 Planned Features
-- [ ] **Live Testing Playground**: Test models directly in-browser
+### 📋 v2.0 - Planned Features
+- [ ] **Live Testing Playground**: Test models directly in-browser with API integration
+- [ ] **Context Window Management**: Smart truncation and conversation splitting tools
+- [ ] **PDF Export**: Generate professional reports with charts
+- [ ] **Scheduled Reports**: Daily/weekly/monthly email summaries
 - [ ] **User Reviews & Ratings**: Community-driven insights
 - [ ] **Community Prompts Library**: Share and discover effective prompts
-- [ ] **Smart Model Selector Wizard**: Answer questions to find perfect model
-- [ ] **Real News Feed**: Latest model updates and changes
-- [ ] API cost comparison charts
-- [ ] Save custom comparisons to browser storage
-- [ ] Email/webhook alerts for price changes
-- [ ] Model changelog tracking
-- [ ] Usage calculator with custom workloads
-- [ ] Provider status monitoring
+- [ ] **Real News Feed**: Latest model updates and changes from providers
+- [ ] **Custom Comparison Templates**: Save and share model comparison sets
+- [ ] **Email/webhook alerts**: Notifications for price changes
+- [ ] **Model Changelog Tracking**: Historical pricing and feature changes
+- [ ] **Provider Status Monitoring**: Real-time uptime and performance tracking
+- [ ] **Multi-language Support**: Internationalization for global users
 
 ---
 
@@ -582,7 +716,8 @@ This tool is for informational purposes only.
 
 Made with ❤️ by Sriram Srinivasan
 
-**Last Updated**: November 8, 2025
+**Version**: 1.0
+**Last Updated**: November 9, 2025
 
 ---
 
