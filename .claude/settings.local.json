@@ -23,7 +23,8 @@
       "Bash(curl:*)",
       "Bash(git checkout:*)",
       "Bash(if exist .next rmdir /s /q .next)",
-      "Bash(netstat:*)"
+      "Bash(netstat:*)",
+      "Bash(del \"E:\\sriram\\LLMDB\\SPRINT1_FEATURES.md\" \"E:\\sriram\\LLMDB\\SPRINT1_SUMMARY.md\" \"E:\\sriram\\LLMDB\\QUICKSTART_SPRINT1.md\" \"E:\\sriram\\LLMDB\\MODEL_SELECTION_UPDATE.md\" \"E:\\sriram\\LLMDB\\UX_IMPROVEMENTS_SUMMARY.md\")"
     ],
     "deny": [],
     "ask": []

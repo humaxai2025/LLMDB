@@ -3,12 +3,14 @@
 import { useState, useMemo, useEffect } from 'react';
 import { calculateBooksInContext, type LLMModel } from './data/llm-data';
 import { enrichedModels } from './data/enriched-models';
-import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Keyboard, TrendingUp, Clock, Filter, Sparkles, AlertCircle } from 'lucide-react';
+import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Keyboard, TrendingUp, Clock, Filter, Sparkles, AlertCircle, BarChart3 } from 'lucide-react';
 import { APIIntegrationHelper } from '../components/APIIntegrationHelper';
 import { ModelDetailsCard } from './components/ModelDetailsCard';
 import { MobileModelCard } from './components/MobileModelCard';
 import AdvancedSearch from './components/AdvancedSearch';
 import EnhancedModelComparison from './components/EnhancedModelComparison';
+import { Sprint1Dashboard } from './components/Sprint1Dashboard';
+import { ExportButton } from './components/ExportButton';
 import { findSimilarModels, findCheaperAlternatives, findBetterPerformance } from './utils/modelRecommendations';
 
 // Use enriched models with Phase 1 features
@@ -46,6 +48,7 @@ export default function Home() {
   const [isAdvancedSearchActive, setIsAdvancedSearchActive] = useState(false);
   const [showEnhancedComparison, setShowEnhancedComparison] = useState(false);
   const [selectedForCalculator, setSelectedForCalculator] = useState<string[]>([]);
+  const [showSprint1Dashboard, setShowSprint1Dashboard] = useState(false);
 
   // Load comparison from URL on mount
   useEffect(() => {
@@ -369,6 +372,15 @@ export default function Home() {
         </div>
       )}
 
+      {/* Sprint 1 Dashboard - Analytics, Token Counter, Session History, Export */}
+      {showSprint1Dashboard && (
+        <Sprint1Dashboard
+          allModels={llmModels}
+          initialSelectedModels={comparedModels.length > 0 ? comparedModels : []}
+          onClose={() => setShowSprint1Dashboard(false)}
+        />
+      )}
+
       {/* Keyboard Help Modal */}
       {showKeyboardHelp && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowKeyboardHelp(false)}>
@@ -439,6 +451,18 @@ export default function Home() {
             </div>
             <div className="flex flex-wrap gap-2 w-full md:w-auto">
               <button
+                onClick={() => setShowSprint1Dashboard(!showSprint1Dashboard)}
+                className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors ${
+                  showSprint1Dashboard
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
+                    : 'bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600'
+                }`}
+                title="Token Counter, Session History & Export"
+              >
+                <BarChart3 className="w-5 h-5" />
+                <span className="hidden sm:inline">Analytics</span>
+              </button>
+              <button
                 onClick={() => setShowCalculator(!showCalculator)}
                 className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors ${
                   showCalculator
@@ -504,6 +528,12 @@ export default function Home() {
                 Advanced Cost Calculator
               </h2>
               <div className="flex flex-wrap gap-2 w-full md:w-auto">
+                {selectedForCalculator.length > 0 && (
+                  <ExportButton
+                    models={llmModels.filter(m => selectedForCalculator.includes(m.id))}
+                    context="Cost Calculator"
+                  />
+                )}
                 <button
                   onClick={() => setShowAdvancedCalc(!showAdvancedCalc)}
                   className="text-sm text-blue-600 hover:text-blue-700"

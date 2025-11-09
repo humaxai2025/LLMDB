@@ -8,6 +8,7 @@ import {
   DollarSign, FileText, TrendingUp, Code, Copy, Check, ChevronDown, ChevronUp,
   Sparkles, AlertCircle, Globe
 } from 'lucide-react';
+import { ExportButton } from './ExportButton';
 
 interface ModelDetailsCardProps {
   model: LLMModel;
@@ -882,11 +883,14 @@ print(response.choices[0].message.content)
               </p>
             )}
           </div>
-          {computedQuality && (
-            <div className={`${getQualityColor(computedQuality)} rounded-xl p-4 text-center min-w-[80px] shadow-lg`}>
-              <div className="text-4xl font-bold text-white drop-shadow-lg">{computedQuality}</div>
-            </div>
-          )}
+          <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
+            {computedQuality && (
+              <div className={`${getQualityColor(computedQuality)} rounded-xl p-4 text-center min-w-[80px] shadow-lg`}>
+                <div className="text-4xl font-bold text-white drop-shadow-lg">{computedQuality}</div>
+              </div>
+            )}
+            <ExportButton models={[model]} context="Model Details" />
+          </div>
         </div>
       </header>
 

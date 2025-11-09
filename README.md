@@ -27,10 +27,13 @@ Choosing the right LLM can be overwhelming. Different providers, different prici
 LLM DB gives you:
 - ✅ **Instant comparison** of 150 production models in a sortable table
 - ✅ **Real-time cost calculator** to estimate your expenses
+- ✅ **Accurate token counting** with real-time cost estimation
+- ✅ **Usage analytics** to track your LLM spending and patterns
 - ✅ **Quality scores** based on benchmark performance
 - ✅ **Python code samples** ready to copy-paste for every model
 - ✅ **Advanced filtering** by price, context size, provider, status, and more
 - ✅ **Side-by-side comparison** of up to 4 models
+- ✅ **Export functionality** from any view (CSV, JSON, Markdown)
 - ✅ **API availability info** with endpoints, authentication, and rate limits
 - ✅ **Status indicators** showing NEW, UPDATED, and DEPRECATED models
 
@@ -38,8 +41,7 @@ LLM DB gives you:
 
 ## ✨ Key Features
 
-### 🆕 Phase 1: Practical Implementation Features
-**NEW - Complete for all 150 models!**
+### 💻 Practical Implementation Features
 
 #### Working Code Examples
 - **1,200+ code samples** (8 per model)
@@ -112,6 +114,39 @@ LLM DB gives you:
 - **Official documentation links** - quick access to provider docs
 - **100% coverage** - every model includes complete API information
 
+### 📊 Usage Analytics & Tracking
+- **Enhanced Token Counter** - Accurate token counting using GPT tokenizer
+  - Real-time token counting as you type
+  - Separate tracking for system, user, and assistant messages
+  - Context window usage visualization with color-coded warnings
+  - Per-request cost estimation with input/output breakdown
+  - Model-specific pricing and context limits
+- **Session History** - Automatic tracking of your LLM usage
+  - Stores up to 1,000 sessions in your browser (100% private)
+  - Time-based filtering (today, week, month, all-time)
+  - Comprehensive statistics dashboard
+  - Track total costs, tokens, and identify usage patterns
+  - Model and provider usage distribution
+  - One-click export of usage data
+- **Smart Model Selection** - Choose any models for analysis
+  - Search through all 150+ models
+  - Add/remove models dynamically
+  - Quick clear button to reset selections
+  - No arbitrary limits
+
+### 📥 Universal Export Functionality
+- **Export from Anywhere** - Available in all major views
+  - Model Details view - export single model data
+  - Comparison view - export compared models
+  - Cost Calculator - export calculation results
+  - Analytics - comprehensive reports
+- **Multiple Formats**
+  - CSV - Excel/Google Sheets compatible
+  - JSON - For developers and automation
+  - Markdown - Documentation-ready tables
+- **Smart File Naming** - Auto-generated with timestamps
+- **One-Click Download** - No complex steps required
+
 ### 🎨 Beautiful User Interface
 - **Collapsible sections** - only see what you need
 - **Dark mode** support with automatic theme switching
@@ -122,15 +157,16 @@ LLM DB gives you:
 
 ### 📱 Enhanced Model Detail View
 Click any model to see:
+- **Export Button** - Download model data in CSV, JSON, or Markdown format
 - **Status Badges** - NEW, UPDATED, or DEPRECATED indicators in header
 - **Overview** - primary purpose, best use cases, key features
 - **Pricing & Economics** - detailed cost breakdown with examples
 - **Technical Specs** - context window, capacity, last updated
 - **Performance Benchmarks** - MMLU, HumanEval, speed ratings
 - **API Availability** - endpoints, authentication, rate limits, regional availability
-- **Working Code Examples** 🆕 - Python, JavaScript, and cURL samples (8 per model = 1,200+ total)
-- **Real-World Use Cases** 🆕 - Industry-specific examples with metrics (600+ scenarios)
-- **Limitations & Best Practices** 🆕 - Known issues, gotchas, and expert tips
+- **Working Code Examples** - Python, JavaScript, and cURL samples (8 per model = 1,200+ total)
+- **Real-World Use Cases** - Industry-specific examples with metrics (600+ scenarios)
+- **Limitations & Best Practices** - Known issues, gotchas, and expert tips
 - **Tags** - quick identification of model capabilities
 
 ---
@@ -197,6 +233,7 @@ npm start
 
 ### 3️⃣ View Details
 - Click the **ℹ️ info icon** or **View Details** button on any model
+- Click **green Export button** to download model data (CSV/JSON/Markdown)
 - See **status badges** (NEW/UPDATED/DEPRECATED) in the model header
 - Explore organized, collapsible sections:
   - **Overview** - what the model is good for
@@ -205,19 +242,49 @@ npm start
   - **Best For** - recommended use cases
   - **Key Features** - unique capabilities
   - **API Integration** - endpoints, authentication, rate limits, docs
-  - **Working Code Examples** 🆕 - Python, JavaScript, cURL (expand to see)
-  - **Real-World Use Cases** 🆕 - Industry examples with metrics (expand to see)
-  - **Limitations & Best Practices** 🆕 - Gotchas and expert tips (expand to see)
+  - **Working Code Examples** - Python, JavaScript, cURL (expand to see)
+  - **Real-World Use Cases** - Industry examples with metrics (expand to see)
+  - **Limitations & Best Practices** - Gotchas and expert tips (expand to see)
   - **Tags** - model capabilities
 - **Copy code** with one click
 - **Expand/collapse** sections for easier navigation
 
-### 4️⃣ Calculate Costs
-- Click **"Calculator"** button
-- Enter your expected token usage
-- See estimated costs for your selected model
+### 4️⃣ Track Usage & Costs
+- Click **"Analytics"** button (gradient blue-purple in header)
+- **Token Counter Tab**:
+  - Enter system instructions, user prompts, and expected responses
+  - See real-time token counts with accurate GPT tokenization
+  - View context window usage with color-coded warnings (green/yellow/red)
+  - Get instant cost estimates for each request
+- **Session History Tab**:
+  - View all your token calculations automatically saved
+  - Filter by time (today, week, month, all-time)
+  - See comprehensive statistics (total cost, tokens, most-used model)
+  - Track usage patterns and spending trends
+  - Export your usage data
+- **Export & Reports Tab**:
+  - Export selected models in CSV, JSON, or Markdown
+  - Generate comprehensive usage reports
+  - Download session history data
+- **Model Selection**:
+  - Click "Add/Remove Models" to select any models from database
+  - Search through 150+ models by name or provider
+  - Clear button to quickly reset selections
 
-### 5️⃣ Keyboard Shortcuts
+### 5️⃣ Calculate Costs
+- Click **"Calculator"** button
+- Add models for cost calculation
+- Enter your expected token usage
+- See estimated costs for selected models
+- Click **green Export button** to download calculation results
+
+### 6️⃣ Compare Models
+- Select up to 4 models for comparison
+- Click **"Compare"** button
+- View side-by-side comparison with benchmarks and costs
+- Click **green Export button** to download comparison data
+
+### 7️⃣ Keyboard Shortcuts
 Press **?** to see all keyboard shortcuts:
 - `/` - Focus search
 - `c` - Toggle calculator
@@ -253,7 +320,7 @@ We calculate quality scores using:
 - Normalized to 0-10 scale
 - Color-coded badges (green = excellent, blue = good, etc.)
 
-### Code Examples (Phase 1)
+### Code Examples
 Every model includes **8 working code samples**:
 
 **Python (3 examples):**
@@ -420,9 +487,12 @@ vercel
 
 ## 🎯 Roadmap
 
-### ✅ Recently Completed - Phase 1 Launch!
-- [x] **Phase 1 Complete**: Working code examples, use cases, and limitations for ALL 150 models
-- [x] **1,200+ Code Examples**: Python, JavaScript, and cURL samples
+### ✅ Recently Completed
+- [x] **Enhanced Token Counter**: Accurate tokenization with real-time cost estimation
+- [x] **Session History & Analytics**: Track usage, costs, and patterns over time
+- [x] **Universal Export**: Export from any view (Model Details, Comparison, Calculator, Analytics)
+- [x] **Smart Model Selection**: Search and select from all 150+ models with quick clear option
+- [x] **1,200+ Code Examples**: Python, JavaScript, and cURL samples for all models
 - [x] **600+ Use Cases**: Real-world industry scenarios with metrics
 - [x] **150 Limitation Guides**: Comprehensive best practices and gotchas
 - [x] **Mobile Responsive Design**: Perfect UX on all devices
@@ -433,11 +503,7 @@ vercel
 - [x] Enhanced Model Comparison (up to 4 models)
 - [x] Database cleanup (150 curated production models)
 
-### 🚧 In Progress
-- [ ] Model performance visualizations
-- [ ] Export comparison tables to CSV/JSON
-
-### 📋 Planned Features - Phase 2
+### 📋 Planned Features
 - [ ] **Live Testing Playground**: Test models directly in-browser
 - [ ] **User Reviews & Ratings**: Community-driven insights
 - [ ] **Community Prompts Library**: Share and discover effective prompts
