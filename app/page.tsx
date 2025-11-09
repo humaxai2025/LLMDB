@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { calculateBooksInContext, type LLMModel } from './data/llm-data';
 import { enrichedModels } from './data/enriched-models';
-import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Keyboard, TrendingUp, Clock, Filter, Sparkles, AlertCircle, BarChart3 } from 'lucide-react';
+import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Keyboard, TrendingUp, Clock, Filter, Sparkles, AlertCircle, BarChart3, Lightbulb, Activity, Zap } from 'lucide-react';
 import { APIIntegrationHelper } from '../components/APIIntegrationHelper';
 import { ModelDetailsCard } from './components/ModelDetailsCard';
 import { MobileModelCard } from './components/MobileModelCard';
@@ -11,6 +11,10 @@ import AdvancedSearch from './components/AdvancedSearch';
 import EnhancedModelComparison from './components/EnhancedModelComparison';
 import { Sprint1Dashboard } from './components/Sprint1Dashboard';
 import { ExportButton } from './components/ExportButton';
+import { EnhancedCostCalculator } from './components/EnhancedCostCalculator';
+import { TokenOptimizationAssistant } from './components/TokenOptimizationAssistant';
+import { InteractiveUsageDashboard } from './components/InteractiveUsageDashboard';
+import { SmartModelRecommender } from './components/SmartModelRecommender';
 import { findSimilarModels, findCheaperAlternatives, findBetterPerformance } from './utils/modelRecommendations';
 
 // Use enriched models with Phase 1 features
@@ -49,6 +53,10 @@ export default function Home() {
   const [showEnhancedComparison, setShowEnhancedComparison] = useState(false);
   const [selectedForCalculator, setSelectedForCalculator] = useState<string[]>([]);
   const [showSprint1Dashboard, setShowSprint1Dashboard] = useState(false);
+  const [showEnhancedCostCalculator, setShowEnhancedCostCalculator] = useState(false);
+  const [showTokenOptimizer, setShowTokenOptimizer] = useState(false);
+  const [showUsageDashboard, setShowUsageDashboard] = useState(false);
+  const [showSmartRecommender, setShowSmartRecommender] = useState(false);
 
   // Load comparison from URL on mount
   useEffect(() => {
@@ -443,7 +451,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-1">
-                LLM DB
+                LLM DB <span className="text-lg sm:text-xl text-blue-600 dark:text-blue-400">v1.0</span>
               </h1>
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 Compare {llmModels.length} AI models • Updated Nov 2025
@@ -505,6 +513,38 @@ export default function Home() {
                     ? `Select ${selectedForCompare.length > 0 ? `(${selectedForCompare.length})` : ''}`
                     : 'Compare'}
                 </span>
+              </button>
+              <button
+                onClick={() => setShowEnhancedCostCalculator(true)}
+                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600 shadow-md hover:shadow-lg"
+                title="Enhanced Cost Calculator with Charts"
+              >
+                <Calculator className="w-5 h-5" />
+                <span className="hidden sm:inline">Cost Charts</span>
+              </button>
+              <button
+                onClick={() => setShowTokenOptimizer(true)}
+                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg"
+                title="Token Optimization Assistant"
+              >
+                <Lightbulb className="w-5 h-5" />
+                <span className="hidden sm:inline">Optimize</span>
+              </button>
+              <button
+                onClick={() => setShowUsageDashboard(true)}
+                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors bg-gradient-to-r from-indigo-500 to-blue-500 text-white hover:from-indigo-600 hover:to-blue-600 shadow-md hover:shadow-lg"
+                title="Interactive Usage Dashboard"
+              >
+                <Activity className="w-5 h-5" />
+                <span className="hidden sm:inline">Dashboard</span>
+              </button>
+              <button
+                onClick={() => setShowSmartRecommender(true)}
+                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:from-amber-600 hover:to-orange-600 shadow-md hover:shadow-lg"
+                title="Smart Model Recommender"
+              >
+                <Zap className="w-5 h-5" />
+                <span className="hidden sm:inline">Find Model</span>
               </button>
               <button
                 onClick={() => setShowKeyboardHelp(true)}
@@ -1403,6 +1443,37 @@ export default function Home() {
           </div>
         </div>
       </main>
+
+      {/* Enhanced Cost Calculator Modal */}
+      {showEnhancedCostCalculator && (
+        <EnhancedCostCalculator
+          models={llmModels}
+          onClose={() => setShowEnhancedCostCalculator(false)}
+        />
+      )}
+
+      {/* Token Optimization Assistant Modal */}
+      {showTokenOptimizer && (
+        <TokenOptimizationAssistant
+          onClose={() => setShowTokenOptimizer(false)}
+        />
+      )}
+
+      {/* Interactive Usage Dashboard Modal */}
+      {showUsageDashboard && (
+        <InteractiveUsageDashboard
+          onClose={() => setShowUsageDashboard(false)}
+        />
+      )}
+
+      {/* Smart Model Recommender Modal */}
+      {showSmartRecommender && (
+        <SmartModelRecommender
+          models={llmModels}
+          onSelectModel={(model) => setSelectedModel(model)}
+          onClose={() => setShowSmartRecommender(false)}
+        />
+      )}
 
       {/* Footer */}
       <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-6 mt-8">
