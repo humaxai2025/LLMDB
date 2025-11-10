@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { calculateBooksInContext, type LLMModel } from './data/llm-data';
 import { enrichedModels } from './data/enriched-models';
-import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Keyboard, TrendingUp, Clock, Filter, Sparkles, AlertCircle, BarChart3, Lightbulb, Activity, Zap } from 'lucide-react';
+import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Keyboard, TrendingUp, Clock, Filter, Sparkles, AlertCircle, BarChart3, Lightbulb, Activity, Zap, TestTube, History, RefreshCw, Book } from 'lucide-react';
 import { APIIntegrationHelper } from '../components/APIIntegrationHelper';
 import { ModelDetailsCard } from './components/ModelDetailsCard';
 import { MobileModelCard } from './components/MobileModelCard';
@@ -13,8 +13,12 @@ import { Sprint1Dashboard } from './components/Sprint1Dashboard';
 import { ExportButton } from './components/ExportButton';
 import { EnhancedCostCalculator } from './components/EnhancedCostCalculator';
 import { TokenOptimizationAssistant } from './components/TokenOptimizationAssistant';
-import { InteractiveUsageDashboard } from './components/InteractiveUsageDashboard';
 import { SmartModelRecommender } from './components/SmartModelRecommender';
+import { ModelTestingPlayground } from './components/ModelTestingPlayground';
+import { ModelDocumentationHub } from './components/ModelDocumentationHub';
+import NotificationsPanel from './components/NotificationsPanel';
+import ModelChangelog from './components/ModelChangelog';
+import NotificationPreferences from './components/NotificationPreferences';
 import { findSimilarModels, findCheaperAlternatives, findBetterPerformance } from './utils/modelRecommendations';
 
 // Use enriched models with Phase 1 features
@@ -55,8 +59,13 @@ export default function Home() {
   const [showSprint1Dashboard, setShowSprint1Dashboard] = useState(false);
   const [showEnhancedCostCalculator, setShowEnhancedCostCalculator] = useState(false);
   const [showTokenOptimizer, setShowTokenOptimizer] = useState(false);
-  const [showUsageDashboard, setShowUsageDashboard] = useState(false);
+  const [showDocumentationHub, setShowDocumentationHub] = useState(false);
   const [showSmartRecommender, setShowSmartRecommender] = useState(false);
+  const [showTestingPlayground, setShowTestingPlayground] = useState(false);
+  const [showChangelog, setShowChangelog] = useState(false);
+  const [showNotificationPreferences, setShowNotificationPreferences] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [refreshMessage, setRefreshMessage] = useState('');
 
   // Load comparison from URL on mount
   useEffect(() => {
@@ -122,6 +131,49 @@ export default function Home() {
       : [...favorites, modelId];
     setFavorites(newFavorites);
     localStorage.setItem('llm-favorites', JSON.stringify(newFavorites));
+  };
+
+  const handleRefreshModels = async () => {
+    setIsRefreshing(true);
+    setRefreshMessage('');
+
+    try {
+      const response = await fetch('/api/refresh-models', {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Save changelog entries to localStorage if any changes detected
+        if (data.changelogEntries && data.changelogEntries.length > 0) {
+          const existingChangelog = localStorage.getItem('model-changelog');
+          const changelog = existingChangelog ? JSON.parse(existingChangelog) : [];
+
+          // Add new entries to the beginning
+          const updatedChangelog = [...data.changelogEntries, ...changelog];
+          localStorage.setItem('model-changelog', JSON.stringify(updatedChangelog));
+
+          setRefreshMessage(`✓ ${data.message}`);
+
+          // Also trigger notifications for watched models
+          // (This would integrate with the notification system)
+        } else {
+          setRefreshMessage(`✓ ${data.message}`);
+        }
+
+        setTimeout(() => setRefreshMessage(''), 8000);
+      } else {
+        setRefreshMessage('✗ Failed to refresh model data. Please try again.');
+        setTimeout(() => setRefreshMessage(''), 5000);
+      }
+    } catch (error) {
+      console.error('Refresh error:', error);
+      setRefreshMessage('✗ Network error. Please check your connection.');
+      setTimeout(() => setRefreshMessage(''), 5000);
+    } finally {
+      setIsRefreshing(false);
+    }
   };
 
   const toggleCompare = (modelId: string) => {
@@ -451,107 +503,161 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-1">
-                LLM DB <span className="text-lg sm:text-xl text-blue-600 dark:text-blue-400">v1.0</span>
+                LLM DB <span className="text-lg sm:text-xl text-blue-600 dark:text-blue-400">v1.2</span>
               </h1>
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 Compare {llmModels.length} AI models • Updated Nov 2025
               </p>
             </div>
-            <div className="flex flex-wrap gap-2 w-full md:w-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 w-full md:w-auto">
+              {/* Analytics */}
               <button
                 onClick={() => setShowSprint1Dashboard(!showSprint1Dashboard)}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg ${
                   showSprint1Dashboard
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                    : 'bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600'
+                    ? 'bg-blue-700 text-white'
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
                 }`}
                 title="Token Counter, Session History & Export"
               >
                 <BarChart3 className="w-5 h-5" />
                 <span className="hidden sm:inline">Analytics</span>
               </button>
+
+              {/* Calculator */}
               <button
                 onClick={() => setShowCalculator(!showCalculator)}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg ${
                   showCalculator
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                    ? 'bg-blue-700 text-white'
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
                 }`}
+                title="Basic Cost Calculator"
               >
                 <Calculator className="w-5 h-5" />
                 <span className="hidden sm:inline">Calculator</span>
               </button>
+
+              {/* Changelog */}
+              <button
+                onClick={() => setShowChangelog(true)}
+                className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg bg-blue-600 text-white hover:bg-blue-700"
+                title="Model Changelog"
+              >
+                <History className="w-5 h-5" />
+                <span className="hidden sm:inline">Changelog</span>
+              </button>
+
+              {/* Charts */}
+              <button
+                onClick={() => setShowEnhancedCostCalculator(true)}
+                className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg bg-blue-600 text-white hover:bg-blue-700"
+                title="Enhanced Cost Calculator with Charts"
+              >
+                <Calculator className="w-5 h-5" />
+                <span className="hidden sm:inline">Charts</span>
+              </button>
+
+              {/* Compare */}
               <button
                 onClick={() => {
                   if (compareMode && selectedForCompare.length >= 2) {
-                    // If already in compare mode with selections, open comparison
                     setShowEnhancedComparison(true);
                   } else {
-                    // Toggle compare mode
                     setCompareMode(!compareMode);
                     if (compareMode) setSelectedForCompare([]);
                   }
                 }}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg ${
+                className={`flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg ${
                   compareMode
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                    ? 'bg-blue-700 text-white'
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
                 }`}
+                title="Compare Models"
               >
                 <GitCompare className="w-5 h-5" />
                 <span className="hidden sm:inline">
                   {compareMode && selectedForCompare.length >= 2
-                    ? `View Comparison (${selectedForCompare.length})`
-                    : compareMode
-                    ? `Select Models ${selectedForCompare.length > 0 ? `(${selectedForCompare.length})` : ''}`
-                    : 'Compare Models'}
-                </span>
-                <span className="inline sm:hidden">
-                  {compareMode && selectedForCompare.length >= 2
-                    ? `Compare (${selectedForCompare.length})`
+                    ? `View (${selectedForCompare.length})`
                     : compareMode
                     ? `Select ${selectedForCompare.length > 0 ? `(${selectedForCompare.length})` : ''}`
                     : 'Compare'}
                 </span>
+                <span className="inline sm:hidden">
+                  {compareMode && selectedForCompare.length >= 2
+                    ? `(${selectedForCompare.length})`
+                    : compareMode
+                    ? `${selectedForCompare.length > 0 ? `(${selectedForCompare.length})` : ''}`
+                    : 'Compare'}
+                </span>
               </button>
+
+              {/* Learn */}
               <button
-                onClick={() => setShowEnhancedCostCalculator(true)}
-                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600 shadow-md hover:shadow-lg"
-                title="Enhanced Cost Calculator with Charts"
+                onClick={() => setShowDocumentationHub(true)}
+                className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg bg-blue-600 text-white hover:bg-blue-700"
+                title="Model Documentation Hub"
               >
-                <Calculator className="w-5 h-5" />
-                <span className="hidden sm:inline">Cost Charts</span>
+                <Book className="w-5 h-5" />
+                <span className="hidden sm:inline">Learn</span>
               </button>
+
+              {/* Notifications */}
+              <NotificationsPanel onOpenPreferences={() => setShowNotificationPreferences(true)} />
+
+              {/* Optimize */}
               <button
                 onClick={() => setShowTokenOptimizer(true)}
-                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md hover:shadow-lg"
+                className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg bg-blue-600 text-white hover:bg-blue-700"
                 title="Token Optimization Assistant"
               >
                 <Lightbulb className="w-5 h-5" />
                 <span className="hidden sm:inline">Optimize</span>
               </button>
-              <button
-                onClick={() => setShowUsageDashboard(true)}
-                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors bg-gradient-to-r from-indigo-500 to-blue-500 text-white hover:from-indigo-600 hover:to-blue-600 shadow-md hover:shadow-lg"
-                title="Interactive Usage Dashboard"
-              >
-                <Activity className="w-5 h-5" />
-                <span className="hidden sm:inline">Dashboard</span>
-              </button>
+
+              {/* Recommend */}
               <button
                 onClick={() => setShowSmartRecommender(true)}
-                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:from-amber-600 hover:to-orange-600 shadow-md hover:shadow-lg"
+                className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg bg-blue-600 text-white hover:bg-blue-700"
                 title="Smart Model Recommender"
               >
                 <Zap className="w-5 h-5" />
-                <span className="hidden sm:inline">Find Model</span>
+                <span className="hidden sm:inline">Recommend</span>
               </button>
+
+              {/* Refresh */}
+              <button
+                onClick={handleRefreshModels}
+                disabled={isRefreshing}
+                className={`flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg ${
+                  isRefreshing
+                    ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed text-white'
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
+                title="Refresh model data from providers"
+              >
+                <RefreshCw className={`w-5 h-5 ${isRefreshing ? 'animate-spin' : ''}`} />
+                <span className="hidden sm:inline">{isRefreshing ? 'Refreshing...' : 'Refresh'}</span>
+              </button>
+
+              {/* Shortcuts */}
               <button
                 onClick={() => setShowKeyboardHelp(true)}
-                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg bg-blue-600 text-white hover:bg-blue-700"
+                title="Keyboard Shortcuts"
               >
                 <Keyboard className="w-5 h-5" />
                 <span className="hidden sm:inline">Shortcuts</span>
+              </button>
+
+              {/* Test */}
+              <button
+                onClick={() => setShowTestingPlayground(true)}
+                className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg bg-blue-600 text-white hover:bg-blue-700"
+                title="Model Performance Testing Playground"
+              >
+                <TestTube className="w-5 h-5" />
+                <span className="hidden sm:inline">Test</span>
               </button>
             </div>
           </div>
@@ -559,6 +665,16 @@ export default function Home() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-6">
+        {/* Refresh Message */}
+        {refreshMessage && (
+          <div className={`mb-4 p-4 rounded-lg border flex items-center gap-2 ${
+            refreshMessage.includes('✓')
+              ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200'
+              : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200'
+          }`}>
+            <span className="font-medium">{refreshMessage}</span>
+          </div>
+        )}
         {/* Advanced Cost Calculator */}
         {showCalculator && (
           <div className="mb-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 border-2 border-blue-500">
@@ -1459,10 +1575,10 @@ export default function Home() {
         />
       )}
 
-      {/* Interactive Usage Dashboard Modal */}
-      {showUsageDashboard && (
-        <InteractiveUsageDashboard
-          onClose={() => setShowUsageDashboard(false)}
+      {/* Model Documentation Hub Modal */}
+      {showDocumentationHub && (
+        <ModelDocumentationHub
+          onClose={() => setShowDocumentationHub(false)}
         />
       )}
 
@@ -1473,6 +1589,54 @@ export default function Home() {
           onSelectModel={(model) => setSelectedModel(model)}
           onClose={() => setShowSmartRecommender(false)}
         />
+      )}
+
+      {/* Model Testing Playground Modal */}
+      {showTestingPlayground && (
+        <ModelTestingPlayground
+          models={llmModels}
+          onClose={() => setShowTestingPlayground(false)}
+        />
+      )}
+
+      {/* Model Changelog Modal */}
+      {showChangelog && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Model Changelog</h2>
+              <button
+                onClick={() => setShowChangelog(false)}
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              >
+                <X className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto">
+              <ModelChangelog />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Notification Preferences Modal */}
+      {showNotificationPreferences && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Notification Preferences</h2>
+              <button
+                onClick={() => setShowNotificationPreferences(false)}
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              >
+                <X className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto">
+              <NotificationPreferences />
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Footer */}

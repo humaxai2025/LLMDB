@@ -1,6 +1,6 @@
-# LLM DB v1.0 🤖
+# LLM DB v1.2 🤖
 
-**The Ultimate Large Language Model Comparison Tool with Advanced Analytics**
+**The Ultimate Large Language Model Comparison Tool with Advanced Analytics, Documentation Hub & Notifications**
 
 LLM DB is a comprehensive, user-friendly web application that helps developers, researchers, and AI enthusiasts compare and choose the right Large Language Model (LLM) for their needs. With 150 carefully curated production models from 39+ providers, powerful cost analytics, token optimization, and intelligent model recommendations, you'll never struggle to find pricing, context windows, or API integration details again.
 
@@ -26,6 +26,7 @@ Choosing the right LLM can be overwhelming. Different providers, different prici
 ### The Solution
 LLM DB gives you:
 - ✅ **Instant comparison** of 150 production models in a sortable table
+- ✅ **Live model testing playground** - Test models with your API keys directly in-browser (NEW!)
 - ✅ **Enhanced cost calculator** with visual charts and budget tracking
 - ✅ **Token optimization assistant** to reduce costs by 20-40%
 - ✅ **Interactive usage dashboard** with detailed analytics and trends
@@ -39,10 +40,60 @@ LLM DB gives you:
 - ✅ **Export functionality** from any view (CSV, JSON, Markdown)
 - ✅ **API availability info** with endpoints, authentication, and rate limits
 - ✅ **Status indicators** showing NEW, UPDATED, and DEPRECATED models
+- ✅ **Official documentation hub** organized by genre for all providers (NEW in v1.2!)
+- ✅ **Model changelog** to track updates, price changes, and deprecations (NEW in v1.2!)
+- ✅ **Notifications system** with real-time alerts and customizable preferences (NEW in v1.2!)
+- ✅ **Organized navigation** with 12 alphabetically-sorted buttons in 6-per-row grid (NEW in v1.2!)
 
 ---
 
 ## ✨ Key Features
+
+### 🧪 Model Performance Testing Playground (NEW in v1.1!)
+
+**Test LLM models live with your API keys directly in your browser!**
+
+#### Live API Integration
+- **OpenAI, Anthropic, and Google support**: Test GPT, Claude, and Gemini models in real-time
+- **Maximum security**: API keys are NEVER stored anywhere - not in cookies, localStorage, or our servers
+- **Session-only keys**: Enter keys each time you test for complete privacy
+- **Direct API calls**: Your keys never touch our servers - requests go straight to providers
+
+#### Side-by-Side Response Comparison
+- **Test up to 4 models simultaneously** with the same prompt
+- **Visual comparison cards** showing responses, metrics, and quality
+- **Error handling**: Clear error messages when tests fail
+
+#### Real Performance Metrics
+- **Response time measurement**: Accurate millisecond-level timing
+- **Actual token usage**: Real input/output token counts from APIs
+- **True cost calculation**: Exact costs based on actual usage, not estimates
+- **Quick stats**: Instantly see fastest, cheapest, and highest-rated models
+
+#### Quality Scoring System
+- **5-star ratings**: Rate each model's response quality
+- **Persistent ratings**: Scores saved with test history
+- **Optional notes**: Add detailed feedback for each response
+- **Comparison tracking**: Track which models perform best for your use cases
+
+#### Test History & Management
+- **Save unlimited tests**: Preserve complete test contexts (prompt, settings, results)
+- **Load previous tests**: Instantly replay any saved test
+- **Export results**: Download test data as JSON for analysis
+- **Session management**: Delete unwanted tests, organize your history
+
+#### Configurable Settings
+- **Max tokens**: Control response length (1-4000 tokens)
+- **Temperature control**: Adjust creativity (0-2 scale)
+- **Custom prompts**: Test with your actual use cases
+
+**How This Helps You:**
+- ✅ **Make informed decisions**: Test before committing to a provider
+- ✅ **Validate performance**: See actual response times, not marketing claims
+- ✅ **Compare quality**: Judge responses side-by-side with your prompts
+- ✅ **Understand costs**: Know exact costs before scaling up
+- ✅ **Track preferences**: Build history of what works for your use cases
+- ✅ **Risk-free testing**: Try expensive models with small tests first
 
 ### 💻 Practical Implementation Features
 
@@ -241,6 +292,82 @@ Click any model to see:
 - **Limitations & Best Practices** - Known issues, gotchas, and expert tips
 - **Tags** - quick identification of model capabilities
 
+### 📚 Official Documentation Hub (NEW in v1.2!)
+**Access comprehensive documentation for all major LLM providers in one place**
+
+- **Genre-based Organization** - Find docs by model type:
+  - Chat Models (conversational AI)
+  - Reasoning Models (complex problem-solving)
+  - Vision & Multimodal (image understanding)
+  - Coding Models (code generation)
+  - Embedding Models (semantic search)
+- **8 Providers Covered** - OpenAI, Anthropic, Google, Mistral, Cohere, Meta, xAI, Perplexity
+- **12 Documentation Resources** - Organized by genre with model lists
+- **Official Links** - Direct access to:
+  - Main documentation pages
+  - API reference guides
+  - Pricing information
+  - Model-specific details
+- **Smart Search** - Find by provider, model name, or description
+- **Quick Filters** - Filter by genre with visual icons
+- **Always Up-to-Date** - Links to official provider sources
+
+### 📋 Model Changelog & Tracking (NEW in v1.2!)
+**Never miss important model updates and pricing changes**
+
+- **Comprehensive Change Tracking**:
+  - New model releases with full details
+  - Price changes with before/after comparison
+  - Deprecation warnings with timeline
+  - Model updates and improvements
+- **Advanced Filtering**:
+  - Filter by change type (new, price, deprecation, update)
+  - Filter by provider
+  - Time-based filtering (today, week, month, all time)
+- **Detailed Change Records**:
+  - Exact change details with old/new values
+  - Timestamp for each change
+  - Direct links to affected models
+  - Provider and model information
+- **Export Capability** - Download changelog history
+- **LocalStorage Persistence** - Keeps last 200 entries
+
+### 🔔 Notifications System (NEW in v1.2!)
+**Stay informed with intelligent alerts and customizable preferences**
+
+- **Smart Notifications** for:
+  - Price changes (only when exceeding your threshold)
+  - New model releases from watched providers
+  - Model deprecation warnings
+  - Important model updates
+- **Granular Preferences**:
+  - Enable/disable specific notification types
+  - Watch specific models by ID
+  - Watch specific providers
+  - Set minimum price change percentage (e.g., only notify if >5% change)
+- **Multiple Channels** (configurable):
+  - In-app notifications with unread badges
+  - Browser notifications (when permitted)
+  - Email notifications (with backend)
+  - Webhook integration (with backend)
+- **Notification Management**:
+  - Filter by notification type
+  - Mark individual or all as read
+  - Delete unwanted notifications
+  - View detailed change information
+- **Privacy-First** - All stored locally in your browser
+- **Actionable** - Direct links to view affected models
+
+### 🎯 Improved Navigation (NEW in v1.2!)
+**Enhanced user experience with organized, consistent interface**
+
+- **Alphabetically Sorted Menu** - 12 buttons organized A-Z for easy finding
+- **Responsive Grid Layout** - 6 buttons per row on desktop, adapts to mobile
+- **Unified Color Scheme** - Consistent blue palette across all buttons
+- **Clear Icons** - Visual identification for each feature
+- **Responsive Design** - Text hidden on mobile, icons always visible
+- **Button Consistency** - Uniform size, spacing, and hover effects
+
 ---
 
 ## 🚀 Quick Start
@@ -281,13 +408,28 @@ npm start
 
 ## 📖 How to Use
 
-### 1️⃣ Browse Models
+### 1️⃣ Navigation & Quick Actions
+- **Organized button menu** - 12 buttons in a responsive 6-per-row grid layout (alphabetically sorted)
+- **Analytics** - Token Counter, Session History & Export
+- **Calculator** - Basic cost calculator
+- **Changelog** - View model updates, deprecations, and new releases
+- **Charts** - Enhanced cost calculator with visualizations
+- **Compare** - Side-by-side model comparison (up to 4 models)
+- **Learn** - Official documentation hub for all providers organized by genre
+- **Notifications** - Real-time alerts for price changes, new models, deprecations
+- **Optimize** - Token optimization assistant
+- **Recommend** - Smart model recommender
+- **Refresh** - Check for latest model updates
+- **Shortcuts** - Keyboard shortcuts reference
+- **Test** - Live model testing playground
+
+### 2️⃣ Browse Models
 - View the comprehensive table of all LLM models
 - Sort by **name**, **provider**, **context window**, **price**, or **quality score**
 - Use the search bar to find specific models
 - **Status badges** show NEW, UPDATED, or DEPRECATED models directly in the table
 
-### 2️⃣ Advanced Search & Filter
+### 3️⃣ Advanced Search & Filter
 - Click **"Advanced Search"** button for multi-criteria filtering:
   - **Providers** - filter by specific providers (OpenAI, Anthropic, Google, etc.)
   - **Model Types** - chat, completion, embedding, multimodal
@@ -303,7 +445,7 @@ npm start
 - **Star models** to add them to favorites
 - **Select up to 4 models** to compare side-by-side
 
-### 3️⃣ View Details
+### 4️⃣ View Details
 - Click the **ℹ️ info icon** or **View Details** button on any model
 - Click **green Export button** to download model data (CSV/JSON/Markdown)
 - See **status badges** (NEW/UPDATED/DEPRECATED) in the model header
@@ -321,7 +463,7 @@ npm start
 - **Copy code** with one click
 - **Expand/collapse** sections for easier navigation
 
-### 4️⃣ Track Usage & Costs
+### 5️⃣ Track Usage & Costs
 - Click **"Analytics"** button (gradient blue-purple in header)
 - **Token Counter Tab**:
   - Enter system instructions, user prompts, and expected responses
@@ -343,14 +485,14 @@ npm start
   - Search through 150+ models by name or provider
   - Clear button to quickly reset selections
 
-### 5️⃣ Calculate Costs
+### 6️⃣ Calculate Costs
 - Click **"Calculator"** button (basic calculator)
 - Add models for cost calculation
 - Enter your expected token usage
 - See estimated costs for selected models
 - Click **green Export button** to download calculation results
 
-### 6️⃣ Enhanced Cost Calculator with Charts (NEW!)
+### 7️⃣ Enhanced Cost Calculator with Charts (NEW!)
 - Click **"Cost Charts"** button (green gradient in header)
 - Select models from the comprehensive list
 - Choose mode:
@@ -364,7 +506,7 @@ npm start
 - Get instant insights on cheapest vs most expensive models
 - Export all data with one click
 
-### 7️⃣ Optimize Your Prompts (NEW!)
+### 8️⃣ Optimize Your Prompts (NEW!)
 - Click **"Optimize"** button (purple-pink gradient in header)
 - Paste your prompt in the text area
 - Get instant efficiency score (1-10)
@@ -372,17 +514,6 @@ npm start
 - View optimized version with token savings
 - Copy optimized prompt with one click
 - Learn best practices for token efficiency
-
-### 8️⃣ View Usage Analytics (NEW!)
-- Click **"Dashboard"** button (indigo-blue gradient in header)
-- Select time period (Today, Last 7 Days, Last 30 Days, All Time)
-- Explore different views:
-  - **Overview** - Model usage pie charts and daily activity
-  - **Usage Heatmap** - See your peak usage hours
-  - **Cost Trends** - Track spending over time
-  - **Provider Analysis** - Compare costs by provider
-- View comprehensive statistics
-- Analyze top models table with detailed metrics
 
 ### 9️⃣ Find the Perfect Model (NEW!)
 - Click **"Find Model"** button (amber-orange gradient in header)
@@ -396,7 +527,85 @@ npm start
 - Review top 5 recommendations with match scores
 - Click to view details or add to comparison
 
-### 🔟 Compare Models
+### 🔟 Test Models Live (NEW in v1.1!)
+- Click **"Test Models"** button (pink-rose gradient in header)
+- Enter API keys for providers (OpenAI, Anthropic, Google)
+  - **Maximum Privacy**: Keys are NEVER stored - you must enter them each session
+  - Only kept in memory while playground is open
+  - Never sent to our servers - requests go directly to providers
+- Select up to 4 models to test simultaneously
+- Configure settings:
+  - Max tokens (1-4000)
+  - Temperature (0-2)
+- Enter your test prompt
+- Click "Test All Models" to run live tests
+- View side-by-side results with:
+  - Response time (milliseconds)
+  - Actual cost based on real token usage
+  - Complete model responses
+  - Token usage breakdown
+- Rate quality of each response (1-5 stars)
+- Save tests to history for future reference
+- Export results as JSON
+- Quick stats show fastest, cheapest, and highest-rated models
+
+**How it helps users:**
+- **Test before committing**: Try models with your actual prompts before making decisions
+- **Real performance data**: See actual response times and costs, not estimates
+- **Side-by-side comparison**: Compare responses quality directly
+- **Cost transparency**: Know exact costs based on actual token usage
+- **Performance tracking**: Save and compare tests over time
+- **Quality validation**: Rate and track which models work best for your use case
+
+### 1️⃣1️⃣ Official Documentation Hub (NEW!)
+- Click **"Learn"** button to access comprehensive documentation
+- **Genre-based Organization**:
+  - Chat Models (GPT, Claude, Gemini, etc.)
+  - Reasoning Models (o1, o1-mini, etc.)
+  - Vision & Multimodal (Claude 3.5 Sonnet, Gemini Pro, etc.)
+  - Coding Models (Codestral, Mistral Large, etc.)
+  - Embedding Models (Cohere Embed, etc.)
+- **8 Providers Covered**: OpenAI, Anthropic, Google, Mistral, Cohere, Meta, xAI, Perplexity
+- **Official Links for Each Provider**:
+  - Main Documentation
+  - API Reference
+  - Pricing Information
+  - Model Details (when available)
+- **Search Functionality**: Find documentation by provider, model, or description
+- **Genre Filters**: Quick filtering by model type
+- **Direct Access**: All links open to official provider documentation
+
+### 1️⃣2️⃣ Model Changelog & Updates (NEW!)
+- Click **"Changelog"** button to view model update history
+- **Filter by Type**:
+  - New Models - Recently released models
+  - Price Changes - Pricing updates with before/after comparison
+  - Deprecations - Models being phased out
+  - Model Updates - Feature additions and improvements
+- **Comprehensive Details**: See exactly what changed and when
+- **Provider Filtering**: View changes for specific providers
+- **Time-based Filters**: Today, This Week, This Month, All Time
+- **Export Capability**: Download changelog data
+
+### 1️⃣3️⃣ Notifications System (NEW!)
+- Click **"Notifications"** button to manage alerts
+- **Real-time Notifications** for:
+  - Price changes (with configurable minimum threshold)
+  - New model releases
+  - Model deprecations
+  - Important model updates
+- **Notification Preferences**:
+  - Configure which types of alerts you want
+  - Watch specific models or providers
+  - Set minimum price change percentage
+  - Enable browser notifications (optional)
+  - Email notifications (optional)
+  - Webhook integration (optional)
+- **Filter & Organize**: View by notification type
+- **Mark as Read/Delete**: Manage your notification history
+- **Actionable**: Direct links to affected models
+
+### 1️⃣4️⃣ Compare Models
 - Select up to 4 models for comparison
 - Click **"Compare"** button
 - View side-by-side comparison with benchmarks and costs
@@ -526,6 +735,9 @@ Customize in:
 ```
 LLMDB/
 ├── app/
+│   ├── api/
+│   │   └── test-model/
+│   │       └── route.ts                    # 🆕 API endpoint for live model testing
 │   ├── [modelId]/
 │   │   └── page.tsx                        # Model detail page
 │   ├── components/
@@ -539,17 +751,26 @@ LLMDB/
 │   │   ├── EnhancedCostCalculator.tsx      # 🆕 Cost calculator with charts
 │   │   ├── TokenOptimizationAssistant.tsx  # 🆕 Prompt optimization tool
 │   │   ├── InteractiveUsageDashboard.tsx   # 🆕 Advanced analytics dashboard
-│   │   └── SmartModelRecommender.tsx       # 🆕 Intelligent model finder
+│   │   ├── SmartModelRecommender.tsx       # 🆕 Intelligent model finder
+│   │   ├── ModelTestingPlayground.tsx      # 🆕 Live model testing playground (v1.1)
+│   │   ├── ModelDocumentationHub.tsx       # 🆕 Official docs hub organized by genre (v1.2)
+│   │   ├── ModelChangelog.tsx              # 🆕 Model update history and changelog (v1.2)
+│   │   ├── NotificationsPanel.tsx          # 🆕 Notifications system (v1.2)
+│   │   └── NotificationPreferences.tsx     # 🆕 Notification settings (v1.2)
 │   ├── data/
 │   │   ├── llm-data.ts                     # All model data (150 models)
 │   │   ├── phase1-data-generator.ts        # Dynamic Phase 1 content generation
 │   │   └── enriched-models.ts              # Models with Phase 1 features
 │   ├── types/
-│   │   └── features.ts                     # TypeScript types
+│   │   ├── features.ts                     # TypeScript types
+│   │   ├── playground.ts                   # 🆕 Testing playground types
+│   │   └── notifications.ts                # 🆕 Notification system types (v1.2)
 │   ├── utils/
 │   │   ├── modelRecommendations.ts         # Smart model suggestions
 │   │   ├── sessionStorage.ts               # 🆕 LocalStorage manager for sessions
 │   │   └── exportUtils.ts                  # 🆕 Export utilities (CSV/JSON/Markdown)
+│   ├── services/
+│   │   └── notificationService.ts          # 🆕 Notification management service (v1.2)
 │   ├── globals.css                         # Global styles
 │   ├── layout.tsx                          # Root layout
 │   └── page.tsx                            # Main table view with v1.0 features
@@ -636,19 +857,30 @@ vercel
 - [x] Enhanced Model Comparison (up to 4 models)
 - [x] Database cleanup (150 curated production models)
 
+### 🎯 v1.1 - Completed
+- [x] **Model Performance Testing Playground**: Test models live with your API keys directly in-browser
+
+### 🎯 v1.2 - Just Completed
+- [x] **Model Documentation Hub**: Official documentation organized by genre for all 8 providers
+- [x] **Model Changelog**: Track model updates, price changes, deprecations, and new releases
+- [x] **Notifications System**: Real-time alerts for price changes, new models, and deprecations
+- [x] **Notification Preferences**: Granular control over notification types, watched models/providers
+- [x] **Organized Button Menu**: Alphabetically sorted 6-per-row responsive grid layout
+- [x] **Unified Color Scheme**: Consistent blue color palette across all navigation buttons
+
 ### 📋 v2.0 - Planned Features
-- [ ] **Live Testing Playground**: Test models directly in-browser with API integration
 - [ ] **Context Window Management**: Smart truncation and conversation splitting tools
 - [ ] **PDF Export**: Generate professional reports with charts
 - [ ] **Scheduled Reports**: Daily/weekly/monthly email summaries
 - [ ] **User Reviews & Ratings**: Community-driven insights
 - [ ] **Community Prompts Library**: Share and discover effective prompts
-- [ ] **Real News Feed**: Latest model updates and changes from providers
+- [ ] **Real News Feed**: Automated model updates from provider APIs
 - [ ] **Custom Comparison Templates**: Save and share model comparison sets
-- [ ] **Email/webhook alerts**: Notifications for price changes
-- [ ] **Model Changelog Tracking**: Historical pricing and feature changes
+- [ ] **Advanced Notification Channels**: Email and webhook integrations (backend required)
+- [ ] **Historical Pricing Data**: Track pricing trends over time
 - [ ] **Provider Status Monitoring**: Real-time uptime and performance tracking
 - [ ] **Multi-language Support**: Internationalization for global users
+- [ ] **API Rate Limit Tracker**: Monitor your API usage across providers
 
 ---
 
@@ -716,8 +948,8 @@ This tool is for informational purposes only.
 
 Made with ❤️ by Sriram Srinivasan
 
-**Version**: 1.0
-**Last Updated**: November 9, 2025
+**Version**: 1.2
+**Last Updated**: November 10, 2025
 
 ---
 

@@ -249,6 +249,8 @@ export const llmModels: LLMModel[] = [
   },
     lastUpdated: "2025-01-07",
     status: {
+      isDeprecated: true,
+      deprecationDate: "2024-06-17",
       pricingUpdated: true,
       pricingUpdateDate: "2025-01-07"
     },
@@ -327,6 +329,8 @@ export const llmModels: LLMModel[] = [
   },
     status: {
       isNew: true,
+      isDeprecated: false,
+      deprecationDate: "2025-10-27",
       pricingUpdated: true,
       pricingUpdateDate: "2025-01-07"
     },
@@ -353,12 +357,14 @@ export const llmModels: LLMModel[] = [
   },
     status: {
       isNew: true,
+      isDeprecated: false,
+      deprecationDate: "2025-10-27",
       pricingUpdated: true,
       pricingUpdateDate: "2025-01-07"
     },
   },
   {
-    id: "claude-opus-4",
+    id: "claude-opus-4-20250514",
     name: "Claude Opus 4",
     provider: "Anthropic",
     contextWindow: 200000,
@@ -384,7 +390,7 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "claude-sonnet-4",
+    id: "claude-sonnet-4-20250514",
     name: "Claude Sonnet 4",
     provider: "Anthropic",
     contextWindow: 200000,
@@ -410,7 +416,7 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "claude-3.5-sonnet",
+    id: "claude-3-5-sonnet-20241022",
     name: "Claude 3.5 Sonnet",
     provider: "Anthropic",
     contextWindow: 200000,
@@ -436,7 +442,7 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "claude-3.5-haiku",
+    id: "claude-3-5-haiku-20241022",
     name: "Claude 3.5 Haiku",
     provider: "Anthropic",
     contextWindow: 200000,
@@ -456,7 +462,7 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "claude-sonnet-4.5",
+    id: "claude-sonnet-4-5-20250514",
     name: "Claude Sonnet 4.5",
     provider: "Anthropic",
     contextWindow: 1000000,
@@ -493,7 +499,7 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "claude-opus-4.1",
+    id: "claude-opus-4-1-20250514",
     name: "Claude Opus 4.1",
     provider: "Anthropic",
     contextWindow: 1000000,
@@ -530,7 +536,7 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "claude-3-opus",
+    id: "claude-3-opus-20240229",
     name: "Claude 3 Opus",
     provider: "Anthropic",
     contextWindow: 200000,
@@ -561,13 +567,15 @@ export const llmModels: LLMModel[] = [
   },
     lastUpdated: "2025-01-07",
     status: {
-      isNew: true,
+      isNew: false,
+      isDeprecated: true,
+      deprecationDate: "2025-06-30",
       pricingUpdated: true,
       pricingUpdateDate: "2025-01-07"
     },
   },
   {
-    id: "claude-3-sonnet",
+    id: "claude-3-sonnet-20240229",
     name: "Claude 3 Sonnet",
     provider: "Anthropic",
     contextWindow: 200000,
@@ -583,11 +591,13 @@ export const llmModels: LLMModel[] = [
     documentation: "https://docs.anthropic.com/claude/reference"
   },
     status: {
-      isNew: true
+      isNew: false,
+      isDeprecated: true,
+      deprecationDate: "2025-07-21"
     },
   },
   {
-    id: "claude-3-haiku",
+    id: "claude-3-haiku-20240307",
     name: "Claude 3 Haiku",
     provider: "Anthropic",
     contextWindow: 200000,
@@ -624,43 +634,6 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "claude-sonnet-4.5-xl",
-    name: "Claude Sonnet 4.5 XL",
-    provider: "Anthropic",
-    contextWindow: 1000000,
-    inputCostPer1M: 5.00,
-    outputCostPer1M: 25.00,
-    description: "Enhanced version of Sonnet 4.5 with specialized capabilities",
-    released: "2025",
-    tags: ["Latest", "Specialized", "Long Context", "High Performance"],
-    bestFor: ["Specialized tasks", "Technical analysis", "Research projects"],
-    purpose: "Advanced specialized processing with extended capabilities",
-    keyFeatures: [
-      "1M token context window",
-      "Enhanced domain expertise",
-      "Specialized task optimization",
-      "Research-grade capabilities"
-    ],
-    benchmarks: {
-      mmlu: 92.0,
-      humanEval: 94.5,
-      speed: "fast",
-    },
-    apiInfo: {
-    endpoint: "https://api.anthropic.com/v1/messages",
-    authentication: "API Key (x-api-key header)",
-    rateLimits: "Varies by tier, 50-4000 requests/min",
-    regionalAvailability: "Global",
-    documentation: "https://docs.anthropic.com/claude/reference"
-  },
-    lastUpdated: "2025-11-08",
-    status: {
-      isNew: true,
-      pricingUpdated: true,
-      pricingUpdateDate: "2025-11-08"
-    },
-  },
-  {
     id: "gemini-1.5-pro",
     name: "Gemini 1.5 Pro",
     provider: "Google",
@@ -692,7 +665,9 @@ export const llmModels: LLMModel[] = [
   },
     lastUpdated: "2025-01-07",
     status: {
-      isNew: true,
+      isNew: false,
+      isDeprecated: true,
+      deprecationDate: "2025-09-24",
       pricingUpdated: true,
       pricingUpdateDate: "2025-01-07"
     },
@@ -729,7 +704,9 @@ export const llmModels: LLMModel[] = [
   },
     lastUpdated: "2025-01-07",
     status: {
-      isNew: true,
+      isNew: false,
+      isDeprecated: true,
+      deprecationDate: "2025-09-24",
       pricingUpdated: true,
       pricingUpdateDate: "2025-01-07"
     },
@@ -751,7 +728,9 @@ export const llmModels: LLMModel[] = [
     documentation: "https://ai.google.dev/docs"
   },
     status: {
-      isNew: true
+      isNew: false,
+      isDeprecated: true,
+      deprecationDate: "2025-09-24"
     },
   },
   {
@@ -786,45 +765,10 @@ export const llmModels: LLMModel[] = [
   },
     lastUpdated: "2025-01-07",
     status: {
+      isDeprecated: true,
+      deprecationDate: "2025-04-09",
       pricingUpdated: true,
       pricingUpdateDate: "2025-01-07"
-    },
-  },
-  {
-    id: "gemini-2.5-ultra",
-    name: "Gemini 2.5 Ultra",
-    provider: "Google",
-    contextWindow: 2000000,
-    inputCostPer1M: 2.50,
-    outputCostPer1M: 15.00,
-    description: "Ultimate performance model with advanced tool integration",
-    released: "2025",
-    tags: ["Latest", "Ultimate", "Tool Use", "Ultra-Long Context"],
-    bestFor: ["Enterprise solutions", "Complex systems", "Advanced research"],
-    purpose: "Ultimate performance for demanding applications",
-    keyFeatures: [
-      "2M token context window",
-      "Advanced tool integration",
-      "Real-time reasoning",
-      "Enterprise-grade reliability"
-    ],
-    benchmarks: {
-      mmlu: 93.0,
-      humanEval: 94.5,
-      speed: "fast",
-    },
-    apiInfo: {
-    endpoint: "https://generativelanguage.googleapis.com/v1/models",
-    authentication: "API Key or OAuth 2.0",
-    rateLimits: "60 requests/min (free), higher for paid",
-    regionalAvailability: "Global",
-    documentation: "https://ai.google.dev/docs"
-  },
-    lastUpdated: "2025-11-08",
-    status: {
-      isNew: true,
-      pricingUpdated: true,
-      pricingUpdateDate: "2025-11-08"
     },
   },
   {
@@ -970,6 +914,8 @@ export const llmModels: LLMModel[] = [
   },
     lastUpdated: "2025-01-07",
     status: {
+      isDeprecated: true,
+      deprecationDate: "2024-07-12",
       pricingUpdated: true,
       pricingUpdateDate: "2025-01-07"
     },
@@ -1243,117 +1189,6 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "llama-3.3-200b",
-    name: "Llama 3.3 200B",
-    provider: "Meta",
-    contextWindow: 256000,
-    inputCostPer1M: 1.20,
-    outputCostPer1M: 1.20,
-    description: "Largest and most capable Llama model",
-    released: "2025",
-    tags: ["Latest", "Ultra Large", "Advanced", "Open Source"],
-    bestFor: ["Research", "Complex tasks", "Enterprise deployment"],
-    purpose: "State-of-the-art open source AI",
-    keyFeatures: [
-      "200B parameters",
-      "256K context window",
-      "Advanced reasoning",
-      "Enhanced multimodal capabilities"
-    ],
-    benchmarks: {
-      mmlu: 91.5,
-      humanEval: 93.0,
-      speed: "medium",
-    },
-    apiInfo: {
-    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
-    authentication: "Varies by platform",
-    rateLimits: "Depends on hosting platform",
-    regionalAvailability: "Global",
-    documentation: "https://llama.meta.com/docs"
-  },
-    lastUpdated: "2025-11-08",
-    status: {
-      isNew: true,
-      pricingUpdated: true,
-      pricingUpdateDate: "2025-11-08"
-    },
-  },
-  {
-    id: "llama-3.3-70b-vision",
-    name: "Llama 3.3 70B Vision",
-    provider: "Meta",
-    contextWindow: 256000,
-    inputCostPer1M: 0.80,
-    outputCostPer1M: 0.80,
-    description: "Advanced multimodal Llama model",
-    released: "2025",
-    tags: ["Latest", "Vision", "Multimodal", "Open Source"],
-    bestFor: ["Vision tasks", "Multimodal applications", "Research"],
-    purpose: "Advanced vision and language processing",
-    keyFeatures: [
-      "Superior vision capabilities",
-      "Advanced reasoning",
-      "256K context support",
-      "Enhanced multimodal understanding"
-    ],
-    benchmarks: {
-      mmlu: 89.0,
-      humanEval: 91.5,
-      speed: "fast",
-    },
-    apiInfo: {
-    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
-    authentication: "Varies by platform",
-    rateLimits: "Depends on hosting platform",
-    regionalAvailability: "Global",
-    documentation: "https://llama.meta.com/docs"
-  },
-    lastUpdated: "2025-11-08",
-    status: {
-      isNew: true,
-      pricingUpdated: true,
-      pricingUpdateDate: "2025-11-08"
-    },
-  },
-  {
-    id: "llama-3.3-13b-chat",
-    name: "Llama 3.3 13B Chat",
-    provider: "Meta",
-    contextWindow: 256000,
-    inputCostPer1M: 0.25,
-    outputCostPer1M: 0.25,
-    description: "Efficient chat-optimized Llama model",
-    released: "2025",
-    tags: ["Latest", "Chat", "Efficient", "Open Source"],
-    bestFor: ["Chat applications", "Quick responses", "Edge deployment"],
-    purpose: "Efficient chat and dialogue processing",
-    keyFeatures: [
-      "Optimized for chat",
-      "Fast response times",
-      "Resource efficient",
-      "Extended context support"
-    ],
-    benchmarks: {
-      mmlu: 85.5,
-      humanEval: 88.0,
-      speed: "fast",
-    },
-    apiInfo: {
-    endpoint: "Via cloud providers (AWS, Azure, Hugging Face)",
-    authentication: "Varies by platform",
-    rateLimits: "Depends on hosting platform",
-    regionalAvailability: "Global",
-    documentation: "https://llama.meta.com/docs"
-  },
-    lastUpdated: "2025-11-08",
-    status: {
-      isNew: true,
-      pricingUpdated: true,
-      pricingUpdateDate: "2025-11-08"
-    },
-  },
-  {
     id: "codellama-70b",
     name: "CodeLlama 70B",
     provider: "Meta",
@@ -1462,8 +1297,8 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "mistral-large-2",
-    name: "Mistral Large 2",
+    id: "mistral-large-2411",
+    name: "Mistral Large 2.1",
     provider: "Mistral",
     contextWindow: 128000,
     inputCostPer1M: 2.00,
@@ -1499,8 +1334,8 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "mistral-medium",
-    name: "Mistral Medium",
+    id: "mistral-medium-2508",
+    name: "Mistral Medium 3.1",
     provider: "Mistral",
     contextWindow: 32000,
     inputCostPer1M: 2.70,
@@ -1536,8 +1371,8 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "mistral-small",
-    name: "Mistral Small",
+    id: "mistral-small-2506",
+    name: "Mistral Small 3.2",
     provider: "Mistral",
     contextWindow: 32000,
     inputCostPer1M: 0.20,
@@ -1573,17 +1408,17 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "mistral-next",
-    name: "Mistral Next",
+    id: "magistral-medium-2509",
+    name: "Magistral Medium 1.2",
     provider: "Mistral",
-    contextWindow: 256000,
+    contextWindow: 128000,
     inputCostPer1M: 4.00,
     outputCostPer1M: 12.00,
-    description: "Next-generation model with advanced capabilities",
-    released: "2024",
-    tags: ["Advanced", "Research", "Experimental"],
-    bestFor: ["Advanced research", "Complex problem solving", "Innovation"],
-    purpose: "Cutting-edge AI research and development",
+    description: "Advanced reasoning model with enhanced capabilities",
+    released: "2025",
+    tags: ["Advanced", "Reasoning", "Production Ready"],
+    bestFor: ["Advanced reasoning", "Complex problem solving", "Production workloads"],
+    purpose: "Advanced AI reasoning and development",
     keyFeatures: [
       "Extended context understanding",
       "Advanced reasoning capabilities",
@@ -1610,8 +1445,8 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "cohere-command-r",
-    name: "Command-R",
+    id: "command-r-08-2024",
+    name: "Command R",
     provider: "Cohere",
     contextWindow: 128000,
     inputCostPer1M: 1.50,
@@ -1647,8 +1482,8 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "cohere-command",
-    name: "Command",
+    id: "command-a-03-2025",
+    name: "Command A",
     provider: "Cohere",
     contextWindow: 128000,
     inputCostPer1M: 1.00,
@@ -1750,7 +1585,9 @@ export const llmModels: LLMModel[] = [
   },
     lastUpdated: "2025-01-07",
     status: {
-      isNew: true,
+      isNew: false,
+      isDeprecated: true,
+      deprecationDate: "2024-11-14",
       pricingUpdated: true,
       pricingUpdateDate: "2025-01-07"
     },
@@ -1787,88 +1624,16 @@ export const llmModels: LLMModel[] = [
   },
     lastUpdated: "2025-01-07",
     status: {
-      isNew: true,
+      isNew: false,
+      isDeprecated: true,
+      deprecationDate: "2024-11-14",
       pricingUpdated: true,
       pricingUpdateDate: "2025-01-07"
     },
   },
   {
-    id: "together-ai-ultra",
-    name: "Together AI Ultra",
-    provider: "Together AI",
-    contextWindow: 128000,
-    inputCostPer1M: 0.80,
-    outputCostPer1M: 2.40,
-    description: "High-performance model with flexible deployment options",
-    released: "2024",
-    tags: ["Flexible", "High Performance", "Custom Deployment"],
-    bestFor: ["Custom deployments", "Enterprise solutions", "Specialized applications"],
-    purpose: "Customizable AI solutions",
-    keyFeatures: [
-      "Custom fine-tuning",
-      "Flexible deployment",
-      "Enterprise support",
-      "Advanced customization"
-    ],
-    benchmarks: {
-      mmlu: 85.9,
-      humanEval: 87.8,
-      speed: "fast",
-    },
-    apiInfo: {
-    endpoint: "https://api.together.xyz/v1/chat/completions",
-    authentication: "Bearer Token (API Key)",
-    rateLimits: "Varies by tier",
-    regionalAvailability: "Global",
-    documentation: "https://docs.together.ai/reference"
-  },
-    lastUpdated: "2025-01-07",
-    status: {
-      isNew: true,
-      pricingUpdated: true,
-      pricingUpdateDate: "2025-01-07"
-    },
-  },
-  {
-    id: "together-ai-light",
-    name: "Together AI Light",
-    provider: "Together AI",
-    contextWindow: 32000,
-    inputCostPer1M: 0.30,
-    outputCostPer1M: 0.90,
-    description: "Lightweight model for efficient deployment",
-    released: "2024",
-    tags: ["Lightweight", "Efficient", "Cost Effective"],
-    bestFor: ["Mobile applications", "Edge computing", "Real-time processing"],
-    purpose: "Edge and mobile AI deployment",
-    keyFeatures: [
-      "Mobile optimization",
-      "Edge deployment ready",
-      "Low resource usage",
-      "Fast inference"
-    ],
-    benchmarks: {
-      mmlu: 81.4,
-      humanEval: 83.6,
-      speed: "fast",
-    },
-    apiInfo: {
-    endpoint: "https://api.together.xyz/v1/chat/completions",
-    authentication: "Bearer Token (API Key)",
-    rateLimits: "Varies by tier",
-    regionalAvailability: "Global",
-    documentation: "https://docs.together.ai/reference"
-  },
-    lastUpdated: "2025-01-07",
-    status: {
-      isNew: true,
-      pricingUpdated: true,
-      pricingUpdateDate: "2025-01-07"
-    },
-  },
-  {
-    id: "mistral-nemo",
-    name: "Mistral Nemo",
+    id: "mistral-nemo-12b",
+    name: "Mistral Nemo 12B",
     provider: "Mistral",
     contextWindow: 128000,
     inputCostPer1M: 0.15,
@@ -1904,8 +1669,8 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "mistral-7b",
-    name: "Mistral 7B",
+    id: "open-mistral-7b",
+    name: "Open Mistral 7B",
     provider: "Mistral",
     contextWindow: 32000,
     inputCostPer1M: 0.25,
@@ -1921,8 +1686,8 @@ export const llmModels: LLMModel[] = [
   },
   },
   {
-    id: "mixtral-8x7b",
-    name: "Mixtral 8x7B",
+    id: "open-mixtral-8x7b",
+    name: "Open Mixtral 8x7B",
     provider: "Mistral",
     contextWindow: 32000,
     inputCostPer1M: 0.50,
@@ -1957,8 +1722,8 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "mixtral-8x22b",
-    name: "Mixtral 8x22B",
+    id: "open-mixtral-8x22b",
+    name: "Open Mixtral 8x22B",
     provider: "Mistral",
     contextWindow: 64000,
     inputCostPer1M: 1.20,
@@ -1994,7 +1759,7 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "command-r-plus",
+    id: "command-r-plus-08-2024",
     name: "Command R+",
     provider: "Cohere",
     contextWindow: 128000,
@@ -2026,79 +1791,6 @@ export const llmModels: LLMModel[] = [
     lastUpdated: "2025-01-07",
     status: {
       isNew: true,
-      pricingUpdated: true,
-      pricingUpdateDate: "2025-01-07"
-    },
-  },
-  {
-    id: "command-r",
-    name: "Command R",
-    provider: "Cohere",
-    contextWindow: 128000,
-    inputCostPer1M: 0.15,
-    outputCostPer1M: 0.60,
-    description: "Optimized for conversational interaction and long context",
-    released: "2024",
-  apiInfo: {
-    endpoint: "https://api.cohere.ai/v1/generate",
-    authentication: "Bearer Token (API Key)",
-    rateLimits: "10,000 requests/min (production)",
-    regionalAvailability: "Global",
-    documentation: "https://docs.cohere.com/reference/about"
-  },
-    status: {
-      isNew: true
-    },
-  },
-  {
-    id: "command",
-    name: "Command",
-    provider: "Cohere",
-    contextWindow: 4096,
-    inputCostPer1M: 1.00,
-    outputCostPer1M: 2.00,
-    description: "Standard Cohere command model",
-    released: "2023",
-  apiInfo: {
-    endpoint: "https://api.cohere.ai/v1/generate",
-    authentication: "Bearer Token (API Key)",
-    rateLimits: "10,000 requests/min (production)",
-    regionalAvailability: "Global",
-    documentation: "https://docs.cohere.com/reference/about"
-  },
-  },
-  {
-    id: "command-light",
-    name: "Command Light",
-    provider: "Cohere",
-    contextWindow: 4096,
-    inputCostPer1M: 0.30,
-    outputCostPer1M: 0.60,
-    description: "Lighter, faster Cohere model",
-    released: "2023",
-    tags: ["Fast", "Lightweight", "Economic"],
-    bestFor: ["Quick responses", "Simple tasks", "Cost-efficient processing"],
-    purpose: "Fast, efficient text processing",
-    keyFeatures: [
-      "Rapid response time",
-      "Resource efficient",
-      "Cost effective",
-      "Basic capabilities"
-    ],
-    benchmarks: {
-      mmlu: 72.0,
-      humanEval: 74.5,
-      speed: "fast",
-    },
-    apiInfo: {
-    endpoint: "https://api.cohere.ai/v1/generate",
-    authentication: "Bearer Token (API Key)",
-    rateLimits: "10,000 requests/min (production)",
-    regionalAvailability: "Global",
-    documentation: "https://docs.cohere.com/reference/about"
-  },
-    lastUpdated: "2025-01-07",
-    status: {
       pricingUpdated: true,
       pricingUpdateDate: "2025-01-07"
     },
@@ -2472,8 +2164,8 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "perplexity-sonar-large",
-    name: "Sonar Large",
+    id: "sonar-pro",
+    name: "Sonar Pro",
     provider: "Perplexity",
     contextWindow: 127072,
     inputCostPer1M: 1.00,
@@ -2492,8 +2184,8 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "perplexity-sonar-small",
-    name: "Sonar Small",
+    id: "sonar",
+    name: "Sonar",
     provider: "Perplexity",
     contextWindow: 127072,
     inputCostPer1M: 0.20,
@@ -2529,8 +2221,8 @@ export const llmModels: LLMModel[] = [
     },
   },
   {
-    id: "perplexity-sonar-medium",
-    name: "Sonar Medium",
+    id: "sonar-reasoning",
+    name: "Sonar Reasoning",
     provider: "Perplexity",
     contextWindow: 127072,
     inputCostPer1M: 0.60,
@@ -2755,6 +2447,10 @@ export const llmModels: LLMModel[] = [
     regionalAvailability: "Global",
     documentation: "https://docs.ai21.com/reference"
   },
+    status: {
+      isDeprecated: true,
+      deprecationDate: "2024-11-14"
+    },
   },
   {
     id: "jurassic-2-mid",
@@ -2772,6 +2468,10 @@ export const llmModels: LLMModel[] = [
     regionalAvailability: "Global",
     documentation: "https://docs.ai21.com/reference"
   },
+    status: {
+      isDeprecated: true,
+      deprecationDate: "2024-11-14"
+    },
   },
   {
     id: "together-llama-3.1-405b-turbo",
@@ -4031,7 +3731,7 @@ export const llmModels: LLMModel[] = [
   },
 
   {
-    id: "codestral",
+    id: "codestral-2508",
     name: "Codestral",
     provider: "Mistral",
     contextWindow: 32000,

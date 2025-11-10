@@ -268,10 +268,36 @@ export const InteractiveUsageDashboard = ({ onClose }: InteractiveUsageDashboard
 
         {/* Charts */}
         {sessions.length === 0 ? (
-          <div className="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-lg">
+          <div className="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
             <Activity className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600 dark:text-gray-400">
-              No usage data available for the selected period
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              No Usage Data Available
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4 max-w-md mx-auto">
+              No usage data available for the selected period. The dashboard will automatically track your model usage when you:
+            </p>
+            <div className="text-left max-w-md mx-auto mb-6">
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <li className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                  Use the <strong>Cost Calculator</strong> to calculate token costs
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                  Compare models using the <strong>Enhanced Comparison</strong> tool
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
+                  Run calculations in the <strong>Analytics Dashboard</strong>
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-amber-600 rounded-full"></div>
+                  Test models in the <strong>Testing Playground</strong>
+                </li>
+              </ul>
+            </div>
+            <p className="text-sm text-gray-500 dark:text-gray-500">
+              Your usage history will appear here once you start using these features.
             </p>
           </div>
         ) : (
