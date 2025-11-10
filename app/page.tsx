@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { calculateBooksInContext, type LLMModel } from './data/llm-data';
 import { enrichedModels } from './data/enriched-models';
-import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Keyboard, TrendingUp, Clock, Filter, Sparkles, AlertCircle, BarChart3, Lightbulb, Activity, Zap, TestTube, History, RefreshCw, Book } from 'lucide-react';
+import { Search, ArrowUp, ArrowDown, Star, Calculator, GitCompare, X, Info, Keyboard, TrendingUp, Clock, Filter, Sparkles, AlertCircle, BarChart3, Lightbulb, Zap, TestTube, History, RefreshCw, Book } from 'lucide-react';
 import { APIIntegrationHelper } from '../components/APIIntegrationHelper';
 import { ModelDetailsCard } from './components/ModelDetailsCard';
 import { MobileModelCard } from './components/MobileModelCard';

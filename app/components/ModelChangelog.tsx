@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { History, TrendingUp, TrendingDown, AlertCircle, Sparkles, Calendar, Filter } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { History, TrendingDown, AlertCircle, Sparkles, Calendar, Filter } from 'lucide-react';
 import { ChangelogEntry, ModelChange } from '../types/notifications';
 
 export default function ModelChangelog() {

@@ -1,6 +1,6 @@
 // Notification Service - Handles creating and sending notifications
 
-import { Notification as NotificationData, NotificationPreferences, NotificationType, ModelChange, ChangelogEntry } from '../types/notifications';
+import { Notification as NotificationData, NotificationPreferences, NotificationType, ModelChange, ChangelogEntry, defaultNotificationPreferences } from '../types/notifications';
 
 export class NotificationService {
   private static generateId(): string {
@@ -19,9 +19,9 @@ export class NotificationService {
   }
 
   private static getPreferences(): NotificationPreferences {
-    if (typeof window === 'undefined') return {} as any;
+    if (typeof window === 'undefined') return defaultNotificationPreferences;
     const saved = localStorage.getItem('notification-preferences');
-    return saved ? JSON.parse(saved) : null;
+    return saved ? JSON.parse(saved) : defaultNotificationPreferences;
   }
 
   private static shouldNotify(
@@ -50,8 +50,8 @@ export class NotificationService {
 
     // Check if watching specific models or providers
     if (prefs.watchedModels.length > 0 || prefs.watchedProviders.length > 0) {
-      const watchingModel = modelId && prefs.watchedModels.includes(modelId);
-      const watchingProvider = provider && prefs.watchedProviders.includes(provider);
+      const watchingModel = !!(modelId && prefs.watchedModels.includes(modelId));
+      const watchingProvider = !!(provider && prefs.watchedProviders.includes(provider));
       return watchingModel || watchingProvider;
     }
 

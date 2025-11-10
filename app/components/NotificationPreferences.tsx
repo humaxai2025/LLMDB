@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Bell, Mail, Webhook, X, Save, CheckCircle } from 'lucide-react';
-import { NotificationPreferences, defaultNotificationPreferences } from '../types/notifications';
+import type { NotificationPreferences } from '../types/notifications';
+import { defaultNotificationPreferences } from '../types/notifications';
 import { llmModels } from '../data/llm-data';
 import NotificationTestPanel from './NotificationTestPanel';
 
