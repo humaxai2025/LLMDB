@@ -87,7 +87,7 @@ export default function NotificationsPanel({ onOpenPreferences }: NotificationsP
     : notifications.filter(n => n.type === filter);
 
   return (
-    <div className="relative">
+    <>
       {/* Notification Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -105,7 +105,7 @@ export default function NotificationsPanel({ onOpenPreferences }: NotificationsP
 
       {/* Notifications Dropdown */}
       {isOpen && (
-        <>
+        <div className="relative">
           <div
             className="fixed inset-0 z-40"
             onClick={() => setIsOpen(false)}
@@ -273,8 +273,8 @@ export default function NotificationsPanel({ onOpenPreferences }: NotificationsP
               )}
             </div>
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 }
