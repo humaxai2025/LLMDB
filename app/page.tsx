@@ -583,13 +583,6 @@ export default function Home() {
                     ? `Select ${selectedForCompare.length > 0 ? `(${selectedForCompare.length})` : ''}`
                     : 'Compare'}
                 </span>
-                <span className="inline sm:hidden">
-                  {compareMode && selectedForCompare.length >= 2
-                    ? `(${selectedForCompare.length})`
-                    : compareMode
-                    ? `${selectedForCompare.length > 0 ? `(${selectedForCompare.length})` : ''}`
-                    : 'Compare'}
-                </span>
               </button>
 
               {/* Learn */}
